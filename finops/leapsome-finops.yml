@@ -1,0 +1,91 @@
+specificationVersion: "1.0"
+id: leapsome-finops
+name: Leapsome FinOps Profile
+description: >-
+  FinOps Framework FOCUS-aligned cost visibility profile for Leapsome API and
+  platform consumption. Leapsome charges on a per-user, per-month basis billed
+  annually with modular add-ons per capability. API access is bundled into
+  higher-tier or enterprise plans rather than metered separately. Cost drivers
+  include headcount, selected modules, and add-on features.
+url: https://www.leapsome.com/pricing
+
+framework: FinOps Framework 1.0
+focusVersion: "1.0"
+
+costModel:
+  type: Per-seat, modular subscription
+  billingCadence: Annual
+  unitOfMeasure: User / month
+  minimumCommitment: "€6,000 or $6,000 per year"
+  volumeDiscounts: true
+  trialAvailable: true
+  trialDays: 14
+
+services:
+  - name: HRIS Core
+    description: >-
+      Base people data module covering employee records, workflows, absence
+      management, onboarding, documents, payroll prep, and integrations.
+    chargeType: Per-seat subscription
+    pricingModel: Per user / month (billed annually)
+    estimatedCost: "Contact sales for per-module pricing"
+
+  - name: Talent Suite Modules
+    description: >-
+      À-la-carte talent management modules: performance reviews, engagement
+      surveys, goals and OKRs, learning, 1:1 meetings, instant feedback,
+      compensation management, and competency frameworks.
+    chargeType: Per-seat subscription (per module selected)
+    pricingModel: Per user / month (billed annually)
+    estimatedCost: "Contact sales for per-module pricing"
+
+  - name: Content API Access
+    description: >-
+      Programmatic read access to reviews, goals, employee attributes, payroll,
+      and time-tracking data. Bundled into Enterprise plans; not metered
+      separately by API call volume.
+    chargeType: Bundled (Enterprise plan)
+    pricingModel: Included with Enterprise tier
+    apiCallMetered: false
+
+  - name: SCIM Provisioning
+    description: >-
+      Automated user lifecycle management via SCIM 2.0. Bundled into Enterprise
+      plans; requires active SSO configuration.
+    chargeType: Bundled (Enterprise plan)
+    pricingModel: Included with Enterprise tier
+    apiCallMetered: false
+
+  - name: Add-ons
+    description: >-
+      Optional extras including compensation benchmarks, learning content
+      libraries, and early-access time tracking.
+    chargeType: Add-on subscription
+    pricingModel: Contact sales
+
+costOptimization:
+  - recommendation: Right-size module selection to active use cases to avoid paying for unused Talent Suite modules.
+  - recommendation: Negotiate volume discounts for large headcounts (1,000+ seats).
+  - recommendation: Use the 14-day free trial to validate module fit before annual commitment.
+  - recommendation: Consolidate integrations through native connectors (60+ HRIS, 20+ ATS) to avoid additional middleware costs.
+  - recommendation: Leverage SCIM provisioning (Enterprise) to automate user de-provisioning and reduce orphaned licensed seats.
+
+allocation:
+  dimensions:
+    - Department
+    - Team
+    - Cost Center
+    - Module
+  notes: >-
+    Leapsome does not expose native cost allocation tags via API. Headcount per
+    department should be tracked in the HRIS Core and correlated with billing
+    data manually or via HR analytics tools.
+
+billing:
+  invoicePeriod: Annual
+  paymentMethods:
+    - Invoice (enterprise)
+    - Contact sales for payment options
+  currency:
+    - USD
+    - EUR

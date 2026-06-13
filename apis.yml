@@ -1,0 +1,110 @@
+aid: leapsome
+name: Leapsome
+description: >-
+  Leapsome is an AI-powered people enablement platform that combines HRIS, talent
+  management, and HR automation into a single modular solution used by more than
+  2,000 organizations worldwide. The platform covers the full employee lifecycle
+  including performance reviews, OKRs and goal management, engagement surveys,
+  1:1 meetings, instant feedback, learning pathways, and compensation management.
+  Leapsome exposes a REST Content API for extracting reviews, goals, employee
+  attributes, payroll, and time-tracking data, plus a SCIM 2.0 API for automated
+  user provisioning and lifecycle management with enterprise identity providers.
+  Both APIs authenticate via bearer tokens generated inside the platform settings
+  and are documented through Swagger UI at api.leapsome.com.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/leapsome/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - People Enablement
+  - Performance Management
+  - OKRs
+  - Goals
+  - Engagement Surveys
+  - HRIS
+  - SCIM
+  - Employee Development
+  - 1:1 Meetings
+  - Learning
+apis:
+  - aid: leapsome:leapsome-content-api
+    name: Leapsome Content API
+    description: >-
+      The Leapsome Content API provides read access to performance review data,
+      OKRs and goal progress, employee attributes, payroll information, and time
+      tracking records. It enables one-way extraction of Leapsome data into
+      external analytics tools, data warehouses, and custom integrations. Access
+      is authenticated via a bearer token generated in Settings > Integrations
+      and imports > Content API.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+    baseURL: https://api.leapsome.com/v1
+    tags:
+      - Performance Reviews
+      - Goals
+      - OKRs
+      - Employee Data
+      - Payroll
+      - Time Tracking
+    properties:
+      - type: Documentation
+        url: https://api.leapsome.com/v1/api-docs/
+    contact:
+      - FN: Leapsome Support
+        url: https://help.leapsome.com/
+
+  - aid: leapsome:leapsome-scim-api
+    name: Leapsome SCIM API
+    description: >-
+      The Leapsome SCIM 2.0 API enables automated user provisioning and
+      lifecycle management, supporting creation, update, deactivation, and
+      deletion of users and groups. It integrates with enterprise identity
+      providers such as Okta, Azure Active Directory, OneLogin, and any
+      SCIM-compatible IdP. The API supports pagination, partial updates via
+      PATCH, and recommends soft-deactivation over hard delete to preserve
+      historical performance data. SCIM provisioning requires the Enterprise plan.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://help.leapsome.com/hc/en-us/articles/8759199332765-SCIM-API-Access
+    baseURL: https://api.leapsome.com/scim/v1
+    tags:
+      - SCIM
+      - User Provisioning
+      - Identity
+      - SSO
+      - Enterprise
+    properties:
+      - type: Documentation
+        url: https://api.leapsome.com/scim/v1/api-docs/
+    contact:
+      - FN: Leapsome Support
+        url: https://help.leapsome.com/
+
+common:
+  - type: Website
+    url: https://www.leapsome.com/
+  - type: Documentation
+    url: https://help.leapsome.com/
+  - type: GitHubOrg
+    url: https://github.com/Leapsome
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/leapsome
+  - type: Blog
+    url: https://www.leapsome.com/blog
+  - type: Pricing
+    url: https://www.leapsome.com/pricing
+  - type: StatusPage
+    url: https://status.leapsome.tech/
+  - type: X
+    url: https://x.com/leapsome
+  - type: Plans
+    url: plans/leapsome-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/leapsome-rate-limits.yml
+  - type: FinOps
+    url: finops/leapsome-finops.yml
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

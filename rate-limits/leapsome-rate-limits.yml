@@ -1,0 +1,44 @@
+specificationVersion: "0.1"
+id: leapsome-rate-limits
+name: Leapsome API Rate Limits
+description: >-
+  Leapsome publishes limited rate limit documentation. The SCIM API enforces
+  a maximum of 30 parallel requests per second, returning HTTP 429 when exceeded.
+  The Content API does not have publicly documented rate limits; developers
+  should implement exponential back-off when receiving 429 responses and contact
+  Leapsome support to discuss enterprise throughput thresholds.
+url: https://help.leapsome.com/hc/en-us/articles/8759199332765-SCIM-API-Access
+
+limits:
+  - api: Leapsome SCIM API
+    scope: Parallel requests
+    limit: 30
+    window: per second
+    httpStatusOnExceed: 429
+    notes: >-
+      The SCIM API restricts parallel (concurrent) requests to 30 per second.
+      Clients exceeding this limit receive a 429 Too Many Requests response.
+      Retry-After header behavior is not publicly documented; implement
+      exponential back-off in client code.
+
+  - api: Leapsome Content API
+    scope: General requests
+    limit: Not publicly documented
+    window: Not publicly documented
+    httpStatusOnExceed: 429
+    notes: >-
+      No public rate limit documentation exists for the Content API. Leapsome
+      recommends implementing exponential back-off on 429 responses. Enterprise
+      customers should contact support for specific throughput guidance.
+
+headers:
+  - name: Retry-After
+    description: May be returned on 429 responses; behavior not officially documented.
+    documented: false
+
+guidance:
+  - Implement exponential back-off with jitter for all 429 responses.
+  - Avoid burst parallel calls to the SCIM API beyond 30 concurrent requests.
+  - Paginate SCIM list calls using startIndex and count (default page size is 100).
+  - Contact support@leapsome.com or your Customer Success Manager for enterprise
+    throughput thresholds.

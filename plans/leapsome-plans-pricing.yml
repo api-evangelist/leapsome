@@ -1,0 +1,69 @@
+specificationVersion: "0.1"
+id: leapsome-plans-pricing
+name: Leapsome Plans and Pricing
+description: >-
+  Leapsome uses a modular, usage-based pricing model where organizations build
+  a custom package by selecting the HRIS Core and Talent Suite modules they need.
+  Pricing is per user per month billed annually with a minimum one-year contract.
+  Volume discounts are available for larger organizations. A 14-day free trial
+  is available with no credit card required. API access (Content API) and SCIM
+  provisioning require higher-tier or Enterprise-level configurations.
+url: https://www.leapsome.com/pricing
+plans:
+  - name: Modular Platform
+    description: >-
+      Leapsome's base modular offering. Organizations select from HRIS Core and
+      individual Talent Suite modules. All plans include AI Agents, analytics
+      dashboards, SSO, encryption, ISO 27001 certification, GDPR compliance,
+      and support for 38 languages.
+    price: "Starts at $8 per user / month (billed annually)"
+    minimumContract: "1 year; minimum €6,000 / $6,000 annual commitment"
+    features:
+      - HRIS Core (employee records, absence management, onboarding, documents)
+      - Performance reviews (add-on module)
+      - Engagement surveys (add-on module)
+      - Goals and OKRs (add-on module)
+      - Learning pathways (add-on module)
+      - 1:1 meetings and instant feedback (add-on module)
+      - Compensation management (add-on module)
+      - AI Agents for HR automation
+      - Analytics dashboards
+      - SSO (Google, Azure AD, Okta, OneLogin)
+      - ISO 27001 certified, GDPR compliant
+    trial:
+      available: true
+      days: 14
+      creditCardRequired: false
+
+  - name: Enterprise
+    description: >-
+      Enterprise tier adds dedicated Customer Success support, advanced
+      analytics, SCIM user provisioning, and Content API access for extracting
+      performance review, goal, payroll, and time-tracking data into external
+      systems.
+    price: "Custom — contact sales"
+    minimumContract: "1 year"
+    features:
+      - All Modular Platform features
+      - Content API access (reviews, goals, employee, payroll, time tracking)
+      - SCIM 2.0 provisioning (Okta, Azure AD, OneLogin, and others)
+      - Dedicated Customer Success Manager
+      - Advanced analytics and reporting
+      - Volume and multi-module discounts
+    apiAccess:
+      contentApi: true
+      scimApi: true
+
+addOns:
+  - name: Compensation Benchmarks
+    description: Market compensation data for pay equity and benchmarking.
+  - name: Learning Content Libraries
+    description: Pre-built learning content available as an add-on.
+  - name: Time Tracking
+    description: Early access module for tracking employee time.
+
+notes:
+  - Pricing is modular — customers pay only for modules selected.
+  - Volume discounts are available; contact sales@leapsome.com for quotes.
+  - Minimum annual contract of €6,000 / $6,000 for dedicated CS support.
+  - API and SCIM access are enterprise-tier capabilities.
