@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SCIM Group",
+  "description": "Describes a group belonging to an organization",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The group's unique id",
+      "type": "string"
+    },
+    "displayName": {
+      "description": "The group's display name",
+      "type": "string"
+    },
+    "members": {
+      "type": "array",
+      "description": "An array of members",
+      "maxItems": 0,
+      "items": {
+        "$ref": "#/components/schemas/Member"
+      }
+    },
+    "meta": {
+      "$ref": "#/components/schemas/GroupMetadata"
+    },
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "externalId": {
+      "type": "string",
+      "description": "A groups id in an external system"
+    }
+  },
+  "required": [
+    "id",
+    "displayName"
+  ]
+}

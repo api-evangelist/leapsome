@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FeedbackItem",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$",
+      "example": "58d55e3ffdc2eb20547edd0a",
+      "description": "Feedback item ID"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "praise",
+        "instantFeedback"
+      ],
+      "description": "Type of feedback"
+    },
+    "sender": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{24}$",
+          "nullable": true,
+          "description": "Sender user ID (null if anonymous)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Sender display name (\"Anonymous\" if anonymous)"
+        }
+      },
+      "description": "The user who sent the feedback"
+    },
+    "receivers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "description": "Receiver user or team ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Receiver display name"
+          }
+        }
+      },
+      "description": "Users or teams who received the feedback"
+    },
+    "message": {
+      "type": "string",
+      "nullable": true,
+      "description": "The feedback message content"
+    },
+    "badge": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Badge name"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Badge icon path"
+        }
+      },
+      "description": "Badge attached to the feedback (praise only)"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "receiver",
+        "senderOnly"
+      ],
+      "description": "Visibility level of the feedback"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the feedback was created"
+    },
+    "likesCount": {
+      "type": "integer",
+      "description": "Number of likes on the feedback"
+    },
+    "commentsCount": {
+      "type": "integer",
+      "description": "Number of comments on the feedback"
+    }
+  }
+}

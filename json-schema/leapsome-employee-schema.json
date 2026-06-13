@@ -1,0 +1,371 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Employee",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$",
+      "example": "58d55e3ffdc2eb20547edd0a",
+      "description": "Leapsome user ID"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "jane.doe@example.com",
+      "description": "Employee email address"
+    },
+    "firstname": {
+      "type": "string",
+      "example": "Jane",
+      "description": "Employee first name"
+    },
+    "lastname": {
+      "type": "string",
+      "example": "Doe",
+      "description": "Employee last name"
+    },
+    "middlename": {
+      "type": "string",
+      "example": "von",
+      "description": "Employee middle name"
+    },
+    "fullname": {
+      "type": "string",
+      "example": "Jane Doe",
+      "description": "Employee full name"
+    },
+    "displayedName": {
+      "type": "string",
+      "example": "Jane von Doe",
+      "description": "Employee displayed/preferred name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "created",
+        "active",
+        "invited",
+        "deactivated",
+        "preBoardingInvited",
+        "preBoardingActive",
+        "removed"
+      ],
+      "example": "active",
+      "description": "Current status of the employee"
+    },
+    "lifecycleStatus": {
+      "type": "string",
+      "enum": [
+        "hired",
+        "active",
+        "leave",
+        "offboarding",
+        "terminated",
+        "deactivated",
+        "notSet",
+        "preBoarding"
+      ],
+      "example": "active",
+      "description": "Current lifecycle status of the employee"
+    },
+    "manager": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{24}$",
+          "example": "58d55e3ffdc2eb20547edd0a"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "additionalManagers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a"
+          },
+          "name": {
+            "type": "string",
+            "example": "Jane Doe"
+          }
+        }
+      }
+    },
+    "indirectManagers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          }
+        }
+      }
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-01-01T00:00:00.000Z",
+      "description": "Employee start date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-12-31T23:59:59.999Z",
+      "description": "Employee end date"
+    },
+    "phone": {
+      "type": "string",
+      "example": "+1234567890",
+      "description": "Employee phone number"
+    },
+    "teams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a"
+          },
+          "name": {
+            "type": "string",
+            "example": "Team Red"
+          }
+        }
+      },
+      "description": "Teams the employee belongs to"
+    },
+    "departments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a"
+          },
+          "name": {
+            "type": "string",
+            "example": "Department Blue"
+          }
+        }
+      },
+      "description": "Departments the employee belongs to"
+    },
+    "businessUnits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a"
+          },
+          "name": {
+            "type": "string",
+            "example": "Business Unit Green"
+          }
+        }
+      },
+      "description": "Business units the employee belongs to"
+    },
+    "costCenters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a"
+          },
+          "name": {
+            "type": "string",
+            "example": "Cost Center Yellow"
+          }
+        }
+      },
+      "description": "Cost centers the employee belongs to"
+    },
+    "divisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a"
+          },
+          "name": {
+            "type": "string",
+            "example": "Division Purple"
+          }
+        }
+      },
+      "description": "Divisions the employee belongs to"
+    },
+    "otherGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a"
+          },
+          "name": {
+            "type": "string",
+            "example": "Other Group Orange"
+          }
+        }
+      },
+      "description": "Other groups the employee belongs to"
+    },
+    "level": {
+      "type": "string",
+      "example": "Senior",
+      "description": "Employee's level"
+    },
+    "title": {
+      "type": "string",
+      "example": "Software Engineer",
+      "description": "Employee's job title"
+    },
+    "workLocation": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{24}$",
+          "example": "58d55e3ffdc2eb20547edd0a"
+        },
+        "name": {
+          "type": "string",
+          "example": "Berlin Office"
+        }
+      },
+      "description": "Employee's work location"
+    },
+    "compensation": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "salary": {
+          "type": "number",
+          "example": 75000,
+          "description": "Employee's salary amount"
+        },
+        "currency": {
+          "type": "string",
+          "example": "EUR",
+          "description": "Currency of the salary"
+        },
+        "frequency": {
+          "type": "string",
+          "enum": [
+            "year",
+            "month",
+            "hour"
+          ],
+          "example": "year",
+          "description": "Salary remuneration period"
+        }
+      },
+      "description": "Employee's compensation information"
+    },
+    "additionalCompensations": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "58d55e3ffdc2eb20547edd0a",
+            "description": "Compensation ID"
+          },
+          "name": {
+            "type": "string",
+            "example": "Annual Bonus",
+            "description": "Name of the compensation"
+          },
+          "amount": {
+            "type": "number",
+            "nullable": true,
+            "example": 5000,
+            "description": "Amount of the compensation"
+          },
+          "amountType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "fixed",
+              "variable"
+            ],
+            "example": "fixed",
+            "description": "Type of the compensation amount"
+          },
+          "recurrence": {
+            "type": "string",
+            "enum": [
+              "oneTime",
+              "monthly",
+              "every3Months",
+              "every6Months",
+              "every12Months"
+            ],
+            "example": "every12Months",
+            "description": "Recurrence of the compensation"
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true,
+            "example": "Performance bonus",
+            "description": "Comment for the compensation"
+          },
+          "effectiveAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-01-01T00:00:00.000Z",
+            "description": "Effective date of the compensation"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-12-31T23:59:59.999Z",
+            "description": "Valid until date of the compensation"
+          }
+        }
+      },
+      "description": "Employee's additional compensations"
+    },
+    "customAttributes": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Custom attributes defined for the employee"
+    }
+  }
+}

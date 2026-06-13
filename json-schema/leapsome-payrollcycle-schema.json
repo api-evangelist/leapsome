@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PayrollCycle",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$",
+      "example": "58d55e3ffdc2eb20547edd0a",
+      "description": "Payroll cycle ID"
+    },
+    "name": {
+      "type": "string",
+      "example": "Q1 2024 Payroll",
+      "description": "Name of the payroll cycle"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "pendingApproval",
+        "approved",
+        "overdue",
+        "future",
+        "reopened"
+      ],
+      "example": "open",
+      "description": "Current status of the payroll cycle"
+    },
+    "startAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start date of the payroll period"
+    },
+    "endAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End date of the payroll period"
+    },
+    "customPeriodStartAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start date of the custom period"
+    },
+    "customPeriodEndAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End date of the custom period"
+    },
+    "reviewStartAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start date of the review period"
+    },
+    "approvalStartAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start date of the approval period"
+    },
+    "approvedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date when the payroll cycle was approved"
+    },
+    "approvedBy": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$",
+      "description": "User ID of the user who approved the payroll cycle"
+    },
+    "prorateType": {
+      "type": "string",
+      "enum": [
+        "weekly",
+        "biWeekly",
+        "semiMonthly",
+        "thirtyDays",
+        "actualNumberOfMonthDays"
+      ],
+      "example": "weekly",
+      "description": "Type of prorate used for the payroll cycle"
+    },
+    "compensations": {
+      "type": "object",
+      "properties": {
+        "salaryTypeCustomName": {
+          "type": "string",
+          "description": "Custom name for the salary type"
+        },
+        "baseSalaryCustomName": {
+          "type": "string",
+          "description": "Custom name for the base salary"
+        },
+        "salaryPerHourCustomName": {
+          "type": "string",
+          "description": "Custom name for the salary per hour"
+        },
+        "compensableTimeCustomName": {
+          "type": "string",
+          "description": "Custom name for the compensable time"
+        },
+        "hoursWorkedCustomName": {
+          "type": "string",
+          "description": "Custom name for the hours worked"
+        },
+        "paidAbsencesCustomName": {
+          "type": "string",
+          "description": "Custom name for the paid absences"
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the payroll cycle was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the payroll cycle was last updated"
+    }
+  }
+}

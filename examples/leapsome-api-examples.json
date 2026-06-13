@@ -1,0 +1,375 @@
+{
+  "content-api": {
+    "response_200_listGoals": {
+      "example-1": {
+        "value": {
+          "meta": {
+            "count": 1,
+            "cursor": "58d55e3ffdc2eb20547edd0a",
+            "nextPage": "string"
+          },
+          "data": [
+            {
+              "id": "5b237f6868794d5c08555812",
+              "type": "user",
+              "user": {
+                "id": "58d55e3ffdc2eb20547edd0a",
+                "email": "example@example.com",
+                "fullName": "John Doe",
+                "preferredName": "John Doe"
+              },
+              "team": {
+                "id": "5b237f6868794d5c08555812",
+                "name": "Rocket Scientists"
+              },
+              "name": "Become a great place to work (d)",
+              "description": "Make it entertaining",
+              "contributors": [
+                {
+                  "id": "58d55e3ffdc2eb20547edd0a",
+                  "email": "example@example.com",
+                  "fullName": "John Doe",
+                  "preferredName": "John Doe"
+                }
+              ],
+              "progress": 50,
+              "status": "live",
+              "managedBy": {
+                "id": "58d55e3ffdc2eb20547edd0a",
+                "email": "example@example.com",
+                "fullName": "John Doe",
+                "preferredName": "John Doe"
+              },
+              "tags": [
+                {
+                  "id": "5b237f6868794d5c08555812",
+                  "name": "string"
+                }
+              ],
+              "deadline": "2019-08-24T14:15:22Z",
+              "keyResults": [
+                {
+                  "id": "5b237f6868794d5c08555812",
+                  "name": "Bring Glassdoor score up above 4",
+                  "metric": {
+                    "type": "currency",
+                    "start": 0,
+                    "end": 1000,
+                    "current": 650
+                  },
+                  "weight": 30,
+                  "ownerUser": {
+                    "id": "58d55e3ffdc2eb20547edd0a",
+                    "email": "example@example.com",
+                    "fullName": "John Doe",
+                    "preferredName": "John Doe"
+                  },
+                  "ownerTeam": {
+                    "id": "5b237f6868794d5c08555812",
+                    "name": "Engineer"
+                  }
+                }
+              ],
+              "parent": {
+                "_id": "5cb0855f0f089e6924b742e4",
+                "name": "Enhance Employee Experience and Retention",
+                "status": "live"
+              },
+              "progressStatus": "onTrack",
+              "createdAt": "2019-08-23T11:53:06.741Z",
+              "updatedAt": "2019-08-23T11:53:06.741Z"
+            }
+          ]
+        }
+      }
+    },
+    "response_200_listReviews": {
+      "example-1": {
+        "value": {
+          "data": [
+            {
+              "_id": "5a869af092cf001f4ce73c26",
+              "name": "Performance Review Q1 2022",
+              "status": "peerReviewsPending",
+              "createdAt": "2018-02-16T08:48:48.363Z",
+              "kickoffDate": "2018-02-18T08:48:48.363Z",
+              "template": "63e42f779f7f18396a38f54d",
+              "lastModifiedOn": "2018-02-20T10:15:30.000Z"
+            }
+          ]
+        }
+      }
+    },
+    "response_200_getReviewDetails": {
+      "example-1": {
+        "value": {
+          "data": {
+            "_id": "5a869af092cf001f4ce73c26",
+            "name": "Performance Review Q2",
+            "status": "complete",
+            "questions": [
+              {
+                "_id": "58d55e55fdc2eb20547edd16",
+                "name": "Delivers results"
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd0f",
+                "name": "Takes ownership"
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd20",
+                "name": "Provides structure"
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd21",
+                "name": "Manages expectations"
+              }
+            ],
+            "timeline": {
+              "start": "2018-03-02T08:46:11.444Z",
+              "peerNominationsDeadline": "1970-01-01T00:00:00.000Z",
+              "peerApprovalDeadline": "1970-01-01T00:00:00.000Z",
+              "peerReviewsDeadline": "2018-04-13T08:46:11.444Z",
+              "managerReviewsDeadline": "2018-04-27T08:46:11.444Z",
+              "conversationsDeadline": "2018-05-07T08:46:11.444Z"
+            },
+            "createdAt": "2018-02-16T08:48:48.363Z"
+          },
+          "__v2": true
+        }
+      }
+    },
+    "response_200_getReviewParticipants": {
+      "example-1": {
+        "value": {
+          "data": [
+            {
+              "_id": "58d55e3ffdc2eb20547edd0a",
+              "signatureReviewee": "2025-03-04T13:15:11.574+00:00",
+              "signatureManager": "2025-03-04T13:15:11.574+00:00",
+              "lastModifiedOn": "2025-03-04T13:15:11.574+00:00",
+              "lastModifiedBy": "58d55e3ffdc2eb20547edd0a",
+              "reviewee": {
+                "user": "58d55e3ffdc2eb20547edd0a",
+                "name": "Louise Leapsome",
+                "preferredName": null,
+                "status": "pending",
+                "averageRating": "0 / 100",
+                "lastModifiedOn": "2025-03-04T13:15:11.574+00:00",
+                "lastModifiedBy": "58d55e3ffdc2eb20547edd0a"
+              },
+              "managers": [
+                {
+                  "user": "58d55e3ffdc2eb20547edd00",
+                  "name": "Peter Pan",
+                  "preferredName": null,
+                  "status": "complete",
+                  "averageRating": "50 / 100",
+                  "lastModifiedOn": "2025-03-04T13:15:11.574+00:00",
+                  "lastModifiedBy": "58d55e3ffdc2eb20547edd00"
+                }
+              ],
+              "additionalManagers": [
+                {
+                  "user": "58d625f5fdc2eb20547ede85",
+                  "name": "Jack Johnson",
+                  "preferredName": null,
+                  "status": "pending",
+                  "averageRating": "0 / 100",
+                  "lastModifiedOn": "2025-03-04T13:15:11.574+00:00",
+                  "lastModifiedBy": "58d625f5fdc2eb20547ede85"
+                }
+              ],
+              "peers": [
+                {
+                  "user": "58d625f5fdc2eb20547ede83",
+                  "name": "Susanne Leader",
+                  "preferredName": null,
+                  "status": "declined",
+                  "averageRating": "0 / 100",
+                  "lastModifiedOn": "2025-03-04T13:15:11.574+00:00",
+                  "lastModifiedBy": "58d625f5fdc2eb20547ede83"
+                },
+                {
+                  "user": "62ab64e3339234d9c4a527f2",
+                  "name": "Jason Minor",
+                  "preferredName": null,
+                  "status": "complete",
+                  "averageRating": "75 / 100",
+                  "lastModifiedOn": "2025-03-04T13:15:11.574+00:00",
+                  "lastModifiedBy": "62ab64e3339234d9c4a527f2"
+                }
+              ],
+              "directReports": [
+                {
+                  "user": "62ab64e3339234d9c4a527f1",
+                  "name": "Sandra Susie",
+                  "preferredName": "Sandra von Susie",
+                  "status": "complete",
+                  "averageRating": "75 / 100",
+                  "lastModifiedOn": "2025-03-04T13:15:11.574+00:00",
+                  "lastModifiedBy": "62ab64e3339234d9c4a527f1"
+                }
+              ]
+            }
+          ],
+          "__v2": true
+        }
+      }
+    },
+    "response_200_getReviewParticipantResults": {
+      "example-1": {
+        "value": {
+          "data": {
+            "questions": [
+              {
+                "_id": "61f5656be4a7ef185491a621",
+                "name": "Placeholder Company Skills",
+                "average": 80
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd16",
+                "name": "Delivers results",
+                "average": 100
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd20",
+                "name": "Provides structure",
+                "average": 90
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd14",
+                "name": "Drives innovation",
+                "average": 90
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd0f",
+                "name": "Takes ownership",
+                "average": 90
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd21",
+                "name": "Manages expectations",
+                "average": 70
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd18",
+                "name": "Communicates in written",
+                "average": 100
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd1b",
+                "name": "Motivates",
+                "average": 80
+              },
+              {
+                "_id": "58d55e55fdc2eb20547edd17",
+                "name": "Communicates verbally",
+                "average": 70
+              }
+            ],
+            "answers": [
+              {
+                "authorId": "62ac40b5f1f4baf9a1b6fb52",
+                "receiverId": "58d625f5fdc2eb20547ede84",
+                "question": "58d55e55fdc2eb20547edd16",
+                "type": "Peer Review",
+                "rating": 6,
+                "scale": 6,
+                "comment": "Great job!"
+              },
+              {
+                "authorId": "62ac40b5f1f4baf9a1b6fb52",
+                "receiverId": "58d625f5fdc2eb20547ede84",
+                "question": "58d55e55fdc2eb20547edd20",
+                "type": "Peer Review",
+                "rating": 3,
+                "scale": 6,
+                "comment": "You can improve here"
+              },
+              {
+                "authorId": "62ac40b5f1f4baf9a1b6fb52",
+                "receiverId": "58d625f5fdc2eb20547ede84",
+                "question": "58d55e55fdc2eb20547edd14",
+                "type": "Peer Review",
+                "rating": 4,
+                "scale": 6,
+                "comment": ""
+              },
+              {
+                "authorId": "62ac40b5f1f4baf9a1b6fb52",
+                "receiverId": "58d625f5fdc2eb20547ede84",
+                "question": "58d55e55fdc2eb20547edd0f",
+                "type": "Peer Review",
+                "rating": 4,
+                "scale": 6,
+                "comment": ""
+              },
+              {
+                "authorId": "62ac40b5f1f4baf9a1b6fb52",
+                "receiverId": "58d625f5fdc2eb20547ede84",
+                "question": "58d55e55fdc2eb20547edd21",
+                "type": "Peer Review",
+                "rating": 6,
+                "scale": 6,
+                "comment": ""
+              }
+            ],
+            "users": [
+              {
+                "_id": "58d625f5fdc2eb20547ede84",
+                "fullName": "Susanne Leader",
+                "preferredName": "Susanne Leader",
+                "email": "susanne@leapsome.com",
+                "teams": "Managers (Auto), Sales",
+                "location": "London"
+              },
+              {
+                "_id": "62ac40b5f1f4baf9a1b6fb52",
+                "fullName": "Louise Leapsome",
+                "preferredName": "Louise Leapsome",
+                "email": "louise@leapsome.com",
+                "teams": "Managers (Auto), Marketing",
+                "location": "Berlin"
+              }
+            ]
+          },
+          "__v2": true
+        }
+      }
+    },
+    "response_200_listAbsences": {
+      "example-1": {
+        "value": [
+          {
+            "_id": "66a1b2c3d4e5f6789012345a",
+            "createdAt": "2024-01-15T08:30:00.000Z",
+            "updatedAt": "2024-01-15T08:30:00.000Z",
+            "userId": "58d55e3ffdc2eb20547edd0a",
+            "start": "2024-02-01T00:00:00.000Z",
+            "end": "2024-02-05T23:59:59.999Z",
+            "absenceType": "paidVacation",
+            "activityType": "nonWorkingPaid",
+            "status": "active",
+            "timeUnit": "days",
+            "actualAbsenceDuration": 5
+          },
+          {
+            "_id": "66a1b2c3d4e5f6789012345b",
+            "createdAt": "2024-01-20T09:15:00.000Z",
+            "updatedAt": "2024-01-20T09:15:00.000Z",
+            "userId": "58d55e3ffdc2eb20547edd0b",
+            "start": "2024-03-10T00:00:00.000Z",
+            "end": "2024-03-12T23:59:59.999Z",
+            "absenceType": "sickLeave",
+            "activityType": "nonWorkingPaid",
+            "status": "active",
+            "timeUnit": "days",
+            "actualAbsenceDuration": 3
+          }
+        ]
+      }
+    }
+  },
+  "scim-api": {}
+}

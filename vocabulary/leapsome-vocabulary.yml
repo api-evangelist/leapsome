@@ -1,0 +1,1651 @@
+name: Leapsome API Vocabulary
+description: Vocabulary of terms, properties, and operations from the Leapsome Content API and SCIM 2.0 API.
+version: 1.0.0
+source:
+- https://api.leapsome.com/v1/api-docs/
+- https://api.leapsome.com/scim/v1/api-docs/
+terms:
+  AuthInfo:
+    description: ''
+    type: object
+    source: content-api
+  AuthInfo.token:
+    description: ''
+    type: string
+    source: content-api
+  AuthInfo.expiresIn:
+    description: seconds until the token expires
+    type: integer
+    source: content-api
+  PaginatedGoals:
+    description: ''
+    type: object
+    source: content-api
+  PaginatedGoals.meta:
+    description: ''
+    type: '#/components/schemas/Meta'
+    source: content-api
+  PaginatedGoals.data:
+    description: ''
+    type: array
+    source: content-api
+  Meta:
+    description: ''
+    type: object
+    source: content-api
+  Meta.count:
+    description: number of results returned in this request
+    type: integer
+    source: content-api
+  Meta.cursor:
+    description: 'Will be set to `null` if complete set have been returned.
+
+      '
+    type: string
+    source: content-api
+  Meta.nextPage:
+    description: URL of the next result page. `null` means no more results available.
+    type: string
+    source: content-api
+  User:
+    description: ''
+    type: object
+    source: content-api
+  User.id:
+    description: ''
+    type: string
+    source: content-api
+  User.email:
+    description: ''
+    type: string
+    source: content-api
+  User.fullName:
+    description: ''
+    type: string
+    source: content-api
+  User.preferredName:
+    description: ''
+    type: string
+    source: content-api
+  Comments:
+    description: ''
+    type: object
+    source: content-api
+  Comments.data:
+    description: ''
+    type: array
+    source: content-api
+  Comment:
+    description: ''
+    type: object
+    source: content-api
+  Comment.id:
+    description: ''
+    type: string
+    source: content-api
+  Comment.content:
+    description: The comment body which can contain html tags
+    type: string
+    source: content-api
+  Comment.sender:
+    description: ''
+    type: object
+    source: content-api
+  Comment.createdAt:
+    description: ''
+    type: string
+    source: content-api
+  Comment.updatedAt:
+    description: ''
+    type: string
+    source: content-api
+  Goal:
+    description: ''
+    type: object
+    source: content-api
+  Goal.id:
+    description: ''
+    type: string
+    source: content-api
+  Goal.type:
+    description: ''
+    type: string
+    source: content-api
+  Goal.user:
+    description: ''
+    type: unknown
+    source: content-api
+  Goal.team:
+    description: 'Information about the team, that''s assigned to this goal.
+
+      Will be `null` for User and Company goals.
+
+      '
+    type: object
+    source: content-api
+  Goal.name:
+    description: ''
+    type: string
+    source: content-api
+  Goal.description:
+    description: ''
+    type: string
+    source: content-api
+  Goal.contributors:
+    description: ''
+    type: array
+    source: content-api
+  Goal.progress:
+    description: ''
+    type: integer
+    source: content-api
+  Goal.status:
+    description: ''
+    type: string
+    source: content-api
+  Goal.managedBy:
+    description: ''
+    type: '#/components/schemas/User'
+    source: content-api
+  Goal.tags:
+    description: ''
+    type: array
+    source: content-api
+  Goal.deadline:
+    description: ''
+    type: string
+    source: content-api
+  Goal.keyResults:
+    description: ''
+    type: array
+    source: content-api
+  Goal.parent:
+    description: ''
+    type: '#/components/schemas/ParentGoal'
+    source: content-api
+  Goal.progressStatus:
+    description: ''
+    type: string
+    source: content-api
+  Goal.createdAt:
+    description: ''
+    type: string
+    source: content-api
+  Goal.updatedAt:
+    description: ''
+    type: string
+    source: content-api
+  KeyResults:
+    description: ''
+    type: object
+    source: content-api
+  KeyResults.id:
+    description: ''
+    type: string
+    source: content-api
+  KeyResults.name:
+    description: ''
+    type: string
+    source: content-api
+  KeyResults.metric:
+    description: ''
+    type: object
+    source: content-api
+  KeyResults.weight:
+    description: ''
+    type: integer
+    source: content-api
+  KeyResults.ownerUser:
+    description: ''
+    type: '#/components/schemas/User'
+    source: content-api
+  KeyResults.ownerTeam:
+    description: ''
+    type: object
+    source: content-api
+  KeyResults.contributors:
+    description: ''
+    type: array
+    source: content-api
+  KeyResults.contributorTeams:
+    description: ''
+    type: array
+    source: content-api
+  Tags:
+    description: ''
+    type: array
+    source: content-api
+  Tag:
+    description: ''
+    type: object
+    source: content-api
+  Tag.id:
+    description: ''
+    type: string
+    source: content-api
+  Tag.name:
+    description: ''
+    type: string
+    source: content-api
+  Tag.status:
+    description: ''
+    type: string
+    source: content-api
+  Tag.createdAt:
+    description: ''
+    type: string
+    source: content-api
+  Tag.updatedAt:
+    description: ''
+    type: string
+    source: content-api
+  KeyResultUpdate:
+    description: ''
+    type: object
+    source: content-api
+  KeyResultUpdate.name:
+    description: ''
+    type: string
+    source: content-api
+  KeyResultUpdate.metric:
+    description: ''
+    type: object
+    source: content-api
+  KeyResultUpdate.weight:
+    description: ''
+    type: integer
+    source: content-api
+  InitiativeUpdate:
+    description: ''
+    type: object
+    source: content-api
+  InitiativeUpdate.name:
+    description: ''
+    type: string
+    source: content-api
+  InitiativeUpdate.description:
+    description: ''
+    type: string
+    source: content-api
+  InitiativeUpdate.status:
+    description: ''
+    type: string
+    source: content-api
+  ParentGoal:
+    description: ''
+    type: object
+    source: content-api
+  ParentGoal._id:
+    description: ''
+    type: string
+    source: content-api
+  ParentGoal.name:
+    description: ''
+    type: string
+    source: content-api
+  ParentGoal.status:
+    description: ''
+    type: string
+    source: content-api
+  Absence:
+    description: ''
+    type: object
+    source: content-api
+  Absence._id:
+    description: Unique identifier for the absence
+    type: string
+    source: content-api
+  Absence.createdAt:
+    description: When the absence was created
+    type: string
+    source: content-api
+  Absence.updatedAt:
+    description: When the absence was last modified
+    type: string
+    source: content-api
+  Absence.userId:
+    description: ID of the user taking the absence
+    type: string
+    source: content-api
+  Absence.start:
+    description: Start date and time of the absence
+    type: string
+    source: content-api
+  Absence.startDayTime:
+    description: Start time of the absence (HH:mm format)
+    type: string
+    source: content-api
+  Absence.startDayDuration:
+    description: Duration type for the start day of the absence
+    type: string
+    source: content-api
+  Absence.end:
+    description: End date and time of the absence
+    type: string
+    source: content-api
+  Absence.endDayTime:
+    description: End time of the absence (HH:mm format)
+    type: string
+    source: content-api
+  Absence.endDayDuration:
+    description: Duration type for the end day of the absence
+    type: string
+    source: content-api
+  Absence.absenceType:
+    description: Type of absence being taken
+    type: string
+    source: content-api
+  Absence.activityType:
+    description: Activity type classification of the absence
+    type: string
+    source: content-api
+  Absence.status:
+    description: Current status of the absence
+    type: string
+    source: content-api
+  Absence.timeUnit:
+    description: Unit of time used for measuring the absence duration
+    type: string
+    source: content-api
+  Absence.comment:
+    description: Optional comment or note about the absence
+    type: string
+    source: content-api
+  Absence.actualAbsenceDuration:
+    description: Actual duration of the absence in the specified time unit
+    type: number
+    source: content-api
+  EmployeeList:
+    description: ''
+    type: object
+    source: content-api
+  EmployeeList.data:
+    description: ''
+    type: array
+    source: content-api
+  EmployeeList.meta:
+    description: ''
+    type: object
+    source: content-api
+  Employee:
+    description: ''
+    type: object
+    source: content-api
+  Employee.id:
+    description: Leapsome user ID
+    type: string
+    source: content-api
+  Employee.email:
+    description: Employee email address
+    type: string
+    source: content-api
+  Employee.firstname:
+    description: Employee first name
+    type: string
+    source: content-api
+  Employee.lastname:
+    description: Employee last name
+    type: string
+    source: content-api
+  Employee.middlename:
+    description: Employee middle name
+    type: string
+    source: content-api
+  Employee.fullname:
+    description: Employee full name
+    type: string
+    source: content-api
+  Employee.displayedName:
+    description: Employee displayed/preferred name
+    type: string
+    source: content-api
+  Employee.status:
+    description: Current status of the employee
+    type: string
+    source: content-api
+  Employee.lifecycleStatus:
+    description: Current lifecycle status of the employee
+    type: string
+    source: content-api
+  Employee.manager:
+    description: ''
+    type: object
+    source: content-api
+  Employee.additionalManagers:
+    description: ''
+    type: array
+    source: content-api
+  Employee.indirectManagers:
+    description: ''
+    type: array
+    source: content-api
+  Employee.startDate:
+    description: Employee start date
+    type: string
+    source: content-api
+  Employee.endDate:
+    description: Employee end date
+    type: string
+    source: content-api
+  Employee.phone:
+    description: Employee phone number
+    type: string
+    source: content-api
+  Employee.teams:
+    description: Teams the employee belongs to
+    type: array
+    source: content-api
+  Employee.departments:
+    description: Departments the employee belongs to
+    type: array
+    source: content-api
+  Employee.businessUnits:
+    description: Business units the employee belongs to
+    type: array
+    source: content-api
+  Employee.costCenters:
+    description: Cost centers the employee belongs to
+    type: array
+    source: content-api
+  Employee.divisions:
+    description: Divisions the employee belongs to
+    type: array
+    source: content-api
+  Employee.otherGroups:
+    description: Other groups the employee belongs to
+    type: array
+    source: content-api
+  Employee.level:
+    description: Employee's level
+    type: string
+    source: content-api
+  Employee.title:
+    description: Employee's job title
+    type: string
+    source: content-api
+  Employee.workLocation:
+    description: Employee's work location
+    type: object
+    source: content-api
+  Employee.compensation:
+    description: Employee's compensation information
+    type: object
+    source: content-api
+  Employee.additionalCompensations:
+    description: Employee's additional compensations
+    type: array
+    source: content-api
+  Employee.customAttributes:
+    description: Custom attributes defined for the employee
+    type: object
+    source: content-api
+  WorkLocationList:
+    description: ''
+    type: object
+    source: content-api
+  WorkLocationList.data:
+    description: ''
+    type: array
+    source: content-api
+  WorkLocationList.meta:
+    description: ''
+    type: object
+    source: content-api
+  WorkLocation:
+    description: ''
+    type: object
+    source: content-api
+  WorkLocation.id:
+    description: Work location ID
+    type: string
+    source: content-api
+  WorkLocation.name:
+    description: Name of the work location
+    type: string
+    source: content-api
+  WorkLocation.status:
+    description: Current status of the work location
+    type: string
+    source: content-api
+  WorkLocation.remote:
+    description: Whether this is a remote work location
+    type: boolean
+    source: content-api
+  WorkLocation.currency:
+    description: Default currency for this work location
+    type: string
+    source: content-api
+  WorkLocation.street:
+    description: Street address
+    type: string
+    source: content-api
+  WorkLocation.zip:
+    description: ZIP/postal code
+    type: string
+    source: content-api
+  WorkLocation.city:
+    description: City
+    type: string
+    source: content-api
+  WorkLocation.administrativeDivision:
+    description: State/province/administrative division
+    type: string
+    source: content-api
+  WorkLocation.country:
+    description: Country
+    type: string
+    source: content-api
+  WorkLocation.dateFormat:
+    description: Date format used in this work location
+    type: string
+    source: content-api
+  WorkLocation.primary:
+    description: Whether this is the primary work location
+    type: boolean
+    source: content-api
+  WorkLocation.createdAt:
+    description: When the work location was created
+    type: string
+    source: content-api
+  WorkLocation.updatedAt:
+    description: When the work location was last updated
+    type: string
+    source: content-api
+  TimesheetList:
+    description: ''
+    type: object
+    source: content-api
+  TimesheetList.data:
+    description: ''
+    type: array
+    source: content-api
+  TimesheetList.meta:
+    description: ''
+    type: object
+    source: content-api
+  Timesheet:
+    description: ''
+    type: object
+    source: content-api
+  Timesheet.id:
+    description: Timesheet ID
+    type: string
+    source: content-api
+  Timesheet.user:
+    description: ''
+    type: object
+    source: content-api
+  Timesheet.status:
+    description: Current status of the timesheet
+    type: string
+    source: content-api
+  Timesheet.startDate:
+    description: Start date of the timesheet period
+    type: string
+    source: content-api
+  Timesheet.endDate:
+    description: End date of the timesheet period
+    type: string
+    source: content-api
+  Timesheet.hoursWorked:
+    description: Total hours worked in the period (duration in ISO 8601 format)
+    type: string
+    source: content-api
+  Timesheet.compensableHours:
+    description: Total compensable hours in the period (duration in ISO 8601 format)
+    type: string
+    source: content-api
+  Timesheet.overtimeHours:
+    description: Total overtime hours in the period (duration in ISO 8601 format)
+    type: string
+    source: content-api
+  Timesheet.workDuration:
+    description: Total work duration in the period (duration in ISO 8601 format)
+    type: string
+    source: content-api
+  Timesheet.projects:
+    description: Projects the employee worked on in the timesheet period
+    type: array
+    source: content-api
+  PayrollCycleList:
+    description: ''
+    type: object
+    source: content-api
+  PayrollCycleList.data:
+    description: ''
+    type: array
+    source: content-api
+  PayrollCycleList.meta:
+    description: ''
+    type: object
+    source: content-api
+  PayrollCycle:
+    description: ''
+    type: object
+    source: content-api
+  PayrollCycle.id:
+    description: Payroll cycle ID
+    type: string
+    source: content-api
+  PayrollCycle.name:
+    description: Name of the payroll cycle
+    type: string
+    source: content-api
+  PayrollCycle.status:
+    description: Current status of the payroll cycle
+    type: string
+    source: content-api
+  PayrollCycle.startAt:
+    description: Start date of the payroll period
+    type: string
+    source: content-api
+  PayrollCycle.endAt:
+    description: End date of the payroll period
+    type: string
+    source: content-api
+  PayrollCycle.customPeriodStartAt:
+    description: Start date of the custom period
+    type: string
+    source: content-api
+  PayrollCycle.customPeriodEndAt:
+    description: End date of the custom period
+    type: string
+    source: content-api
+  PayrollCycle.reviewStartAt:
+    description: Start date of the review period
+    type: string
+    source: content-api
+  PayrollCycle.approvalStartAt:
+    description: Start date of the approval period
+    type: string
+    source: content-api
+  PayrollCycle.approvedAt:
+    description: Date when the payroll cycle was approved
+    type: string
+    source: content-api
+  PayrollCycle.approvedBy:
+    description: User ID of the user who approved the payroll cycle
+    type: string
+    source: content-api
+  PayrollCycle.prorateType:
+    description: Type of prorate used for the payroll cycle
+    type: string
+    source: content-api
+  PayrollCycle.compensations:
+    description: ''
+    type: object
+    source: content-api
+  PayrollCycle.createdAt:
+    description: When the payroll cycle was created
+    type: string
+    source: content-api
+  PayrollCycle.updatedAt:
+    description: When the payroll cycle was last updated
+    type: string
+    source: content-api
+  PayrollCycleParticipantList:
+    description: ''
+    type: object
+    source: content-api
+  PayrollCycleParticipantList.data:
+    description: ''
+    type: array
+    source: content-api
+  PayrollCycleParticipantList.meta:
+    description: ''
+    type: object
+    source: content-api
+  PayrollCycleParticipant:
+    description: ''
+    type: object
+    source: content-api
+  PayrollCycleParticipant.id:
+    description: Payroll cycle participant ID
+    type: string
+    source: content-api
+  PayrollCycleParticipant.name:
+    description: Name of the participant
+    type: string
+    source: content-api
+  PayrollCycleParticipant.email:
+    description: Email address of the participant
+    type: string
+    source: content-api
+  PayrollCycleParticipant.compensations:
+    description: ''
+    type: array
+    source: content-api
+  PayrollCycleParticipant.salaryInfoPeriods:
+    description: ''
+    type: array
+    source: content-api
+  PayrollCycleParticipant.isActiveParticipant:
+    description: Whether the participant is active in the payroll cycle
+    type: boolean
+    source: content-api
+  FeedbackList:
+    description: ''
+    type: object
+    source: content-api
+  FeedbackList.data:
+    description: ''
+    type: array
+    source: content-api
+  FeedbackList.meta:
+    description: ''
+    type: object
+    source: content-api
+  FeedbackItem:
+    description: ''
+    type: object
+    source: content-api
+  FeedbackItem.id:
+    description: Feedback item ID
+    type: string
+    source: content-api
+  FeedbackItem.type:
+    description: Type of feedback
+    type: string
+    source: content-api
+  FeedbackItem.sender:
+    description: The user who sent the feedback
+    type: object
+    source: content-api
+  FeedbackItem.receivers:
+    description: Users or teams who received the feedback
+    type: array
+    source: content-api
+  FeedbackItem.message:
+    description: The feedback message content
+    type: string
+    source: content-api
+  FeedbackItem.badge:
+    description: Badge attached to the feedback (praise only)
+    type: object
+    source: content-api
+  FeedbackItem.visibility:
+    description: Visibility level of the feedback
+    type: string
+    source: content-api
+  FeedbackItem.createdAt:
+    description: When the feedback was created
+    type: string
+    source: content-api
+  FeedbackItem.likesCount:
+    description: Number of likes on the feedback
+    type: integer
+    source: content-api
+  FeedbackItem.commentsCount:
+    description: Number of comments on the feedback
+    type: integer
+    source: content-api
+  CreatePraiseRequest:
+    description: ''
+    type: object
+    source: content-api
+  CreatePraiseRequest.senderId:
+    description: User ID of the sender
+    type: string
+    source: content-api
+  CreatePraiseRequest.receiverIds:
+    description: User IDs of the praise receivers
+    type: array
+    source: content-api
+  CreatePraiseRequest.message:
+    description: The praise message content
+    type: string
+    source: content-api
+  CreatePraiseRequest.visibility:
+    description: Visibility level of the praise
+    type: string
+    source: content-api
+  CreatePraiseResponse:
+    description: ''
+    type: object
+    source: content-api
+  CreatePraiseResponse.id:
+    description: ID of the created feedback item
+    type: string
+    source: content-api
+  CreateInstantFeedbackRequest:
+    description: ''
+    type: object
+    source: content-api
+  CreateInstantFeedbackRequest.senderId:
+    description: User ID of the sender
+    type: string
+    source: content-api
+  CreateInstantFeedbackRequest.receiverId:
+    description: User ID of the feedback receiver
+    type: string
+    source: content-api
+  CreateInstantFeedbackRequest.message:
+    description: The feedback message content
+    type: string
+    source: content-api
+  CreateInstantFeedbackRequest.visibility:
+    description: Visibility level of the feedback
+    type: string
+    source: content-api
+  CreatePrivateNoteRequest:
+    description: ''
+    type: object
+    source: content-api
+  CreatePrivateNoteRequest.senderId:
+    description: User ID of the sender
+    type: string
+    source: content-api
+  CreatePrivateNoteRequest.receiverId:
+    description: User ID the private note is about
+    type: string
+    source: content-api
+  CreatePrivateNoteRequest.message:
+    description: The private note content
+    type: string
+    source: content-api
+  CreateFeedbackResponse:
+    description: ''
+    type: object
+    source: content-api
+  CreateFeedbackResponse.id:
+    description: ID of the created feedback item
+    type: string
+    source: content-api
+  UploadUserDocumentRequest:
+    description: ''
+    type: object
+    source: content-api
+  UploadUserDocumentRequest.file:
+    description: The document file to upload (max 25 MB)
+    type: string
+    source: content-api
+  UploadUserDocumentRequest.category:
+    description: ID of the user document category (from GET /documents/categories)
+    type: string
+    source: content-api
+  UploadUserDocumentRequest.description:
+    description: Optional human-readable description for the document
+    type: string
+    source: content-api
+  UploadUserDocumentResponse:
+    description: ''
+    type: object
+    source: content-api
+  UploadUserDocumentResponse.id:
+    description: ID of the uploaded document
+    type: string
+    source: content-api
+  DocumentCategory:
+    description: ''
+    type: object
+    source: content-api
+  DocumentCategory.id:
+    description: Category ID. Use this value as the `category` field when uploading documents.
+    type: string
+    source: content-api
+  DocumentCategory.name:
+    description: Display name of the category
+    type: string
+    source: content-api
+  PublicAccessRole:
+    description: ''
+    type: object
+    source: content-api
+  PublicAccessRole.id:
+    description: Access role ID
+    type: string
+    source: content-api
+  PublicAccessRole.name:
+    description: Display name of the access role
+    type: string
+    source: content-api
+  PublicAccessRole.userScopeType:
+    description: How user scope is determined for this role
+    type: string
+    source: content-api
+  PublicAccessRole.isSystemDefault:
+    description: Whether this is a built-in system role
+    type: boolean
+    source: content-api
+  PublicAccessRole.systemDefaultType:
+    description: System default role identifier when `isSystemDefault` is true
+    type: string
+    source: content-api
+  PublicAccessRole.active:
+    description: Whether the role is active
+    type: boolean
+    source: content-api
+  UpdateEmployeeAccessRolesRequest:
+    description: ''
+    type: object
+    source: content-api
+  UpdateEmployeeAccessRolesRequest.accessRoleIds:
+    description: Full desired set of secondary access role IDs for the employee. Primary access role IDs are not allowed.
+    type: array
+    source: content-api
+  UpdateEmployeeAccessRolesRequest.accessRoleCustomConfigurations:
+    description: User-specific scope configurations for access roles with `userScopeType` set to `userSpecific`. Only `include.users`
+      is supported.
+    type: array
+    source: content-api
+  UpdateEmployeeAccessRolesResponse:
+    description: ''
+    type: object
+    source: content-api
+  UpdateEmployeeAccessRolesResponse.userId:
+    description: ''
+    type: string
+    source: content-api
+  UpdateEmployeeAccessRolesResponse.accessRoleIds:
+    description: ''
+    type: array
+    source: content-api
+  UpdateEmployeeAccessRolesResponse.accessRoleCustomConfigurations:
+    description: ''
+    type: array
+    source: content-api
+  PublicUserAccessRoleCustomConfiguration:
+    description: ''
+    type: object
+    source: content-api
+  PublicUserAccessRoleCustomConfiguration.accessRole:
+    description: Access role ID this custom user scope belongs to
+    type: string
+    source: content-api
+  PublicUserAccessRoleCustomConfiguration.userSpecificAccessScope:
+    description: ''
+    type: '#/components/schemas/PublicUserSpecificAccessScope'
+    source: content-api
+  PublicUserSpecificAccessScope:
+    description: ''
+    type: object
+    source: content-api
+  PublicUserSpecificAccessScope.include:
+    description: ''
+    type: object
+    source: content-api
+  scim-AuthenticationSchemes:
+    description: Specifies supported Authentication Scheme properties
+    type: object
+    source: scim
+  scim-AuthenticationSchemes.description:
+    description: The description of the Authentication Scheme
+    type: string
+    source: scim
+  scim-AuthenticationSchemes.documentationUrl:
+    description: A HTTP addressable URL pointing to the Authentication Scheme's usage documentation
+    type: string
+    source: scim
+  scim-AuthenticationSchemes.name:
+    description: The common authentication scheme name, e.g. HTTP Basic
+    type: string
+    source: scim
+  scim-AuthenticationSchemes.specUrl:
+    description: A HTTP addressable URL pointing to the Authentication Scheme's specification
+    type: string
+    source: scim
+  scim-Bulk:
+    description: Specifies BULK configuration options
+    type: object
+    source: scim
+  scim-Bulk.supported:
+    description: Specifies whether the operation is supported
+    type: boolean
+    source: scim
+  scim-ChangePassword:
+    description: Specifies Change Password configuration options
+    type: object
+    source: scim
+  scim-ChangePassword.supported:
+    description: Specifies whether the operation is supported
+    type: boolean
+    source: scim
+  scim-Etag:
+    description: Specifies Etag configuration options
+    type: object
+    source: scim
+  scim-Etag.supported:
+    description: Specifies whether the operation is supported
+    type: boolean
+    source: scim
+  scim-Filter:
+    description: Specifies FILTER options
+    type: object
+    source: scim
+  scim-Filter.supported:
+    description: Specifies whether the operation is supported
+    type: boolean
+    source: scim
+  scim-Group:
+    description: Describes a group belonging to an organization
+    type: object
+    source: scim
+  scim-Group.id:
+    description: The group's unique id
+    type: string
+    source: scim
+  scim-Group.displayName:
+    description: The group's display name
+    type: string
+    source: scim
+  scim-Group.members:
+    description: An array of members
+    type: array
+    source: scim
+  scim-Group.meta:
+    description: ''
+    type: '#/components/schemas/GroupMetadata'
+    source: scim
+  scim-Group.schemas:
+    description: ''
+    type: array
+    source: scim
+  scim-Group.externalId:
+    description: A groups id in an external system
+    type: string
+    source: scim
+  scim-GroupCollection:
+    description: Class describing a collection of groups
+    type: object
+    source: scim
+  scim-GroupCollection.Resources:
+    description: An array of groups
+    type: array
+    source: scim
+  scim-GroupCollection.totalResults:
+    description: The number of groups in the collection
+    type: integer
+    source: scim
+  scim-GroupCollection.itemsPerPage:
+    description: ''
+    type: integer
+    source: scim
+  scim-GroupCollection.startIndex:
+    description: ''
+    type: integer
+    source: scim
+  scim-GroupCollection.schemas:
+    description: ''
+    type: array
+    source: scim
+  scim-GroupDefinition:
+    description: Describes the group to create
+    type: object
+    source: scim
+  scim-GroupDefinition.displayName:
+    description: The group's display name
+    type: string
+    source: scim
+  scim-GroupDefinition.externalId:
+    description: The id of the group in an external system
+    type: string
+    source: scim
+  scim-GroupMetadata:
+    description: Group metadata
+    type: object
+    source: scim
+  scim-GroupMetadata.created:
+    description: The date and time the group was created
+    type: string
+    source: scim
+  scim-GroupMetadata.location:
+    description: A URI to get the group details through this API
+    type: string
+    source: scim
+  scim-GroupMetadata.lastModified:
+    description: Last modification date & time
+    type: string
+    source: scim
+  scim-GroupMetadata.version:
+    description: ''
+    type: string
+    source: scim
+  scim-Member:
+    description: A member of a group. This can be a group or an user
+    type: object
+    source: scim
+  scim-Member.value:
+    description: The Leapsome ID of a user
+    type: string
+    source: scim
+  scim-Patch:
+    description: Specifies PATCH configuration options
+    type: object
+    source: scim
+  scim-Patch.supported:
+    description: Specifies whether the operation is supported
+    type: boolean
+    source: scim
+  scim-ResourceSchema:
+    description: Describes the attributes and metadata constituting a resource such as a user.
+    type: object
+    source: scim
+  scim-ResourceSchema.attributes:
+    description: The resource's attributes
+    type: array
+    source: scim
+  scim-ResourceSchema.description:
+    description: The resource's description
+    type: string
+    source: scim
+  scim-ResourceSchema.endpoint:
+    description: The resource's HTTP addressable endpoint relative to the base URL, e.g. /Users.
+    type: string
+    source: scim
+  scim-ResourceSchema.id:
+    description: The resource's id, e.g. urn:scim:schemas:core:1.0:User
+    type: string
+    source: scim
+  scim-ResourceSchema.name:
+    description: The resource's name, e.g. "User"
+    type: string
+    source: scim
+  scim-ResourceSchema.schema:
+    description: The resource's associated schema, e.g. urn:scim:schemas:core:1.0
+    type: string
+    source: scim
+  scim-SchemaAttribute:
+    description: Describes a resource attribute
+    type: object
+    source: scim
+  scim-SchemaAttribute.caseExact:
+    description: Indicates whether the attribute is case sensitive
+    type: boolean
+    source: scim
+  scim-SchemaAttribute.description:
+    description: The attribute's description
+    type: string
+    source: scim
+  scim-SchemaAttribute.multiValued:
+    description: Indicates whether the attribute can have multiple values
+    type: boolean
+    source: scim
+  scim-SchemaAttribute.name:
+    description: The attribute's name
+    type: string
+    source: scim
+  scim-SchemaAttribute.readOnly:
+    description: Indicates whether the attribute is mutable
+    type: boolean
+    source: scim
+  scim-SchemaAttribute.required:
+    description: Indicates whether the attribute is required
+    type: boolean
+    source: scim
+  scim-SchemaAttribute.schema:
+    description: The attribute's associated scheme, e.g. urn:scim:schemas:core:1.0
+    type: string
+    source: scim
+  scim-SchemaAttribute.subAttributes:
+    description: The attribute's potential sub-attributes
+    type: array
+    source: scim
+  scim-SchemaAttribute.type:
+    description: The attribute's data type, e.g. String
+    type: string
+    source: scim
+  scim-SchemaSubAttribute:
+    description: Describes the sub-attribute of a resource attribute
+    type: object
+    source: scim
+  scim-SchemaSubAttribute.caseExact:
+    description: Indicates whether the attribute is case sensitive
+    type: boolean
+    source: scim
+  scim-SchemaSubAttribute.description:
+    description: The attribute's description
+    type: string
+    source: scim
+  scim-SchemaSubAttribute.name:
+    description: The attribute's name
+    type: string
+    source: scim
+  scim-SchemaSubAttribute.readOnly:
+    description: Indicates whether the attribute is mutable
+    type: boolean
+    source: scim
+  scim-SchemaSubAttribute.required:
+    description: Indicates whether the attribute is required
+    type: boolean
+    source: scim
+  scim-SchemaSubAttribute.type:
+    description: The attribute's data type, e.g. String
+    type: string
+    source: scim
+  scim-ServiceProviderConfig:
+    description: Represents the Service Provider's configuration
+    type: object
+    source: scim
+  scim-ServiceProviderConfig.authenticationSchemes:
+    description: ''
+    type: '#/components/schemas/AuthenticationSchemes'
+    source: scim
+  scim-ServiceProviderConfig.bulk:
+    description: ''
+    type: '#/components/schemas/Bulk'
+    source: scim
+  scim-ServiceProviderConfig.changePassword:
+    description: ''
+    type: '#/components/schemas/ChangePassword'
+    source: scim
+  scim-ServiceProviderConfig.documentationUrl:
+    description: An HTTP addressable URL pointing to the Service Provider's help documentation
+    type: string
+    source: scim
+  scim-ServiceProviderConfig.etag:
+    description: ''
+    type: '#/components/schemas/Etag'
+    source: scim
+  scim-ServiceProviderConfig.filter:
+    description: ''
+    type: '#/components/schemas/Filter'
+    source: scim
+  scim-ServiceProviderConfig.patch:
+    description: ''
+    type: '#/components/schemas/Patch'
+    source: scim
+  scim-ServiceProviderConfig.sort:
+    description: ''
+    type: '#/components/schemas/Sort'
+    source: scim
+  scim-Sort:
+    description: Specifies Sort configuration options
+    type: object
+    source: scim
+  scim-Sort.supported:
+    description: Specifies whether the operation is supported
+    type: boolean
+    source: scim
+  scim-User:
+    description: Describes a user belonging to an organization
+    type: object
+    source: scim
+  scim-User.id:
+    description: A user's unique id (generated by Leapsome)
+    type: string
+    source: scim
+  scim-User.externalId:
+    description: A user's ID within an external system
+    type: string
+    source: scim
+  scim-User.title:
+    description: A user's job title
+    type: string
+    source: scim
+  scim-User.photos:
+    description: ''
+    type: array
+    source: scim
+  scim-User.meta:
+    description: ''
+    type: '#/components/schemas/UserMetadata'
+    source: scim
+  scim-User.name:
+    description: ''
+    type: '#/components/schemas/UserFullName'
+    source: scim
+  scim-User.displayName:
+    description: A user's full displayed name
+    type: string
+    source: scim
+  scim-User.userName:
+    description: A user's username, usually their email address
+    type: string
+    source: scim
+  scim-User.urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:
+    description: ''
+    type: object
+    source: scim
+  scim-User.active:
+    description: Indicates if the user is activated in Leapsome
+    type: boolean
+    source: scim
+  scim-User.emails:
+    description: User's email
+    type: array
+    source: scim
+  scim-User.groups:
+    description: Represent teams in Leapsome
+    type: array
+    source: scim
+  scim-User.manager:
+    description: ''
+    type: object
+    source: scim
+  scim-User.schemas:
+    description: ''
+    type: array
+    source: scim
+  scim-UserCollection:
+    description: Class describing a collection of users
+    type: object
+    source: scim
+  scim-UserCollection.Resources:
+    description: The list of users
+    type: array
+    source: scim
+  scim-UserCollection.totalResults:
+    description: The number of users in the collection
+    type: integer
+    source: scim
+  scim-UserCollection.itemsPerPage:
+    description: ''
+    type: integer
+    source: scim
+  scim-UserCollection.startIndex:
+    description: ''
+    type: integer
+    source: scim
+  scim-UserCollection.schemas:
+    description: ''
+    type: array
+    source: scim
+  scim-UserDefinition:
+    description: Describes a new user
+    type: object
+    source: scim
+  scim-UserDefinition.externalId:
+    description: User's ID in external system
+    type: string
+    source: scim
+  scim-UserDefinition.title:
+    description: User's job title
+    type: string
+    source: scim
+  scim-UserDefinition.photos:
+    description: Array of profile picture URL's. We take the first one as user avatar.
+    type: array
+    source: scim
+  scim-UserDefinition.name:
+    description: ''
+    type: '#/components/schemas/UserFullName'
+    source: scim
+  scim-UserDefinition.displayName:
+    description: A user's full displayed name
+    type: string
+    source: scim
+  scim-UserDefinition.userName:
+    description: The user's username, usually their email address'
+    type: string
+    source: scim
+  scim-UserDefinition.location:
+    description: User's location value
+    type: string
+    source: scim
+  scim-UserDefinition.manager:
+    description: User ID of user's manager which can be a LeapsomeId, an email or the externalId
+    type: string
+    source: scim
+  scim-UserDefinition.urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:
+    description: ''
+    type: object
+    source: scim
+  scim-UserDefinition.active:
+    description: Activate (true) or deactivate (false) a user if provided. If the user has been active before, the account
+      will be active again while it might be in a "invited" or "created" state if the user never accepted an invitation before.
+    type: boolean
+    source: scim
+  scim-UserFullName:
+    description: The individual name parts of a user
+    type: object
+    source: scim
+  scim-UserFullName.familyName:
+    description: A user's surname
+    type: string
+    source: scim
+  scim-UserFullName.givenName:
+    description: A user's first name
+    type: string
+    source: scim
+  scim-UserFullName.formatted:
+    description: A user's full legal name
+    type: string
+    source: scim
+  scim-UserMetadata:
+    description: User metadata
+    type: object
+    source: scim
+  scim-UserMetadata.created:
+    description: The date and time the user was created
+    type: string
+    source: scim
+  scim-UserMetadata.location:
+    description: The URL where the user can be accessed
+    type: string
+    source: scim
+  scim-UserMetadata.version:
+    description: ''
+    type: string
+    source: scim
+  scim-UserMetadata.lastModified:
+    description: ''
+    type: string
+    source: scim
+  scim-UserManager:
+    description: User's (additional) Manager
+    type: object
+    source: scim
+  scim-UserManager.managerId:
+    description: A Leapsome userId of the  (additional) manager
+    type: string
+    source: scim
+  scim-UserManager.displayName:
+    description: The full name of the defined (additional) manager
+    type: string
+    source: scim
+  operation.apiInfo:
+    description: API info
+    type: operation
+    method: GET
+    path: /
+    source: content-api
+  operation.getToken:
+    description: Get JWT access token
+    type: operation
+    method: GET
+    path: /token
+    source: content-api
+  operation.listGoals:
+    description: List goals
+    type: operation
+    method: GET
+    path: /goals
+    source: content-api
+  operation.listTags:
+    description: get list of goal tags
+    type: operation
+    method: GET
+    path: /goals/tags
+    source: content-api
+  operation.getGoalDetails:
+    description: Get goal details
+    type: operation
+    method: GET
+    path: /goals/{goalId}
+    source: content-api
+  operation.listGoalComments:
+    description: get list of comments for a goal
+    type: operation
+    method: GET
+    path: /goals/{goalId}/comments
+    source: content-api
+  operation.updateKeyResult:
+    description: Update key result
+    type: operation
+    method: POST
+    path: /goals/{goalId}/key-results/{keyResultId}
+    source: content-api
+  operation.updateInitiative:
+    description: Update initiative
+    type: operation
+    method: POST
+    path: /goals/{goalId}/initiatives/{initiativeId}
+    source: content-api
+  operation.listReviews:
+    description: List review cycles
+    type: operation
+    method: GET
+    path: /reviews
+    source: content-api
+  operation.getReviewDetails:
+    description: List review cycles
+    type: operation
+    method: GET
+    path: /reviews/{reviewCycleId}
+    source: content-api
+  operation.getReviewParticipants:
+    description: List review cycle participants
+    type: operation
+    method: GET
+    path: /reviews/{reviewCycleId}/participants
+    source: content-api
+  operation.getReviewParticipantResults:
+    description: Get results for a specific reviewee
+    type: operation
+    method: GET
+    path: /reviews/{reviewCycleId}/participants/{userId}/overview
+    source: content-api
+  operation.listEmployees:
+    description: List employees
+    type: operation
+    method: GET
+    path: /employees
+    source: content-api
+  operation.updateEmployeeAccessRoles:
+    description: Update employee access roles
+    type: operation
+    method: PUT
+    path: /employees/{userId}/access-roles
+    source: content-api
+  operation.listTimesheets:
+    description: List timesheets
+    type: operation
+    method: GET
+    path: /time-tracking/timesheets
+    source: content-api
+  operation.listPayrollCycles:
+    description: List payroll cycles
+    type: operation
+    method: GET
+    path: /payroll-cycles
+    source: content-api
+  operation.listPayrollCycleParticipants:
+    description: List payroll cycle participants
+    type: operation
+    method: GET
+    path: /payroll-cycles/{payrollCycleId}/participants
+    source: content-api
+  operation.listWorkLocations:
+    description: List work locations
+    type: operation
+    method: GET
+    path: /work-locations
+    source: content-api
+  operation.listAbsences:
+    description: List absences
+    type: operation
+    method: GET
+    path: /absences
+    source: content-api
+  operation.listFeedback:
+    description: List feedback
+    type: operation
+    method: GET
+    path: /feedback
+    source: content-api
+  operation.createPraise:
+    description: Create praise
+    type: operation
+    method: POST
+    path: /feedback/praise
+    source: content-api
+  operation.createInstantFeedback:
+    description: Create instant feedback
+    type: operation
+    method: POST
+    path: /feedback/instant
+    source: content-api
+  operation.createPrivateNote:
+    description: Create private note
+    type: operation
+    method: POST
+    path: /feedback/private-note
+    source: content-api
+  operation.listDocumentCategories:
+    description: List document categories
+    type: operation
+    method: GET
+    path: /documents/categories
+    source: content-api
+  operation.uploadUserDocument:
+    description: Upload user document
+    type: operation
+    method: POST
+    path: /users/{userId}/documents
+    source: content-api
+  operation.listAccessRoles:
+    description: List access roles
+    type: operation
+    method: GET
+    path: /access-roles
+    source: content-api
+  operation.scimGetGroups:
+    description: Get Groups
+    type: operation
+    method: GET
+    path: /Groups
+    source: scim-api
+  operation.createGroup:
+    description: Create Group
+    type: operation
+    method: POST
+    path: /Groups
+    source: scim-api
+  operation.getGroup:
+    description: Get Group
+    type: operation
+    method: GET
+    path: /Groups/{groupId}
+    source: scim-api
+  operation.updateGroup:
+    description: Update Group
+    type: operation
+    method: PATCH
+    path: /Groups/{groupId}
+    source: scim-api
+  operation.getServiceProviderConfig:
+    description: Get Service Provider Configurations
+    type: operation
+    method: GET
+    path: /ServiceProviderConfig
+    source: scim-api
+  operation.getUsers:
+    description: Get Users
+    type: operation
+    method: GET
+    path: /Users
+    source: scim-api
+  operation.createUsers:
+    description: Create User
+    type: operation
+    method: POST
+    path: /Users
+    source: scim-api
+  operation.getUser:
+    description: Get User
+    type: operation
+    method: GET
+    path: /Users/{userId}
+    source: scim-api
+  operation.updateUser:
+    description: Update User
+    type: operation
+    method: PATCH
+    path: /Users/{userId}
+    source: scim-api
+  operation.replaceUser:
+    description: Replace User
+    type: operation
+    method: PUT
+    path: /Users/{userId}
+    source: scim-api

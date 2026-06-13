@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Timesheet",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$",
+      "example": "58d55e3ffdc2eb20547edd0a",
+      "description": "Timesheet ID"
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{24}$",
+          "example": "58d55e3ffdc2eb20547edd0a"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "example": "jane.doe@example.com",
+          "description": "Employee email address"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "pendingApproval",
+        "closed"
+      ],
+      "example": "open",
+      "description": "Current status of the timesheet"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start date of the timesheet period"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End date of the timesheet period"
+    },
+    "hoursWorked": {
+      "type": "string",
+      "example": "PT10H",
+      "description": "Total hours worked in the period (duration in ISO 8601 format)"
+    },
+    "compensableHours": {
+      "type": "string",
+      "example": "PT10H",
+      "description": "Total compensable hours in the period (duration in ISO 8601 format)"
+    },
+    "overtimeHours": {
+      "type": "string",
+      "example": "PT10H",
+      "description": "Total overtime hours in the period (duration in ISO 8601 format)"
+    },
+    "workDuration": {
+      "type": "string",
+      "example": "PT10H",
+      "description": "Total work duration in the period (duration in ISO 8601 format)"
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Projects the employee worked on in the timesheet period"
+    }
+  }
+}

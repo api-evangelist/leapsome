@@ -1,0 +1,239 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "leapsome": "https://api.leapsome.com/v1/",
+    "scim": "urn:ietf:params:scim:schemas:core:2.0:",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Goal": {
+      "@id": "leapsome:goals",
+      "@type": "@id"
+    },
+    "id": "@id",
+    "type": "@type",
+    "name": "schema:name",
+    "description": "schema:description",
+
+    "goal": {
+      "@id": "leapsome:Goal",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": {
+          "@id": "leapsome:Goal/type",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "leapsome:Goal/status",
+          "@type": "xsd:string"
+        },
+        "title": "schema:name",
+        "description": "schema:description",
+        "dueDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        },
+        "startDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "progress": {
+          "@id": "leapsome:Goal/progress",
+          "@type": "xsd:number"
+        },
+        "owner": {
+          "@id": "schema:Person",
+          "@type": "@id"
+        },
+        "keyResults": {
+          "@id": "leapsome:Goal/keyResults",
+          "@container": "@list"
+        },
+        "tags": {
+          "@id": "leapsome:Goal/tags",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "employee": {
+      "@id": "schema:Person",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "email": "schema:email",
+        "firstName": "schema:givenName",
+        "lastName": "schema:familyName",
+        "jobTitle": "schema:jobTitle",
+        "department": "schema:department",
+        "hireDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "terminationDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        },
+        "managerId": {
+          "@id": "schema:memberOf",
+          "@type": "@id"
+        },
+        "workLocation": {
+          "@id": "schema:workLocation",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "review": {
+      "@id": "leapsome:Review",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "status": {
+          "@id": "leapsome:Review/status",
+          "@type": "xsd:string"
+        },
+        "kickoffDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "createdAt": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:dateTime"
+        },
+        "participants": {
+          "@id": "leapsome:Review/participants",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "timesheet": {
+      "@id": "leapsome:Timesheet",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "userId": {
+          "@id": "schema:Person",
+          "@type": "@id"
+        },
+        "date": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "hours": {
+          "@id": "leapsome:Timesheet/hours",
+          "@type": "xsd:number"
+        }
+      }
+    },
+
+    "absence": {
+      "@id": "leapsome:Absence",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "userId": {
+          "@id": "schema:Person",
+          "@type": "@id"
+        },
+        "start": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "end": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        },
+        "createdAt": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "feedback": {
+      "@id": "leapsome:Feedback",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "type": {
+          "@id": "leapsome:Feedback/type",
+          "@type": "xsd:string"
+        },
+        "senderId": {
+          "@id": "schema:sender",
+          "@type": "@id"
+        },
+        "receiverId": {
+          "@id": "schema:recipient",
+          "@type": "@id"
+        },
+        "message": "schema:text",
+        "createdAt": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "payrollCycle": {
+      "@id": "leapsome:PayrollCycle",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "startDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "endDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "scimUser": {
+      "@id": "scim:User",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "userName": "schema:email",
+        "displayName": "schema:name",
+        "active": {
+          "@id": "schema:Boolean",
+          "@type": "xsd:boolean"
+        },
+        "emails": {
+          "@id": "schema:email",
+          "@container": "@set"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "@id"
+        },
+        "externalId": {
+          "@id": "leapsome:scimUser/externalId",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "scimGroup": {
+      "@id": "scim:Group",
+      "@type": "@id",
+      "@context": {
+        "id": "@id",
+        "displayName": "schema:name",
+        "members": {
+          "@id": "schema:member",
+          "@container": "@list"
+        }
+      }
+    }
+  }
+}

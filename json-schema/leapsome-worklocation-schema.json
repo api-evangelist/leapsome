@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorkLocation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$",
+      "example": "58d55e3ffdc2eb20547edd0a",
+      "description": "Work location ID"
+    },
+    "name": {
+      "type": "string",
+      "example": "Berlin Office",
+      "description": "Name of the work location"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "example": "active",
+      "description": "Current status of the work location"
+    },
+    "remote": {
+      "type": "boolean",
+      "nullable": true,
+      "example": false,
+      "description": "Whether this is a remote work location"
+    },
+    "currency": {
+      "type": "string",
+      "nullable": true,
+      "example": "EUR",
+      "description": "Default currency for this work location"
+    },
+    "street": {
+      "type": "string",
+      "nullable": true,
+      "example": "123 Main Street",
+      "description": "Street address"
+    },
+    "zip": {
+      "type": "string",
+      "nullable": true,
+      "example": "10115",
+      "description": "ZIP/postal code"
+    },
+    "city": {
+      "type": "string",
+      "nullable": true,
+      "example": "Berlin",
+      "description": "City"
+    },
+    "administrativeDivision": {
+      "type": "string",
+      "nullable": true,
+      "example": "Berlin",
+      "description": "State/province/administrative division"
+    },
+    "country": {
+      "type": "string",
+      "nullable": true,
+      "example": "Germany",
+      "description": "Country"
+    },
+    "dateFormat": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+        "MM-DD-YYYY",
+        "DD-MM-YYYY",
+        "YYYY-MM-DD",
+        "MM/DD/YYYY",
+        "DD/MM/YYYY",
+        "YYYY/MM/DD",
+        "DD.MM.YYYY",
+        "MMMM DD, YYYY",
+        "DD MMMM YYYY",
+        "YYYY MMMM DD"
+      ],
+      "example": "DD.MM.YYYY",
+      "description": "Date format used in this work location"
+    },
+    "primary": {
+      "type": "boolean",
+      "nullable": true,
+      "example": true,
+      "description": "Whether this is the primary work location"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2024-01-15T08:30:00.000Z",
+      "description": "When the work location was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2024-01-20T10:15:00.000Z",
+      "description": "When the work location was last updated"
+    }
+  }
+}

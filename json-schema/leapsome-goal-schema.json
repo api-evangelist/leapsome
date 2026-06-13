@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Goal",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "contributors",
+    "progress",
+    "status",
+    "managedBy",
+    "tags",
+    "deadline",
+    "keyResults",
+    "parent",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$",
+      "example": "5b237f6868794d5c08555812"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "user",
+        "team",
+        "company"
+      ],
+      "example": "user"
+    },
+    "user": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/User"
+        },
+        {
+          "nullable": true,
+          "description": "Information about the user, who's assigned to this goal.\nWill be `null` for Team and Company goals.\n"
+        }
+      ]
+    },
+    "team": {
+      "type": "object",
+      "nullable": true,
+      "description": "Information about the team, that's assigned to this goal.\nWill be `null` for User and Company goals.\n",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{24}$",
+          "example": "5b237f6868794d5c08555812"
+        },
+        "name": {
+          "type": "string",
+          "example": "Rocket Scientists"
+        }
+      }
+    },
+    "name": {
+      "type": "string",
+      "example": "Become a great place to work (d)"
+    },
+    "description": {
+      "type": "string",
+      "example": "Make it entertaining"
+    },
+    "contributors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/User"
+      }
+    },
+    "progress": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "example": 50
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "archived",
+        "live",
+        "draft",
+        "removed"
+      ],
+      "example": "live"
+    },
+    "managedBy": {
+      "$ref": "#/components/schemas/User"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$",
+            "example": "5b237f6868794d5c08555812"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deadline": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "keyResults": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/KeyResults"
+      }
+    },
+    "parent": {
+      "$ref": "#/components/schemas/ParentGoal"
+    },
+    "progressStatus": {
+      "type": "string",
+      "enum": [
+        "onTrack",
+        "offTrack",
+        "inputNeeded",
+        "done",
+        "canceled"
+      ],
+      "nullable": true
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2019-08-23T11:53:06.741Z"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2019-08-23T11:53:06.741Z"
+    }
+  }
+}

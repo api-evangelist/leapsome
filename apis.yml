@@ -51,6 +51,8 @@ apis:
     properties:
       - type: Documentation
         url: https://api.leapsome.com/v1/api-docs/
+      - type: OpenAPI
+        url: openapi/leapsome-content-api-openapi.yml
     contact:
       - FN: Leapsome Support
         url: https://help.leapsome.com/
@@ -77,6 +79,8 @@ apis:
     properties:
       - type: Documentation
         url: https://api.leapsome.com/scim/v1/api-docs/
+      - type: OpenAPI
+        url: openapi/leapsome-scim-api-openapi.yml
     contact:
       - FN: Leapsome Support
         url: https://help.leapsome.com/
@@ -104,6 +108,14 @@ common:
     url: rate-limits/leapsome-rate-limits.yml
   - type: FinOps
     url: finops/leapsome-finops.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONLDContext
+    url: json-ld/leapsome-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/leapsome-vocabulary.yml
+  - type: Examples
+    url: examples/leapsome-api-examples.json
 
 maintainers:
   - FN: Kin Lane
