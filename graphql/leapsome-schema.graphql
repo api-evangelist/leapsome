@@ -1,0 +1,1045 @@
+"""
+Leapsome GraphQL Schema
+Conceptual schema derived from the Leapsome REST Content API.
+Covers performance reviews, OKRs/goals, employees, timesheets,
+payroll, absences, feedback, documents, access roles, and work locations.
+"""
+
+# ── Scalars ──────────────────────────────────────────────────────────────────
+
+"""ISO 8601 date-time string"""
+scalar DateTime
+
+"""Email address string"""
+scalar Email
+
+"""URL string"""
+scalar URL
+
+"""Opaque MongoDB ObjectId (24-char hex)"""
+scalar ObjectId
+
+"""ISO 8601 duration string (e.g. PT10H)"""
+scalar Duration
+
+# ── Enums ────────────────────────────────────────────────────────────────────
+
+enum GoalType {
+  USER
+  TEAM
+  COMPANY
+}
+
+enum GoalStatus {
+  LIVE
+  DRAFT
+  ARCHIVED
+  REMOVED
+}
+
+enum GoalProgressStatus {
+  ON_TRACK
+  OFF_TRACK
+  INPUT_NEEDED
+  DONE
+  CANCELED
+}
+
+enum MetricType {
+  NONE
+  NUMERICAL
+  PERCENTAGE
+  CURRENCY
+}
+
+enum InitiativeStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  BLOCKED
+}
+
+enum TagStatus {
+  ACTIVE
+  VIEW_ONLY
+  REMOVED
+}
+
+enum ReviewCycleStatus {
+  NEW
+  DRAFT
+  PEER_NOMINATIONS_PENDING
+  PEER_APPROVAL_PENDING
+  PEER_REVIEWS_PENDING
+  MANAGER_REVIEWS_PENDING
+  CONVERSATIONS_PENDING
+  COMPLETE
+}
+
+enum ReviewAnswerType {
+  PEER_REVIEW
+  MANAGER_REVIEW
+  DIRECT_REPORT_REVIEW
+  SELF_EVALUATION
+}
+
+enum ParticipantStatus {
+  INVITED
+  PENDING
+  STARTED
+  COMPLETE
+  DECLINED
+}
+
+enum EmployeeStatus {
+  CREATED
+  ACTIVE
+  INVITED
+  DEACTIVATED
+  PRE_BOARDING_INVITED
+  PRE_BOARDING_ACTIVE
+  REMOVED
+}
+
+enum LifecycleStatus {
+  HIRED
+  ACTIVE
+  LEAVE
+  OFFBOARDING
+  TERMINATED
+  DEACTIVATED
+  NOT_SET
+  PRE_BOARDING
+}
+
+enum SalaryFrequency {
+  YEAR
+  MONTH
+  HOUR
+}
+
+enum CompensationAmountType {
+  FIXED
+  VARIABLE
+}
+
+enum CompensationRecurrence {
+  ONE_TIME
+  MONTHLY
+  EVERY_3_MONTHS
+  EVERY_6_MONTHS
+  EVERY_12_MONTHS
+}
+
+enum AbsenceType {
+  PAID_VACATION
+  SICK_LEAVE
+  PARENTAL_LEAVE
+  UNPAID_VACATION
+  FAMILY_CARE
+  CHILD_CARE
+  SHORT_TERM_ALLOWANCE
+  QUARANTINE
+  LOCKOUT
+  IRREVOCABLE_EXEMPTION
+  VOLUNTARY_MILITARY_SERVICE
+  UNLAWFUL_STRIKE
+  LAWFUL_STRIKE
+  UNEXCUSED_ABSENCE
+  REMOTE_WORK
+  OTHER_PAID_LEAVE
+  EDUCATIONAL_LEAVE
+  GARDEN_LEAVE
+  LONGTERM_SICK_LEAVE
+}
+
+enum ActivityType {
+  NON_WORKING_PAID
+  NON_WORKING_UNPAID
+  WORKING
+  NON_WORKING_PARTIALLY_PAID
+}
+
+enum AbsenceStatus {
+  ACTIVE
+  REMOVED
+  PENDING_REMOVAL
+}
+
+enum TimeUnit {
+  DAYS
+  HOURS
+}
+
+enum DayDuration {
+  FULL_DAY
+  HALF_DAY_MORNING
+  HALF_DAY_AFTERNOON
+}
+
+enum FeedbackType {
+  PRAISE
+  INSTANT_FEEDBACK
+}
+
+enum FeedbackVisibility {
+  PUBLIC
+  RECEIVER
+  MANAGER
+  SENDER_ONLY
+}
+
+enum TimesheetStatus {
+  OPEN
+  PENDING_APPROVAL
+  CLOSED
+}
+
+enum PayrollCycleStatus {
+  OPEN
+  PENDING_APPROVAL
+  APPROVED
+  OVERDUE
+  FUTURE
+  REOPENED
+}
+
+enum ProrateType {
+  WEEKLY
+  BI_WEEKLY
+  SEMI_MONTHLY
+  THIRTY_DAYS
+  ACTUAL_NUMBER_OF_MONTH_DAYS
+}
+
+enum WorkLocationStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum DateFormat {
+  MM_DD_YYYY
+  DD_MM_YYYY
+  YYYY_MM_DD
+  MM_SLASH_DD_SLASH_YYYY
+  DD_SLASH_MM_SLASH_YYYY
+  YYYY_SLASH_MM_SLASH_DD
+  DD_DOT_MM_DOT_YYYY
+  MMMM_DD_YYYY
+  DD_MMMM_YYYY
+  YYYY_MMMM_DD
+}
+
+enum AccessRoleScopeType {
+  NONE
+  ROLE_SPECIFIC
+  USER_SPECIFIC
+}
+
+# ── Pagination / Meta ─────────────────────────────────────────────────────────
+
+"""Cursor-based pagination metadata used for goals"""
+type CursorMeta {
+  count: Int!
+  cursor: ObjectId
+  nextPage: URL
+}
+
+"""Offset-based pagination metadata"""
+type OffsetMeta {
+  offset: Int!
+  limit: Int!
+  totalCount: Int!
+}
+
+"""Page-based pagination metadata"""
+type PageMeta {
+  page: Int!
+  pageSize: Int!
+  totalCount: Int!
+}
+
+# ── Auth ──────────────────────────────────────────────────────────────────────
+
+"""JWT authentication token response"""
+type AuthInfo {
+  token: String!
+  """Seconds until the token expires"""
+  expiresIn: Int!
+}
+
+# ── Core User ─────────────────────────────────────────────────────────────────
+
+"""Minimal user reference used across many objects"""
+type UserRef {
+  id: ObjectId!
+  email: Email!
+  fullName: String!
+  preferredName: String
+}
+
+"""Minimal team reference"""
+type TeamRef {
+  id: ObjectId!
+  name: String!
+}
+
+"""Comment sender (minimal profile)"""
+type CommentSender {
+  id: ObjectId!
+  firstname: String!
+  lastname: String!
+  picture: URL
+}
+
+# ── Goals ─────────────────────────────────────────────────────────────────────
+
+"""A Leapsome goal (OKR) at company, team, or individual level"""
+type Goal {
+  id: ObjectId!
+  type: GoalType!
+  """Assigned user (null for TEAM and COMPANY goals)"""
+  user: UserRef
+  """Assigned team (null for USER and COMPANY goals)"""
+  team: TeamRef
+  name: String!
+  description: String!
+  contributors: [UserRef!]!
+  progress: Int!
+  status: GoalStatus!
+  managedBy: UserRef!
+  tags: [GoalTag!]!
+  deadline: DateTime
+  keyResults: [KeyResult!]!
+  initiatives: [Initiative!]
+  parent: ParentGoal
+  progressStatus: GoalProgressStatus
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A tag applied to a goal"""
+type GoalTag {
+  id: ObjectId!
+  name: String!
+}
+
+"""Full tag record with status and timestamps"""
+type Tag {
+  id: ObjectId!
+  name: String!
+  status: TagStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Metric definition and current value for a key result"""
+type Metric {
+  type: MetricType!
+  start: Float!
+  end: Float!
+  current: Float!
+}
+
+"""Key result belonging to a goal"""
+type KeyResult {
+  id: ObjectId!
+  name: String!
+  metric: Metric!
+  weight: Int!
+  ownerUser: UserRef
+  ownerTeam: TeamRef
+  contributors: [UserRef!]!
+  contributorTeams: [TeamRef!]!
+}
+
+"""Initiative (task) belonging to a goal"""
+type Initiative {
+  id: ObjectId!
+  name: String!
+  description: String
+  status: InitiativeStatus!
+}
+
+"""Parent goal reference"""
+type ParentGoal {
+  id: ObjectId!
+  name: String!
+  status: GoalStatus!
+}
+
+"""Comment on a goal"""
+type Comment {
+  id: ObjectId!
+  """HTML-formatted comment body"""
+  content: String!
+  sender: CommentSender!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Paginated list of goals"""
+type PaginatedGoals {
+  meta: CursorMeta!
+  data: [Goal!]!
+}
+
+"""List of comments"""
+type CommentList {
+  data: [Comment!]!
+}
+
+# ── Reviews ───────────────────────────────────────────────────────────────────
+
+"""Summary of a review cycle as returned from the list endpoint"""
+type ReviewCycleSummary {
+  id: ObjectId!
+  name: String!
+  status: ReviewCycleStatus!
+  createdAt: DateTime
+  kickoffDate: DateTime
+  template: ObjectId
+  lastModifiedOn: DateTime
+}
+
+"""Review question"""
+type ReviewQuestion {
+  id: ObjectId!
+  name: String!
+  """Normalized average score (0–100) across all answers"""
+  average: Float
+}
+
+"""Timeline dates for a review cycle"""
+type ReviewTimeline {
+  start: DateTime
+  peerNominationsDeadline: DateTime
+  peerApprovalDeadline: DateTime
+  peerReviewsDeadline: DateTime
+  managerReviewsDeadline: DateTime
+  conversationsDeadline: DateTime
+}
+
+"""Detailed view of a single review cycle"""
+type ReviewCycleDetail {
+  id: ObjectId!
+  name: String!
+  status: ReviewCycleStatus!
+  questions: [ReviewQuestion!]!
+  timeline: ReviewTimeline
+  createdAt: DateTime
+}
+
+"""A single reviewer entry within a participant record"""
+type ReviewerEntry {
+  user: ObjectId!
+  name: String!
+  preferredName: String
+  status: ParticipantStatus!
+  averageRating: String
+  lastModifiedOn: DateTime
+  lastModifiedBy: ObjectId
+}
+
+"""Participant record (reviewee + all reviewers)"""
+type ReviewParticipant {
+  id: ObjectId!
+  signatureReviewee: DateTime
+  signatureManager: DateTime
+  lastModifiedOn: DateTime
+  lastModifiedBy: ObjectId
+  reviewee: ReviewerEntry!
+  managers: [ReviewerEntry!]!
+  additionalManagers: [ReviewerEntry!]!
+  peers: [ReviewerEntry!]!
+  directReports: [ReviewerEntry!]!
+}
+
+"""An individual answer in a review result"""
+type ReviewAnswer {
+  authorId: ObjectId!
+  receiverId: ObjectId!
+  question: ObjectId!
+  type: ReviewAnswerType!
+  rating: Int
+  scale: Int
+  comment: String
+  multipleChoice: String
+}
+
+"""User record as it appears inside review results"""
+type ReviewUser {
+  id: ObjectId!
+  fullName: String!
+  preferredName: String
+  email: Email!
+  teams: String
+  location: String
+  lastModifiedOn: DateTime
+}
+
+"""Full results for a single reviewee"""
+type ReviewParticipantResults {
+  lastModifiedOn: DateTime
+  questions: [ReviewQuestion!]!
+  answers: [ReviewAnswer!]!
+  users: [ReviewUser!]!
+}
+
+# ── Employees ─────────────────────────────────────────────────────────────────
+
+"""A named organizational group (team, department, division, etc.)"""
+type OrgGroup {
+  id: ObjectId!
+  name: String!
+}
+
+"""Manager reference (id + name)"""
+type ManagerRef {
+  id: ObjectId!
+  name: String!
+}
+
+"""Employee work location summary"""
+type EmployeeWorkLocation {
+  id: ObjectId!
+  name: String!
+}
+
+"""Base salary information"""
+type Compensation {
+  salary: Float
+  currency: String
+  frequency: SalaryFrequency
+}
+
+"""Additional (non-base) compensation item"""
+type AdditionalCompensation {
+  id: ObjectId!
+  name: String!
+  amount: Float
+  amountType: CompensationAmountType
+  recurrence: CompensationRecurrence
+  comment: String
+  effectiveAt: DateTime
+  validUntil: DateTime
+}
+
+"""Full employee record"""
+type Employee {
+  id: ObjectId!
+  email: Email!
+  firstname: String
+  lastname: String
+  middlename: String
+  fullname: String
+  displayedName: String
+  status: EmployeeStatus!
+  lifecycleStatus: LifecycleStatus
+  manager: ManagerRef
+  additionalManagers: [ManagerRef!]
+  indirectManagers: [ManagerRef!]
+  startDate: DateTime
+  endDate: DateTime
+  phone: String
+  teams: [OrgGroup!]
+  departments: [OrgGroup!]
+  businessUnits: [OrgGroup!]
+  costCenters: [OrgGroup!]
+  divisions: [OrgGroup!]
+  otherGroups: [OrgGroup!]
+  level: String
+  title: String
+  workLocation: EmployeeWorkLocation
+  compensation: Compensation
+  additionalCompensations: [AdditionalCompensation!]
+  """Arbitrary custom attributes defined per Leapsome instance"""
+  customAttributes: String
+}
+
+"""Paginated employee list"""
+type EmployeeList {
+  data: [Employee!]!
+  meta: PageMeta!
+}
+
+# ── Access Roles ──────────────────────────────────────────────────────────────
+
+"""An access role definition"""
+type AccessRole {
+  id: ObjectId!
+  name: String!
+  userScopeType: AccessRoleScopeType!
+  isSystemDefault: Boolean!
+  systemDefaultType: String
+  active: Boolean!
+}
+
+"""User-specific scope (include list of accessible user IDs)"""
+type UserSpecificScope {
+  users: [ObjectId!]!
+}
+
+"""Include filter within a user-specific access scope"""
+type AccessScopeInclude {
+  users: [ObjectId!]!
+}
+
+"""User-specific access scope"""
+type UserAccessScope {
+  include: AccessScopeInclude!
+}
+
+"""Custom configuration binding a role to a user-specific scope"""
+type AccessRoleCustomConfiguration {
+  accessRole: ObjectId!
+  userSpecificAccessScope: UserAccessScope!
+}
+
+"""Result of updating an employee's access roles"""
+type UpdateEmployeeAccessRolesResult {
+  userId: ObjectId!
+  accessRoleIds: [ObjectId!]!
+  accessRoleCustomConfigurations: [AccessRoleCustomConfiguration!]!
+}
+
+# ── Work Locations ────────────────────────────────────────────────────────────
+
+"""A physical or remote work location"""
+type WorkLocation {
+  id: ObjectId!
+  name: String!
+  status: WorkLocationStatus!
+  remote: Boolean
+  currency: String
+  street: String
+  zip: String
+  city: String
+  administrativeDivision: String
+  country: String
+  dateFormat: DateFormat
+  primary: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Paginated work location list"""
+type WorkLocationList {
+  data: [WorkLocation!]!
+  meta: PageMeta!
+}
+
+# ── Absences ──────────────────────────────────────────────────────────────────
+
+"""An employee absence record"""
+type Absence {
+  id: ObjectId!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  userId: ObjectId!
+  start: DateTime!
+  startDayTime: String
+  startDayDuration: DayDuration
+  end: DateTime!
+  endDayTime: String
+  endDayDuration: DayDuration
+  absenceType: AbsenceType!
+  activityType: ActivityType!
+  status: AbsenceStatus!
+  timeUnit: TimeUnit!
+  comment: String
+  actualAbsenceDuration: Float
+}
+
+# ── Feedback ──────────────────────────────────────────────────────────────────
+
+"""Sender in a feedback item (may be anonymous)"""
+type FeedbackSender {
+  id: ObjectId
+  name: String!
+}
+
+"""Receiver (user or team) in a feedback item"""
+type FeedbackReceiver {
+  id: ObjectId!
+  name: String!
+}
+
+"""Badge attached to a praise item"""
+type FeedbackBadge {
+  name: String!
+  icon: String
+}
+
+"""A praise or instant feedback item"""
+type FeedbackItem {
+  id: ObjectId!
+  type: FeedbackType!
+  sender: FeedbackSender
+  receivers: [FeedbackReceiver!]!
+  message: String
+  badge: FeedbackBadge
+  visibility: FeedbackVisibility!
+  createdAt: DateTime!
+  likesCount: Int!
+  commentsCount: Int!
+}
+
+"""Paginated feedback list"""
+type FeedbackList {
+  data: [FeedbackItem!]!
+  meta: OffsetMeta!
+}
+
+# ── Documents ─────────────────────────────────────────────────────────────────
+
+"""A document category"""
+type DocumentCategory {
+  id: ObjectId!
+  name: String!
+}
+
+"""Result of a document upload"""
+type UploadDocumentResult {
+  id: ObjectId!
+}
+
+# ── Timesheets ────────────────────────────────────────────────────────────────
+
+"""A project reference within a timesheet"""
+type TimesheetProject {
+  id: ObjectId!
+  title: String!
+}
+
+"""Timesheet user summary"""
+type TimesheetUser {
+  id: ObjectId!
+  name: String
+  email: Email
+}
+
+"""A timesheet record for a pay period"""
+type Timesheet {
+  id: ObjectId!
+  user: TimesheetUser!
+  status: TimesheetStatus!
+  startDate: DateTime
+  endDate: DateTime
+  hoursWorked: Duration
+  compensableHours: Duration
+  overtimeHours: Duration
+  workDuration: Duration
+  projects: [TimesheetProject!]
+}
+
+"""Paginated timesheet list"""
+type TimesheetList {
+  data: [Timesheet!]!
+  meta: PageMeta!
+}
+
+# ── Payroll ───────────────────────────────────────────────────────────────────
+
+"""Compensation column custom names for a payroll cycle"""
+type PayrollCompensationConfig {
+  salaryTypeCustomName: String
+  baseSalaryCustomName: String
+  salaryPerHourCustomName: String
+  compensableTimeCustomName: String
+  hoursWorkedCustomName: String
+  paidAbsencesCustomName: String
+}
+
+"""A payroll cycle"""
+type PayrollCycle {
+  id: ObjectId!
+  name: String!
+  status: PayrollCycleStatus!
+  startAt: DateTime
+  endAt: DateTime
+  customPeriodStartAt: DateTime
+  customPeriodEndAt: DateTime
+  reviewStartAt: DateTime
+  approvalStartAt: DateTime
+  approvedAt: DateTime
+  approvedBy: ObjectId
+  prorateType: ProrateType
+  compensations: PayrollCompensationConfig
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Paginated payroll cycle list"""
+type PayrollCycleList {
+  data: [PayrollCycle!]!
+  meta: PageMeta!
+}
+
+"""A compensation item within a payroll participant record"""
+type PayrollParticipantCompensation {
+  name: String
+  amount: Float
+  amountType: CompensationAmountType
+  recurrence: CompensationRecurrence
+  comment: String
+  effectiveAt: DateTime
+  validUntil: DateTime
+}
+
+"""Salary information for a single period within a payroll participant"""
+type SalaryInfoPeriod {
+  currency: String
+  salary: Float
+  salaryRemunerationPeriod: SalaryFrequency
+  compensationType: String
+  baseSalary: Float
+}
+
+"""A participant in a payroll cycle"""
+type PayrollParticipant {
+  id: ObjectId!
+  name: String!
+  email: Email!
+  compensations: [PayrollParticipantCompensation!]
+  salaryInfoPeriods: [SalaryInfoPeriod!]
+  isActiveParticipant: Boolean!
+}
+
+"""Paginated payroll participant list"""
+type PayrollParticipantList {
+  data: [PayrollParticipant!]!
+  meta: PageMeta!
+}
+
+# ── Input Types ───────────────────────────────────────────────────────────────
+
+"""Filters for listing goals"""
+input GoalFilters {
+  userId: [ObjectId!]
+  teamId: [ObjectId!]
+  tagId: [ObjectId!]
+  type: [GoalType!]
+  search: String
+  state: [GoalStatus!]
+  limit: Int
+  cursor: ObjectId
+}
+
+"""Update payload for a key result"""
+input KeyResultUpdateInput {
+  name: String
+  metric: MetricInput
+  weight: Int
+}
+
+"""Metric update payload"""
+input MetricInput {
+  type: MetricType!
+  start: Float!
+  end: Float!
+  current: Float!
+}
+
+"""Update payload for an initiative"""
+input InitiativeUpdateInput {
+  name: String
+  description: String
+  status: InitiativeStatus
+}
+
+"""Filters for listing review cycles"""
+input ReviewCycleFilters {
+  filter: String
+  page: Int
+  pageSize: Int
+  template: ObjectId
+  sort: String
+  name: String
+  templateName: String
+  conversationDeadlineAfter: DateTime
+  lastModifiedAfter: DateTime
+}
+
+"""Filters for listing employees"""
+input EmployeeFilters {
+  email: Email
+  employeeId: ObjectId
+  displayedName: String
+  status: EmployeeStatus
+  page: Int
+  pageSize: Int
+}
+
+"""Filters for listing absences"""
+input AbsenceFilters {
+  absenceStartFrom: DateTime
+  absenceStartUntil: DateTime
+  status: AbsenceStatus
+  userId: ObjectId
+  page: Int
+  pageSize: Int
+}
+
+"""Filters for listing feedback"""
+input FeedbackFilters {
+  type: FeedbackType
+  receiverId: ObjectId
+  senderId: ObjectId
+  offset: Int
+  limit: Int
+}
+
+"""Input for creating praise"""
+input CreatePraiseInput {
+  senderId: ObjectId!
+  receiverIds: [ObjectId!]!
+  message: String!
+  visibility: FeedbackVisibility
+}
+
+"""Input for creating instant feedback"""
+input CreateInstantFeedbackInput {
+  senderId: ObjectId!
+  receiverId: ObjectId!
+  message: String!
+  visibility: FeedbackVisibility
+}
+
+"""Input for creating a private note"""
+input CreatePrivateNoteInput {
+  senderId: ObjectId!
+  receiverId: ObjectId!
+  message: String!
+}
+
+"""Input for updating employee access roles"""
+input UpdateAccessRolesInput {
+  accessRoleIds: [ObjectId!]!
+  accessRoleCustomConfigurations: [AccessRoleConfigInput!]
+}
+
+"""Custom configuration for a user-specific access role"""
+input AccessRoleConfigInput {
+  accessRole: ObjectId!
+  userSpecificAccessScope: UserAccessScopeInput!
+}
+
+"""Include clause for user-specific access scope"""
+input UserAccessScopeInput {
+  include: AccessScopeIncludeInput!
+}
+
+"""Users to include in an access scope"""
+input AccessScopeIncludeInput {
+  users: [ObjectId!]!
+}
+
+# ── Query ─────────────────────────────────────────────────────────────────────
+
+type Query {
+  """Get a JWT access token using an API secret"""
+  token(secret: String!): AuthInfo!
+
+  # Goals
+  """List goals with optional filters and cursor pagination"""
+  goals(filters: GoalFilters): PaginatedGoals!
+  """Get full details for a single goal"""
+  goal(goalId: ObjectId!): Goal
+  """List all goal tags"""
+  goalTags: [Tag!]!
+  """List comments for a goal"""
+  goalComments(goalId: ObjectId!): CommentList!
+
+  # Reviews
+  """List review cycles"""
+  reviewCycles(filters: ReviewCycleFilters): [ReviewCycleSummary!]!
+  """Get details for a single review cycle"""
+  reviewCycle(reviewCycleId: ObjectId!): ReviewCycleDetail
+  """List participants for a review cycle"""
+  reviewParticipants(reviewCycleId: ObjectId!, page: Int, pageSize: Int): [ReviewParticipant!]!
+  """Get review results for a specific reviewee in a cycle"""
+  reviewParticipantResults(reviewCycleId: ObjectId!, userId: ObjectId!): ReviewParticipantResults
+
+  # Employees
+  """List employees with optional filters"""
+  employees(filters: EmployeeFilters): EmployeeList!
+
+  # Access Roles
+  """List all access roles for the account"""
+  accessRoles: [AccessRole!]!
+
+  # Work Locations
+  """List work locations"""
+  workLocations(
+    workLocationId: ObjectId
+    name: String
+    status: WorkLocationStatus
+    page: Int
+    pageSize: Int
+  ): WorkLocationList!
+
+  # Absences
+  """List absences"""
+  absences(filters: AbsenceFilters): [Absence!]!
+
+  # Feedback
+  """List praise and instant feedback"""
+  feedback(filters: FeedbackFilters): FeedbackList!
+
+  # Documents
+  """List document categories"""
+  documentCategories: [DocumentCategory!]!
+
+  # Time Tracking
+  """List timesheets"""
+  timesheets(
+    username: Email
+    employeeId: ObjectId
+    offset: Int
+    limit: Int
+  ): TimesheetList!
+
+  # Payroll
+  """List payroll cycles"""
+  payrollCycles(
+    name: String
+    status: PayrollCycleStatus
+    offset: Int
+    limit: Int
+  ): PayrollCycleList!
+
+  """List participants for a payroll cycle"""
+  payrollCycleParticipants(
+    payrollCycleId: ObjectId!
+    username: Email
+    employeeId: ObjectId
+    offset: Int
+    limit: Int
+  ): PayrollParticipantList!
+}
+
+# ── Mutation ──────────────────────────────────────────────────────────────────
+
+type Mutation {
+  # Goals
+  """Update a key result within a goal"""
+  updateKeyResult(goalId: ObjectId!, keyResultId: ObjectId!, input: KeyResultUpdateInput!): Goal!
+  """Update an initiative within a goal"""
+  updateInitiative(goalId: ObjectId!, initiativeId: ObjectId!, input: InitiativeUpdateInput!): Goal!
+
+  # Feedback
+  """Create a praise item"""
+  createPraise(input: CreatePraiseInput!): String!
+  """Create an instant feedback item"""
+  createInstantFeedback(input: CreateInstantFeedbackInput!): String!
+  """Create a private note"""
+  createPrivateNote(input: CreatePrivateNoteInput!): String!
+
+  # Employees
+  """Update secondary access roles for an employee"""
+  updateEmployeeAccessRoles(
+    userId: ObjectId!
+    input: UpdateAccessRolesInput!
+  ): UpdateEmployeeAccessRolesResult!
+}
