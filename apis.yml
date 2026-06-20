@@ -11,7 +11,7 @@ description: Leapsome is an AI-powered people enablement platform that combines 
   via bearer tokens generated inside the platform settings and are documented through
   Swagger UI at api.leapsome.com.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/leapsome/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -36,7 +36,7 @@ apis:
     analytics tools, data warehouses, and custom integrations. Access is authenticated
     via a bearer token generated in Settings > Integrations and imports > Content
     API.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
@@ -65,7 +65,7 @@ apis:
     partial updates via PATCH, and recommends soft-deactivation over hard delete to
     preserve historical performance data. SCIM provisioning requires the Enterprise
     plan.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://help.leapsome.com/hc/en-us/articles/8759199332765-SCIM-API-Access
   baseURL: https://api.leapsome.com/scim/v1
   tags:
