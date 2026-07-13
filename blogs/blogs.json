@@ -2,20 +2,17 @@
   "repo": "leapsome",
   "feeds": [
     {
-      "source": "https://www.leapsome.com/blog",
+      "source": "https://www.leapsome.com/blog/rss.xml",
       "feed_url": "https://www.leapsome.com/blog/rss.xml",
       "title": "",
-      "saved": 60,
-      "method": "discovered"
+      "saved": 9,
+      "method": "feed"
     },
     {
       "source": "https://www.linkedin.com/company/leapsome",
-      "feed_url": "https://www.linkedin.com/company/leapsome",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "error": "HTTPError"
     }
   ],
-  "post_count": 70,
-  "fetched": "2026-06-27T12:03:07Z"
+  "post_count": 122,
+  "fetched": "2026-07-11T11:50:51Z"
 }
