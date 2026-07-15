@@ -83,6 +83,8 @@ apis:
   - FN: Leapsome Support
     url: https://help.leapsome.com/
 common:
+- type: AgenticAccess
+  url: agentic-access/leapsome-agentic-access.yml
 - type: TrustCenter
   url: security/leapsome-trust-center.yml
 - type: DomainSecurity
