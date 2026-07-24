@@ -1,0 +1,270 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences Groups API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- description: Operations on groups belonging to an organization
+  name: Groups
+paths:
+  /Groups:
+    get:
+      description: Queries multiple group identities in the organization domain. Filtering is available and we return all results if none is given.
+      operationId: scimGetGroups
+      parameters:
+      - description: The filter parameter must be a properly formed SCIM filter using the operator "eq" (equals). The filter works for the "displayName".
+        in: query
+        name: filter
+        schema:
+          type: string
+      - schema:
+          type: integer
+          minimum: 0
+          maximum: 1000
+        in: query
+        name: count
+        description: The amount of elements you would like to get returned.
+      - schema:
+          type: integer
+          minimum: 1
+        in: query
+        name: startIndex
+        description: The offset (starts from 1, not 0) used to lookup elements. If you need to paginate, your next startIndex value would be "startIndex + count".
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupCollection'
+        '401':
+          description: Client is not sufficiently authorized
+        '403':
+          description: Invalid token passed
+      summary: Get Groups
+      tags:
+      - Groups
+    post:
+      description: 'Creates a new organization group and adds it to the user domain.
+
+        Member groups and member users must be in the organization.
+
+        '
+      operationId: createGroup
+      requestBody:
+        description: The details of the group to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupDefinition'
+      responses:
+        '201':
+          description: The group has been created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: 'Possible reasons are:
+
+            - The displayName field is not set
+
+            - The displayName field is malformed
+
+            '
+        '401':
+          description: Client is not sufficiently authorized
+        '403':
+          description: Invalid token passed
+        '409':
+          description: The displayName is already in use within the organization
+      summary: Create Group
+      tags:
+      - Groups
+  /Groups/{groupId}:
+    get:
+      description: Queries group details in the organization domain. If the provided id does not match a leapsome group's id in your organization, we try if we find a group with an externalId like that as fallback.
+      operationId: getGroup
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '200':
+          description: Return the group's details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: No groupId provided
+        '401':
+          description: Client is not sufficiently authorized or group does not exist in organization
+        '403':
+          description: Invalid token passed
+        '404':
+          description: Not Found
+      summary: Get Group
+      tags:
+      - Groups
+    patch:
+      description: 'Updates one or more values of an existing group without sending the full definition. For members you need to send the complete list of all members. Member groups and member users must be in the organization.
+
+        '
+      operationId: updateGroup
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      requestBody:
+        description: The group data to update. It is allowed to update one or more values of the group definition
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                  description: The name of the group
+                externalId:
+                  type: string
+                  description: The id of the group in an external system
+                replaceMembers:
+                  type: boolean
+                  default: false
+                  description: By default, only new members are added. If this value is set to true, all existing team members will be REMOVED from the group and only the newly provided members are added again.
+                members:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Member'
+      responses:
+        '200':
+          description: The group has been updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: 'Possible reasons are:
+
+            - The displayName field is not set
+
+            - The displayName field is malformed
+
+            - The displayName field exceeds 128 characters
+
+            - The members array exceeds 100 elements
+
+            - No groupId provided'
+        '401':
+          description: Client is not sufficiently authorized or group does not exist in organization
+        '403':
+          description: Invalid token passed
+        '409':
+          description: The displayName is already in use within the organization
+      summary: Update Group
+      tags:
+      - Groups
+components:
+  schemas:
+    Member:
+      description: A member of a group. This can be a group or an user
+      type: object
+      properties:
+        value:
+          description: The Leapsome ID of a user
+          type: string
+    GroupCollection:
+      description: Class describing a collection of groups
+      type: object
+      properties:
+        Resources:
+          description: An array of groups
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        totalResults:
+          description: The number of groups in the collection
+          format: int64
+          type: integer
+        itemsPerPage:
+          type: integer
+        startIndex:
+          type: integer
+        schemas:
+          type: array
+          items:
+            type: string
+    Group:
+      description: Describes a group belonging to an organization
+      type: object
+      properties:
+        id:
+          description: The group's unique id
+          type: string
+        displayName:
+          description: The group's display name
+          type: string
+        members:
+          type: array
+          description: An array of members
+          maxItems: 0
+          items:
+            $ref: '#/components/schemas/Member'
+        meta:
+          $ref: '#/components/schemas/GroupMetadata'
+        schemas:
+          type: array
+          items:
+            type: string
+        externalId:
+          type: string
+          description: A groups id in an external system
+      required:
+      - id
+      - displayName
+    GroupDefinition:
+      description: Describes the group to create
+      type: object
+      properties:
+        displayName:
+          description: The group's display name
+          type: string
+        externalId:
+          type: string
+          description: The id of the group in an external system
+      required:
+      - displayName
+    GroupMetadata:
+      description: Group metadata
+      type: object
+      properties:
+        created:
+          description: The date and time the group was created
+          format: date-time
+          type: string
+        location:
+          description: A URI to get the group details through this API
+          type: string
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification date & time
+        version:
+          type: string
+  parameters:
+    groupId:
+      description: The key of the group to query. The group must be in the organization domain
+      in: path
+      name: groupId
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

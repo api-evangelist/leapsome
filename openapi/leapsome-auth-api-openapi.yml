@@ -1,0 +1,59 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences auth API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- name: auth
+paths:
+  /token:
+    get:
+      summary: Get JWT access token
+      operationId: getToken
+      security: []
+      tags:
+      - auth
+      parameters:
+      - name: secret
+        in: query
+        required: true
+        description: 'API Secret from [Leapsome admin page](www.leapsome.com:3000/app/#/team/settings/)
+
+          '
+        schema:
+          type: string
+        example: yvpBwdF1kE74e2aXuzsG
+      responses:
+        '200':
+          description: Authorization successfull
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthInfo'
+        '401':
+          description: Authorization failed. This usually means that `secret` is missing or is incorrect.
+components:
+  schemas:
+    AuthInfo:
+      type: object
+      required:
+      - token
+      - expiresIn
+      properties:
+        token:
+          type: string
+          example: <JWT TOKEN>
+        expiresIn:
+          type: integer
+          description: seconds until the token expires
+          example: 18000
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

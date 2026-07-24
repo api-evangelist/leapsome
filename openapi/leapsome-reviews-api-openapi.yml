@@ -1,0 +1,801 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences reviews API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- name: reviews
+paths:
+  /reviews:
+    parameters: []
+    get:
+      summary: List review cycles
+      description: Get a paginated list of all review cycles or templates in your Leapsome instance
+      operationId: listReviews
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: filter
+        in: query
+        required: false
+        description: 'Use predefined filters to filter the list:  "all" gives all cycles, "draft" all draft cycles, "upcoming" all cycles that haven''t been launched yet, "ongoing" all currently ongoing cycles and "complete" all completed cycles. Use "templates" to filter for all templates.'
+        explode: false
+        schema:
+          type: string
+          items:
+            type: string
+            pattern: ^[0-9a-f]{24}$
+            example: 58d55e3ffdc2eb20547edd0a
+          enum:
+          - all
+          - draft
+          - upcoming
+          - ongoing
+          - complete
+      - schema:
+          type: number
+        in: query
+        name: page
+        description: Page number, starting at 0
+      - schema:
+          type: number
+          default: 20
+        in: query
+        name: pageSize
+        description: Page size for pagination
+      - schema:
+          type: string
+        in: query
+        name: template
+        description: 'ID of the template that the cycle was created from (use filter = "templates" to filter for all templates) '
+      - schema:
+          type: string
+        in: query
+        name: sort
+        description: Sort by "creationDate" or "kickoffDate" (descending order)
+      - schema:
+          type: string
+        in: query
+        name: name
+        description: Filter by review cycle name (partial match, case-insensitive)
+      - schema:
+          type: string
+        in: query
+        name: templateName
+        description: Filter by template name (partial match, case-insensitive) - only returns cycles created from templates
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: conversationDeadlineAfter
+        description: Filter for review cycles with conversation deadline after the specified date (ISO 8601 format)
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: lastModifiedAfter
+        description: Filter for review cycles where any participant was last modified after the specified date (ISO 8601 format)
+      responses:
+        '200':
+          description: A list of review cycles
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                    - _id: 5a869af092cf001f4ce73c26
+                      name: Mid-2018 Biannual Performance Feedback
+                      status: complete
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        name:
+                          type: string
+                        status:
+                          type: string
+                          enum:
+                          - new
+                          - draft
+                          - peerNominationsPending
+                          - peerApprovalPending
+                          - peerReviewsPending
+                          - managerReviewsPending
+                          - conversationsPending
+                          - complete
+                        createdAt:
+                          type: string
+                          format: date-time
+                        kickoffDate:
+                          type: string
+                          format: date-time
+                          description: Planned kickoff date
+                        template:
+                          type: string
+                          description: ID of the underlying template
+                        lastModifiedOn:
+                          type: string
+                          format: date-time
+                          description: Most recent modification date among any participant in the review cycle
+              examples:
+                example-1:
+                  value:
+                    data:
+                    - _id: 5a869af092cf001f4ce73c26
+                      name: Performance Review Q1 2022
+                      status: peerReviewsPending
+                      createdAt: '2018-02-16T08:48:48.363Z'
+                      kickoffDate: '2018-02-18T08:48:48.363Z'
+                      template: 63e42f779f7f18396a38f54d
+                      lastModifiedOn: '2018-02-20T10:15:30.000Z'
+      tags:
+      - reviews
+  /reviews/{reviewCycleId}:
+    parameters:
+    - schema:
+        type: string
+      name: reviewCycleId
+      in: path
+      required: true
+      description: ID of your review cycle
+    get:
+      summary: List review cycles
+      description: Provides details of a specific review cycle
+      operationId: getReviewDetails
+      security:
+      - bearerAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: 'Details of a specific review cycle. '
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      _id: 5a869af092cf001f4ce73c26
+                      name: Mid-2018 Biannual Performance Feedback
+                      status: complete
+                      questions:
+                      - _id: 58d55e55fdc2eb20547edd14
+                        text: Drives innovation
+                      - _id: 58d55e55fdc2eb20547edd16
+                        text: Delivers results
+                      - _id: 58d55e55fdc2eb20547edd0e
+                        text: Priorisiert effektiv
+                      - _id: 58d55e55fdc2eb20547edd0f
+                        text: Takes ownership
+                      - _id: 58d55e55fdc2eb20547edd20
+                        text: Provides structure
+                      - _id: 58d55e55fdc2eb20547edd21
+                        text: Manages expectations
+                      - _id: 58d55e55fdc2eb20547edd17
+                        text: Communicates verbally
+                      - _id: 58d55e55fdc2eb20547edd18
+                        text: Communicates in written
+                      - _id: 58d55e55fdc2eb20547edd1b
+                        text: Motivates
+                      - _id: 58d55e55fdc2eb20547edd1e
+                        text: Gibt Feedback
+                      - _id: 5a869af092cf001f4ce73c24
+                        text: What was your biggest achievement?
+                      - _id: 5a869af092cf001f4ce73c25
+                        text: What is this person's most important development goal?
+                      timeline:
+                        start: '2018-03-02T08:46:11.444Z'
+                        peerNominationsDeadline: '1970-01-01T00:00:00.000Z'
+                        peerApprovalDeadline: '1970-01-01T00:00:00.000Z'
+                        peerReviewsDeadline: '2018-04-13T08:46:11.444Z'
+                        managerReviewsDeadline: '2018-04-27T08:46:11.444Z'
+                        conversationsDeadline: '2018-05-07T08:46:11.444Z'
+                      createdAt: '2018-02-16T08:48:48.363Z'
+                    __v2: true
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      status:
+                        type: string
+                        enum:
+                        - new
+                        - peerNominationsPending
+                        - peerApprovalPending
+                        - peerReviewsPending
+                        - managerReviewsPending
+                        - conversationsPending
+                        - complete
+                      questions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            name:
+                              type: string
+                      timeline:
+                        type: object
+                        properties:
+                          start:
+                            type: string
+                            format: date-time
+                          peerNominationsDeadline:
+                            type: string
+                            format: date-time
+                          peerApprovalDeadline:
+                            type: string
+                            format: date-time
+                          peerReviewsDeadline:
+                            type: string
+                            format: date-time
+                          managerReviewsDeadline:
+                            type: string
+                            format: date-time
+                          conversationsDeadline:
+                            type: string
+                            format: date-time
+                      createdAt:
+                        type: string
+                        format: date-time
+                  __v2:
+                    type: boolean
+                  ? ''
+                  : type: string
+              examples:
+                example-1:
+                  value:
+                    data:
+                      _id: 5a869af092cf001f4ce73c26
+                      name: Performance Review Q2
+                      status: complete
+                      questions:
+                      - _id: 58d55e55fdc2eb20547edd16
+                        name: Delivers results
+                      - _id: 58d55e55fdc2eb20547edd0f
+                        name: Takes ownership
+                      - _id: 58d55e55fdc2eb20547edd20
+                        name: Provides structure
+                      - _id: 58d55e55fdc2eb20547edd21
+                        name: Manages expectations
+                      timeline:
+                        start: '2018-03-02T08:46:11.444Z'
+                        peerNominationsDeadline: '1970-01-01T00:00:00.000Z'
+                        peerApprovalDeadline: '1970-01-01T00:00:00.000Z'
+                        peerReviewsDeadline: '2018-04-13T08:46:11.444Z'
+                        managerReviewsDeadline: '2018-04-27T08:46:11.444Z'
+                        conversationsDeadline: '2018-05-07T08:46:11.444Z'
+                      createdAt: '2018-02-16T08:48:48.363Z'
+                    __v2: true
+      tags:
+      - reviews
+  /reviews/{reviewCycleId}/participants:
+    parameters:
+    - schema:
+        type: string
+      name: reviewCycleId
+      in: path
+      required: true
+      description: ID of your review cycle
+    get:
+      summary: List review cycle participants
+      description: Provides a paginated list of cycle participants
+      operationId: getReviewParticipants
+      security:
+      - bearerAuth: []
+      parameters:
+      - schema:
+          type: number
+        in: query
+        name: page
+        description: Number of page, starting at 0
+      - schema:
+          type: string
+          default: '20'
+        in: query
+        name: pageSize
+        description: Results per page
+      responses:
+        '200':
+          description: Meta information for review cycle participants
+          headers:
+            X-Next:
+              schema:
+                type: string
+              description: Next page
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                    - _id: 58d55e3ffdc2eb20547edd0a
+                      reviewee:
+                        user: 58d55e3ffdc2eb20547edd0a
+                        name: Louise Leapsome
+                        preferredName: null
+                        status: pending
+                        averageRating: 0 / 100
+                      managers:
+                      - user: 58d55e3ffdc2eb20547edd00
+                        name: Peter Pan
+                        preferredName: null
+                        status: complete
+                        averageRating: 50 / 100
+                      additionalManagers:
+                      - user: 58d625f5fdc2eb20547ede85
+                        name: Jack Johnson
+                        preferredName: null
+                        status: pending
+                        averageRating: 0 / 100
+                      peers:
+                      - user: 58d625f5fdc2eb20547ede83
+                        name: Susanne Leader
+                        preferredName: null
+                        status: declined
+                        averageRating: 0 / 100
+                      - user: 62ab64e3339234d9c4a527f2
+                        name: Jason Minor
+                        preferredName: null
+                        status: complete
+                        averageRating: 75 / 100
+                      directReports:
+                      - user: 62ab64e3339234d9c4a527f1
+                        name: Sandra Susie
+                        preferredName: Sandra von Susie
+                        status: complete
+                        averageRating: 75 / 100
+                    __v2: true
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        reviewee:
+                          type: object
+                          properties:
+                            user:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                              enum:
+                              - pending
+                              - started
+                              - complete
+                            averageRating:
+                              type: string
+                              example: 7 / 10
+                        managers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              user:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                                enum:
+                                - pending
+                                - started
+                                - complete
+                              averageRating:
+                                type: string
+                                example: 7 / 10
+                        additionalManagers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              user:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                                enum:
+                                - pending
+                                - started
+                                - complete
+                              averageRating:
+                                type: string
+                                example: 7 / 10
+                        peers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              user:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                                enum:
+                                - invited
+                                - pending
+                                - started
+                                - complete
+                                - declined
+                              averageRating:
+                                type: string
+                                example: 7 / 10
+                        directReports:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              user:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                                enum:
+                                - pending
+                                - started
+                                - complete
+                              averageRating:
+                                type: string
+                                example: 7 / 10
+                  __v2:
+                    type: boolean
+              examples:
+                example-1:
+                  value:
+                    data:
+                    - _id: 58d55e3ffdc2eb20547edd0a
+                      signatureReviewee: '2025-03-04T13:15:11.574+00:00'
+                      signatureManager: '2025-03-04T13:15:11.574+00:00'
+                      lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                      lastModifiedBy: 58d55e3ffdc2eb20547edd0a
+                      reviewee:
+                        user: 58d55e3ffdc2eb20547edd0a
+                        name: Louise Leapsome
+                        preferredName: null
+                        status: pending
+                        averageRating: 0 / 100
+                        lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                        lastModifiedBy: 58d55e3ffdc2eb20547edd0a
+                      managers:
+                      - user: 58d55e3ffdc2eb20547edd00
+                        name: Peter Pan
+                        preferredName: null
+                        status: complete
+                        averageRating: 50 / 100
+                        lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                        lastModifiedBy: 58d55e3ffdc2eb20547edd00
+                      additionalManagers:
+                      - user: 58d625f5fdc2eb20547ede85
+                        name: Jack Johnson
+                        preferredName: null
+                        status: pending
+                        averageRating: 0 / 100
+                        lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                        lastModifiedBy: 58d625f5fdc2eb20547ede85
+                      peers:
+                      - user: 58d625f5fdc2eb20547ede83
+                        name: Susanne Leader
+                        preferredName: null
+                        status: declined
+                        averageRating: 0 / 100
+                        lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                        lastModifiedBy: 58d625f5fdc2eb20547ede83
+                      - user: 62ab64e3339234d9c4a527f2
+                        name: Jason Minor
+                        preferredName: null
+                        status: complete
+                        averageRating: 75 / 100
+                        lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                        lastModifiedBy: 62ab64e3339234d9c4a527f2
+                      directReports:
+                      - user: 62ab64e3339234d9c4a527f1
+                        name: Sandra Susie
+                        preferredName: Sandra von Susie
+                        status: complete
+                        averageRating: 75 / 100
+                        lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                        lastModifiedBy: 62ab64e3339234d9c4a527f1
+                    __v2: true
+      tags:
+      - reviews
+  /reviews/{reviewCycleId}/participants/{userId}/overview:
+    parameters:
+    - schema:
+        type: string
+      name: reviewCycleId
+      in: path
+      required: true
+      description: ID of your review cycle
+    - schema:
+        type: string
+      name: userId
+      in: path
+      required: true
+    get:
+      summary: Get results for a specific reviewee
+      description: Provides answers of all reviewers for a specific reviewee, if admins have access to these
+      operationId: getReviewParticipantResults
+      security:
+      - bearerAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: Relevant questions, answers (if visible) and contributor details (if not anonymous)
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                      questions:
+                      - _id: 61f5656be4a7ef185491a621
+                        name: Placeholder Company Skills
+                      - _id: 58d55e55fdc2eb20547edd16
+                        name: Delivers results
+                      - _id: 58d55e55fdc2eb20547edd20
+                        name: Provides structure
+                      - _id: 58d55e55fdc2eb20547edd14
+                        name: Drives innovation
+                      - _id: 58d55e55fdc2eb20547edd0f
+                        name: Takes ownership
+                      - _id: 58d55e55fdc2eb20547edd21
+                        name: Manages expectations
+                      - _id: 58d55e55fdc2eb20547edd18
+                        name: Communicates in written
+                      - _id: 58d55e55fdc2eb20547edd1b
+                        name: Motivates
+                      - _id: 58d55e55fdc2eb20547edd17
+                        name: Communicates verbally
+                      answers:
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd16
+                        type: Peer Review
+                        rating: 4
+                        scale: 6
+                        comment: ''
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd20
+                        type: Peer Review
+                        rating: 3
+                        scale: 6
+                        comment: ''
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd14
+                        type: Peer Review
+                        rating: 4
+                        scale: 6
+                        comment: ''
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd0f
+                        type: Peer Review
+                        rating: 4
+                        scale: 6
+                        comment: ''
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd21
+                        type: Peer Review
+                        rating: 6
+                        scale: 6
+                        comment: ''
+                        multipleChoice: A
+                      users:
+                      - _id: 58d625f5fdc2eb20547ede84
+                        fullName: Susanne Leader
+                        preferredName: Susanne von Leader
+                        email: susanne@leapsome.com
+                        teams: Managers (Auto), Sales
+                        location: London
+                        lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                      - _id: 62ac40b5f1f4baf9a1b6fb52
+                        fullName: Louise Leapsome
+                        preferredName: Louise von Leapsome
+                        email: louise@leapsome.com
+                        teams: Managers (Auto), Marketing
+                        location: Berlin
+                        lastModifiedOn: '2025-03-04T13:15:11.574+00:00'
+                    __v2: true
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      questions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                              example: 61f5656be4a7ef185491a621
+                            name:
+                              type: string
+                              example: What's your overall feedback?
+                            average:
+                              type: number
+                              example: 75
+                              minimum: 0
+                              maximum: 100
+                              exclusiveMinimum: false
+                              description: Normalized average score (0-100) of all answers to this question
+                      answers:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            authorId:
+                              type: string
+                              example: 62ac40b5f1f4baf9a1b6fb52
+                            receiverId:
+                              type: string
+                              example: 62ac40b5f1f4baf9a1b6fb52
+                            question:
+                              type: string
+                              example: 61f5656be4a7ef185491a621
+                            type:
+                              type: string
+                              enum:
+                              - Peer Review
+                              - Manager Review
+                              - Direct Report Review
+                              - Self-Evaluation
+                            rating:
+                              type: integer
+                              example: 7
+                            scale:
+                              type: integer
+                              example: 10
+                            comment:
+                              type: string
+                              example: Great job!
+                            multipleChoice:
+                              type: string
+                              example: A
+                      users:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                              example: 62ac40b5f1f4baf9a1b6fb52
+                            fullName:
+                              type: string
+                              example: Jack Johnson
+                            preferredName:
+                              type: string
+                              example: Jack von Johnson (Full name)
+                            email:
+                              type: string
+                              format: email
+                              example: jack.johnson@leapsome.com
+                            teams:
+                              type: string
+                              example: Marketing, Sales
+                            location:
+                              type: string
+                              example: Berlin
+                  __v2:
+                    type: boolean
+              examples:
+                example-1:
+                  value:
+                    data:
+                      questions:
+                      - _id: 61f5656be4a7ef185491a621
+                        name: Placeholder Company Skills
+                        average: 80
+                      - _id: 58d55e55fdc2eb20547edd16
+                        name: Delivers results
+                        average: 100
+                      - _id: 58d55e55fdc2eb20547edd20
+                        name: Provides structure
+                        average: 90
+                      - _id: 58d55e55fdc2eb20547edd14
+                        name: Drives innovation
+                        average: 90
+                      - _id: 58d55e55fdc2eb20547edd0f
+                        name: Takes ownership
+                        average: 90
+                      - _id: 58d55e55fdc2eb20547edd21
+                        name: Manages expectations
+                        average: 70
+                      - _id: 58d55e55fdc2eb20547edd18
+                        name: Communicates in written
+                        average: 100
+                      - _id: 58d55e55fdc2eb20547edd1b
+                        name: Motivates
+                        average: 80
+                      - _id: 58d55e55fdc2eb20547edd17
+                        name: Communicates verbally
+                        average: 70
+                      answers:
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd16
+                        type: Peer Review
+                        rating: 6
+                        scale: 6
+                        comment: Great job!
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd20
+                        type: Peer Review
+                        rating: 3
+                        scale: 6
+                        comment: You can improve here
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd14
+                        type: Peer Review
+                        rating: 4
+                        scale: 6
+                        comment: ''
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd0f
+                        type: Peer Review
+                        rating: 4
+                        scale: 6
+                        comment: ''
+                      - authorId: 62ac40b5f1f4baf9a1b6fb52
+                        receiverId: 58d625f5fdc2eb20547ede84
+                        question: 58d55e55fdc2eb20547edd21
+                        type: Peer Review
+                        rating: 6
+                        scale: 6
+                        comment: ''
+                      users:
+                      - _id: 58d625f5fdc2eb20547ede84
+                        fullName: Susanne Leader
+                        preferredName: Susanne Leader
+                        email: susanne@leapsome.com
+                        teams: Managers (Auto), Sales
+                        location: London
+                      - _id: 62ac40b5f1f4baf9a1b6fb52
+                        fullName: Louise Leapsome
+                        preferredName: Louise Leapsome
+                        email: louise@leapsome.com
+                        teams: Managers (Auto), Marketing
+                        location: Berlin
+                    __v2: true
+      tags:
+      - reviews
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

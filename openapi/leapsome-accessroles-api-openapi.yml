@@ -1,0 +1,75 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences accessRoles API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- name: accessRoles
+paths:
+  /access-roles:
+    get:
+      summary: List access roles
+      description: 'Get a list of all access roles for the account. Returns role details including name,
+
+        scope type, and system default information.
+
+
+        Requires the standard Super Admin access role; for API tokens, assign that role to the API key.
+
+        '
+      operationId: listAccessRoles
+      security:
+      - bearerAuth: []
+      tags:
+      - accessRoles
+      responses:
+        '200':
+          description: List of access roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicAccessRole'
+        '401':
+          description: Authorization failed. Token is missing or invalid.
+        '403':
+          description: Insufficient permissions. Super Admin access role is required.
+components:
+  schemas:
+    PublicAccessRole:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: Access role ID
+        name:
+          type: string
+          description: Display name of the access role
+        userScopeType:
+          type: string
+          enum:
+          - none
+          - roleSpecific
+          - userSpecific
+          description: How user scope is determined for this role
+        isSystemDefault:
+          type: boolean
+          description: Whether this is a built-in system role
+        systemDefaultType:
+          type: string
+          description: System default role identifier when `isSystemDefault` is true
+        active:
+          type: boolean
+          description: Whether the role is active
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

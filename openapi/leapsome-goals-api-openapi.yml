@@ -1,0 +1,733 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences goals API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- name: goals
+paths:
+  /goals:
+    get:
+      summary: List goals
+      description: 'Setting multiple filters will result in a subset of goals that satisfy *all* constraints.
+
+        All filters except for `search` accept comma-separated values.
+
+        '
+      operationId: listGoals
+      security:
+      - bearerAuth: []
+      tags:
+      - goals
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: select goals containing *any* of the userIds.
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9a-f]{24}$
+            example: 58d55e3ffdc2eb20547edd0a
+      - name: teamId
+        in: query
+        required: false
+        description: select goals containing *any* of the teamIds.
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9a-f]{24}$
+            example: 58d55e3ffdc2eb20547edd0a
+      - name: tagId
+        in: query
+        required: false
+        description: select goals containing *all* of the tagIds.
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9a-f]{24}$
+            example: 58d55e3ffdc2eb20547edd0a
+      - name: type
+        in: query
+        required: false
+        description: select goals that match by `type` to *any* of the types listed.
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - company
+            - team
+            - user
+      - name: search
+        in: query
+        required: false
+        description: 'search on title, user name and team name fields. Special symbols must be URL-encoded.
+
+          Search is performed on a whole value of a text field, without splitting it into words
+
+          (e.g. search for `ark` will match `Marketing`).
+
+          '
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: only include goals that match provided state
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - live
+            - draft
+            - archived
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/cursorParam'
+      responses:
+        '200':
+          description: A paginated array of user goals
+          headers:
+            X-Next:
+              $ref: '#/components/headers/X-Next'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGoals'
+              examples:
+                example-1:
+                  value:
+                    meta:
+                      count: 1
+                      cursor: 58d55e3ffdc2eb20547edd0a
+                      nextPage: string
+                    data:
+                    - id: 5b237f6868794d5c08555812
+                      type: user
+                      user:
+                        id: 58d55e3ffdc2eb20547edd0a
+                        email: example@example.com
+                        fullName: John Doe
+                        preferredName: John Doe
+                      team:
+                        id: 5b237f6868794d5c08555812
+                        name: Rocket Scientists
+                      name: Become a great place to work (d)
+                      description: Make it entertaining
+                      contributors:
+                      - id: 58d55e3ffdc2eb20547edd0a
+                        email: example@example.com
+                        fullName: John Doe
+                        preferredName: John Doe
+                      progress: 50
+                      status: live
+                      managedBy:
+                        id: 58d55e3ffdc2eb20547edd0a
+                        email: example@example.com
+                        fullName: John Doe
+                        preferredName: John Doe
+                      tags:
+                      - id: 5b237f6868794d5c08555812
+                        name: string
+                      deadline: '2019-08-24T14:15:22Z'
+                      keyResults:
+                      - id: 5b237f6868794d5c08555812
+                        name: Bring Glassdoor score up above 4
+                        metric:
+                          type: currency
+                          start: 0
+                          end: 1000
+                          current: 650
+                        weight: 30
+                        ownerUser:
+                          id: 58d55e3ffdc2eb20547edd0a
+                          email: example@example.com
+                          fullName: John Doe
+                          preferredName: John Doe
+                        ownerTeam:
+                          id: 5b237f6868794d5c08555812
+                          name: Engineer
+                      parent:
+                        _id: 5cb0855f0f089e6924b742e4
+                        name: Enhance Employee Experience and Retention
+                        status: live
+                      progressStatus: onTrack
+                      createdAt: '2019-08-23T11:53:06.741Z'
+                      updatedAt: '2019-08-23T11:53:06.741Z'
+  /goals/tags:
+    get:
+      summary: get list of goal tags
+      operationId: listTags
+      security:
+      - bearerAuth: []
+      tags:
+      - goals
+      responses:
+        '200':
+          description: An array of goal tags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tags'
+  /goals/{goalId}:
+    get:
+      summary: Get goal details
+      operationId: getGoalDetails
+      parameters:
+      - in: path
+        name: goalId
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        description: ID of the goal
+      security:
+      - bearerAuth: []
+      tags:
+      - goals
+      responses:
+        '200':
+          description: Goal details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Goal'
+  /goals/{goalId}/comments:
+    get:
+      summary: get list of comments for a goal
+      operationId: listGoalComments
+      parameters:
+      - in: path
+        name: goalId
+        required: true
+        schema:
+          type: string
+        description: ID of the goal
+      security:
+      - bearerAuth: []
+      tags:
+      - goals
+      responses:
+        '200':
+          description: An array of goal comments ordered by creation date (descending)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comments'
+  /goals/{goalId}/key-results/{keyResultId}:
+    post:
+      summary: Update key result
+      operationId: updateKeyResult
+      parameters:
+      - in: path
+        name: goalId
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        description: ID of the goal
+      - in: path
+        name: keyResultId
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        description: ID of the key result
+      security:
+      - bearerAuth: []
+      tags:
+      - goals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeyResultUpdate'
+      responses:
+        '200':
+          description: Updated goal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Goal'
+  /goals/{goalId}/initiatives/{initiativeId}:
+    post:
+      summary: Update initiative
+      operationId: updateInitiative
+      parameters:
+      - in: path
+        name: goalId
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        description: ID of the goal
+      - in: path
+        name: initiativeId
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        description: ID of the initiative
+      security:
+      - bearerAuth: []
+      tags:
+      - goals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiativeUpdate'
+      responses:
+        '200':
+          description: Updated goal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Goal'
+components:
+  schemas:
+    User:
+      type: object
+      required:
+      - id
+      - email
+      - fullName
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+        email:
+          type: string
+          format: email
+          example: example@example.com
+        fullName:
+          type: string
+          example: John Doe
+        preferredName:
+          type: string
+          example: John von Doe (Full name)
+    ParentGoal:
+      type: object
+      nullable: true
+      properties:
+        _id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5cb0855f0f089e6924b742e4
+        name:
+          type: string
+          example: Enhance Employee Experience and Retention
+        status:
+          type: string
+          enum:
+          - live
+          - draft
+          - archived
+          example: live
+    PaginatedGoals:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal'
+    Tag:
+      type: object
+      required:
+      - id
+      - name
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5b237f6868794d5c08555812
+        name:
+          type: string
+          example: Marketing
+        status:
+          type: string
+          enum:
+          - active
+          - viewOnly
+          - removed
+        createdAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+    KeyResultUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Bring Glassdoor score up above 4
+        metric:
+          type: object
+          required:
+          - type
+          - start
+          - end
+          - current
+          properties:
+            type:
+              type: string
+              enum:
+              - none
+              - numerical
+              - percentage
+              - currency
+            start:
+              type: integer
+            end:
+              type: integer
+            current:
+              type: integer
+        weight:
+          type: integer
+          minimum: 0
+          maximum: 100
+    Goal:
+      type: object
+      required:
+      - id
+      - type
+      - name
+      - description
+      - contributors
+      - progress
+      - status
+      - managedBy
+      - tags
+      - deadline
+      - keyResults
+      - parent
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5b237f6868794d5c08555812
+        type:
+          type: string
+          enum:
+          - user
+          - team
+          - company
+          example: user
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          - nullable: true
+            description: 'Information about the user, who''s assigned to this goal.
+
+              Will be `null` for Team and Company goals.
+
+              '
+        team:
+          type: object
+          nullable: true
+          description: 'Information about the team, that''s assigned to this goal.
+
+            Will be `null` for User and Company goals.
+
+            '
+          properties:
+            id:
+              type: string
+              pattern: ^[0-9a-f]{24}$
+              example: 5b237f6868794d5c08555812
+            name:
+              type: string
+              example: Rocket Scientists
+        name:
+          type: string
+          example: Become a great place to work (d)
+        description:
+          type: string
+          example: Make it entertaining
+        contributors:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        progress:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 50
+        status:
+          type: string
+          enum:
+          - archived
+          - live
+          - draft
+          - removed
+          example: live
+        managedBy:
+          $ref: '#/components/schemas/User'
+        tags:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - name
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 5b237f6868794d5c08555812
+              name:
+                type: string
+        deadline:
+          type: string
+          format: date-time
+          nullable: true
+        keyResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyResults'
+        parent:
+          $ref: '#/components/schemas/ParentGoal'
+        progressStatus:
+          type: string
+          enum:
+          - onTrack
+          - offTrack
+          - inputNeeded
+          - done
+          - canceled
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+    KeyResults:
+      type: object
+      required:
+      - id
+      - name
+      - metric
+      - weight
+      - ownerTeam
+      - ownerUser
+      - contributors
+      - contributorTeams
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5b237f6868794d5c08555812
+        name:
+          type: string
+          example: Bring Glassdoor score up above 4
+        metric:
+          type: object
+          required:
+          - type
+          - start
+          - end
+          - current
+          properties:
+            type:
+              type: string
+              example: currency
+              enum:
+              - none
+              - numerical
+              - percentage
+              - currency
+            start:
+              type: integer
+            end:
+              type: integer
+            current:
+              type: integer
+        weight:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 30
+        ownerUser:
+          $ref: '#/components/schemas/User'
+        ownerTeam:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: ^[0-9a-f]{24}$
+              example: 5b237f6868794d5c08555812
+            name:
+              type: string
+              example: Engineer
+        contributors:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        contributorTeams:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 5b237f6868794d5c08555812
+              name:
+                type: string
+                example: Engineer
+    Comment:
+      type: object
+      required:
+      - id
+      - content
+      - sender
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+          description: The comment body which can contain html tags
+        sender:
+          type: object
+          required:
+          - id
+          - firstname
+          - lastname
+          - picture
+          properties:
+            id:
+              type: string
+            firstname:
+              type: string
+            lastname:
+              type: string
+            picture:
+              type: string
+              format: url
+        createdAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+    Meta:
+      type: object
+      required:
+      - count
+      - cursor
+      - nextPage
+      properties:
+        count:
+          type: integer
+          description: number of results returned in this request
+          minimum: 1
+          maximum: 1000
+        cursor:
+          type: string
+          description: 'Will be set to `null` if complete set have been returned.
+
+            '
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+          nullable: true
+        nextPage:
+          type: string
+          format: url
+          description: URL of the next result page. `null` means no more results available.
+          nullable: true
+    Comments:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+    InitiativeUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - notStarted
+          - inProgress
+          - completed
+          - blocked
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximal number of results in a response
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+    cursorParam:
+      name: cursor
+      in: query
+      required: false
+      description: 'Start showing results from this location. Typically, you do not
+
+        need to set this parameter manually, it is mainly used in
+
+        "x-next" header
+
+        '
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{24}$
+  headers:
+    X-Next:
+      description: A link to the next page of responses
+      schema:
+        type: string
+        format: url
+        example: https://api.leapsome.com/v1/goals?cursor=58d55e3ffdc2eb20547edd0a&limit=100
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

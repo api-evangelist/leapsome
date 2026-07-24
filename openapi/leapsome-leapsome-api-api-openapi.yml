@@ -1,0 +1,40 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences Leapsome API API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- name: Leapsome API
+paths:
+  /:
+    get:
+      summary: API info
+      operationId: apiInfo
+      security: []
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: Leapsome API
+                  version:
+                    type: string
+                    example: 1.0.0
+      tags:
+      - Leapsome API
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

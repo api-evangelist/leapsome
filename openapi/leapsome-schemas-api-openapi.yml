@@ -1,0 +1,140 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences Schemas API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- description: Operations on schemas
+  name: Schemas
+paths:
+  /ServiceProviderConfig:
+    get:
+      description: 'Queries service provider configurations.
+
+        The service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6).
+
+        This call returns a description, a documentationURL, name, and specURL.
+
+        '
+      operationId: getServiceProviderConfig
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceProviderConfig'
+        '403':
+          description: Invalid token passed
+      summary: Get Service Provider Configurations
+      tags:
+      - Schemas
+components:
+  schemas:
+    Filter:
+      description: Specifies FILTER options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Etag:
+      description: Specifies Etag configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    ChangePassword:
+      description: Specifies Change Password configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    AuthenticationSchemes:
+      description: Specifies supported Authentication Scheme properties
+      properties:
+        description:
+          description: The description of the Authentication Scheme
+          type: string
+        documentationUrl:
+          description: A HTTP addressable URL pointing to the Authentication Scheme's usage documentation
+          type: string
+        name:
+          description: The common authentication scheme name, e.g. HTTP Basic
+          type: string
+        specUrl:
+          description: A HTTP addressable URL pointing to the Authentication Scheme's specification
+          type: string
+      required:
+      - name
+      - description
+      - specUrl
+      - documentationUrl
+    ServiceProviderConfig:
+      description: Represents the Service Provider's configuration
+      properties:
+        authenticationSchemes:
+          $ref: '#/components/schemas/AuthenticationSchemes'
+        bulk:
+          $ref: '#/components/schemas/Bulk'
+        changePassword:
+          $ref: '#/components/schemas/ChangePassword'
+        documentationUrl:
+          description: An HTTP addressable URL pointing to the Service Provider's help documentation
+          type: string
+        etag:
+          $ref: '#/components/schemas/Etag'
+        filter:
+          $ref: '#/components/schemas/Filter'
+        patch:
+          $ref: '#/components/schemas/Patch'
+        sort:
+          $ref: '#/components/schemas/Sort'
+      required:
+      - documentationUrl
+      - patch
+      - bulk
+      - filter
+      - changePassword
+      - sort
+      - etag
+      - authenticationSchemes
+    Sort:
+      description: Specifies Sort configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Patch:
+      description: Specifies PATCH configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Bulk:
+      description: Specifies BULK configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

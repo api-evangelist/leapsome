@@ -1,0 +1,131 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences documents API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- name: documents
+paths:
+  /documents/categories:
+    get:
+      summary: List document categories
+      description: 'List all active user document categories for the team.
+
+        Use the returned category IDs when uploading documents via the upload endpoint.
+
+        '
+      operationId: listDocumentCategories
+      security:
+      - bearerAuth: []
+      tags:
+      - documents
+      responses:
+        '200':
+          description: List of document categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentCategory'
+        '401':
+          description: Authorization failed. Token is missing or invalid.
+  /users/{userId}/documents:
+    post:
+      summary: Upload user document
+      description: 'Upload a document to a user''s profile in a single request. Send the file as
+
+        multipart/form-data along with the target category. The backend handles storage
+
+        and confirmation automatically.
+
+
+        Maximum file size: 25 MB.
+
+        '
+      operationId: uploadUserDocument
+      security:
+      - bearerAuth: []
+      tags:
+      - documents
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        description: Leapsome user ID of the document owner
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadUserDocumentRequest'
+      responses:
+        '201':
+          description: Document uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadUserDocumentResponse'
+        '400':
+          description: Invalid request. File extension or MIME type not allowed, or file exceeds size limit.
+        '401':
+          description: Authorization failed. Token is missing or invalid.
+        '403':
+          description: No upload permission for the specified category.
+        '404':
+          description: User not found.
+components:
+  schemas:
+    UploadUserDocumentRequest:
+      type: object
+      required:
+      - file
+      - category
+      properties:
+        file:
+          type: string
+          format: binary
+          description: The document file to upload (max 25 MB)
+        category:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: ID of the user document category (from GET /documents/categories)
+          example: 58d55e3ffdc2eb20547edd0a
+        description:
+          type: string
+          description: Optional human-readable description for the document
+          example: Annual performance review for 2024
+    DocumentCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: Category ID. Use this value as the `category` field when uploading documents.
+          example: 58d55e3ffdc2eb20547edd0a
+        name:
+          type: string
+          description: Display name of the category
+          example: Past Reviews
+    UploadUserDocumentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: ID of the uploaded document
+          example: 58d55e3ffdc2eb20547edd0a
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

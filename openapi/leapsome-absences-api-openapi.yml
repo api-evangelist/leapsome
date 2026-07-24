@@ -1,0 +1,245 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- name: absences
+paths:
+  /absences:
+    get:
+      summary: List absences
+      description: "Get a paginated list of absences in your Leapsome instance. You can filter by date range, \nstatus, and user. Requires admin permissions for absence management.\n"
+      operationId: listAbsences
+      security:
+      - bearerAuth: []
+      tags:
+      - absences
+      parameters:
+      - name: absenceStartFrom
+        in: query
+        required: false
+        description: Filter absences that start on or after this date
+        schema:
+          type: string
+          format: date-time
+        example: '2024-01-01T00:00:00.000Z'
+      - name: absenceStartUntil
+        in: query
+        required: false
+        description: Filter absences that start on or before this date
+        schema:
+          type: string
+          format: date-time
+        example: '2024-12-31T23:59:59.999Z'
+      - name: status
+        in: query
+        required: false
+        description: Filter by absence status
+        schema:
+          type: string
+          enum:
+          - active
+          - removed
+          - pendingRemoval
+      - name: userId
+        in: query
+        required: false
+        description: Filter absences for a specific user
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination (starts at 1)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of results per page
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+      responses:
+        '200':
+          description: A list of absences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Absence'
+              examples:
+                example-1:
+                  value:
+                  - _id: 66a1b2c3d4e5f6789012345a
+                    createdAt: '2024-01-15T08:30:00.000Z'
+                    updatedAt: '2024-01-15T08:30:00.000Z'
+                    userId: 58d55e3ffdc2eb20547edd0a
+                    start: '2024-02-01T00:00:00.000Z'
+                    end: '2024-02-05T23:59:59.999Z'
+                    absenceType: paidVacation
+                    activityType: nonWorkingPaid
+                    status: active
+                    timeUnit: days
+                    actualAbsenceDuration: 5
+                  - _id: 66a1b2c3d4e5f6789012345b
+                    createdAt: '2024-01-20T09:15:00.000Z'
+                    updatedAt: '2024-01-20T09:15:00.000Z'
+                    userId: 58d55e3ffdc2eb20547edd0b
+                    start: '2024-03-10T00:00:00.000Z'
+                    end: '2024-03-12T23:59:59.999Z'
+                    absenceType: sickLeave
+                    activityType: nonWorkingPaid
+                    status: active
+                    timeUnit: days
+                    actualAbsenceDuration: 3
+        '401':
+          description: Authorization failed. Token is missing or invalid.
+        '403':
+          description: Insufficient permissions. Admin access to absence management is required.
+components:
+  schemas:
+    Absence:
+      type: object
+      required:
+      - _id
+      - createdAt
+      - updatedAt
+      - userId
+      - start
+      - end
+      - absenceType
+      - activityType
+      - status
+      - timeUnit
+      properties:
+        _id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 66a1b2c3d4e5f6789012345a
+          description: Unique identifier for the absence
+        createdAt:
+          type: string
+          format: date-time
+          example: '2024-01-15T08:30:00.000Z'
+          description: When the absence was created
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2024-01-15T08:30:00.000Z'
+          description: When the absence was last modified
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+          description: ID of the user taking the absence
+        start:
+          type: string
+          format: date-time
+          example: '2024-02-01T00:00:00.000Z'
+          description: Start date and time of the absence
+        startDayTime:
+          type: string
+          example: 09:00
+          description: Start time of the absence (HH:mm format)
+        startDayDuration:
+          type: string
+          enum:
+          - fullDay
+          - halfDayMorning
+          - halfDayAfternoon
+          example: fullDay
+          description: Duration type for the start day of the absence
+        end:
+          type: string
+          format: date-time
+          example: '2024-02-05T23:59:59.999Z'
+          description: End date and time of the absence
+        endDayTime:
+          type: string
+          example: '17:00'
+          description: End time of the absence (HH:mm format)
+        endDayDuration:
+          type: string
+          enum:
+          - fullDay
+          - halfDayMorning
+          - halfDayAfternoon
+          example: fullDay
+          description: Duration type for the end day of the absence
+        absenceType:
+          type: string
+          enum:
+          - paidVacation
+          - sickLeave
+          - parentalLeave
+          - unpaidVacation
+          - familyCare
+          - childCare
+          - shortTermAllowance
+          - quarantine
+          - lockout
+          - irrevocableExemption
+          - voluntaryMilitaryService
+          - unlawfulStrike
+          - lawfulStrike
+          - unexcusedAbsence
+          - remoteWork
+          - otherPaidLeave
+          - educationalLeave
+          - gardenLeave
+          - longtermSickLeave
+          example: paidVacation
+          description: Type of absence being taken
+        activityType:
+          type: string
+          enum:
+          - nonWorkingPaid
+          - nonWorkingUnpaid
+          - working
+          - nonWorkingPartiallyPaid
+          example: nonWorkingPaid
+          description: Activity type classification of the absence
+        status:
+          type: string
+          enum:
+          - active
+          - removed
+          - pendingRemoval
+          example: active
+          description: Current status of the absence
+        timeUnit:
+          type: string
+          enum:
+          - days
+          - hours
+          example: days
+          description: Unit of time used for measuring the absence duration
+        comment:
+          type: string
+          example: Medical appointment
+          description: Optional comment or note about the absence
+        actualAbsenceDuration:
+          type: number
+          nullable: true
+          example: 5
+          description: Actual duration of the absence in the specified time unit
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

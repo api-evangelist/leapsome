@@ -1,0 +1,1115 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Leapsome absences users API
+  contact:
+    name: Support
+    url: https://leapsome.zendesk.com
+  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+servers:
+- url: https://api.leapsome.com/v1
+tags:
+- name: users
+paths:
+  /employees:
+    get:
+      summary: List employees
+      description: Get a paginated list of employees with optional filtering by email, Leapsome ID, displayed name, or status. Returns basic employee information including teams, departments, and custom attributes.
+      operationId: listEmployees
+      security:
+      - bearerAuth: []
+      tags:
+      - users
+      parameters:
+      - name: email
+        in: query
+        required: false
+        description: Filter by employee email address
+        schema:
+          type: string
+          format: email
+      - name: employeeId
+        in: query
+        required: false
+        description: Filter by Leapsome user ID
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+      - name: displayedName
+        in: query
+        required: false
+        description: Filter by displayed name (partial match, case-insensitive)
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        description: Filter by user status
+        schema:
+          type: string
+          enum:
+          - created
+          - active
+          - invited
+          - removed
+          - deactivated
+          - preBoardingInvited
+          - preBoardingActive
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination (starts at 1)
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of results per page
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+      responses:
+        '200':
+          description: A list of employees
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeList'
+        '401':
+          description: Authorization failed. Token is missing or invalid.
+  /employees/{userId}/access-roles:
+    put:
+      summary: Update employee access roles
+      description: 'Update the secondary access roles and user-specific access scope for one employee.
+
+        Primary access roles cannot be updated through this endpoint.
+
+
+        For roles with `userScopeType` set to `userSpecific`, provide a matching
+
+        `accessRoleCustomConfigurations` entry. The public API only supports `include.users`
+
+        in user-specific access scope configurations.
+
+
+        Requires the standard Super Admin access role; for API tokens, assign that role to the API key.
+
+        '
+      operationId: updateEmployeeAccessRoles
+      security:
+      - bearerAuth: []
+      tags:
+      - users
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        description: Employee ID whose secondary access roles are being updated
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmployeeAccessRolesRequest'
+      responses:
+        '200':
+          description: Updated employee access roles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEmployeeAccessRolesResponse'
+        '400':
+          description: Invalid request. Primary access roles are not allowed, roles must belong to the account, and USER_SPECIFIC roles require a matching include.users scope.
+        '401':
+          description: Authorization failed. Token is missing or invalid.
+        '403':
+          description: Insufficient permissions. Super Admin access role is required.
+        '404':
+          description: Employee not found.
+  /Users:
+    get:
+      description: Queries multiple user identities in the organization domain. Filtering is available and we return a maximum of 5000 users if no smaller value is provided.
+      operationId: getUsers
+      parameters:
+      - example: userName eq Smith
+        in: query
+        name: filter
+        schema:
+          type: string
+          example: externalId eq 123
+        description: The filter parameter must be a properly formed SCIM filter using the operator "eq" (equals). We support a "userName" filter only.
+      - schema:
+          type: integer
+          minimum: 0
+          maximum: 5000
+        in: query
+        name: count
+        description: The amount of elements you would like to get returned.
+      - schema:
+          type: integer
+          minimum: 1
+        in: query
+        name: startIndex
+        description: The offset (starts from 1, not 0) used to lookup elements. If you need to paginate, your next startIndex value would be "startIndex + count".
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollection'
+        '401':
+          description: Client is not sufficiently authorized
+        '403':
+          description: Invalid token passed
+      summary: Get Users
+      tags:
+      - users
+    post:
+      description: 'Creates a new organization user and adds them to the user domain. The user email domain must match an existing organization email domain.
+
+
+        Note: All user need to get created before you start assigning managers or groups using the other PATCH and PUT endpoints.'
+      operationId: createUsers
+      requestBody:
+        description: The details of the user to create
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  format: email
+                  description: A user's email
+                name:
+                  type: object
+                  properties:
+                    givenName:
+                      type: string
+                      example: Jane
+                    familyName:
+                      type: string
+                      example: Doe
+                displayName:
+                  type: string
+                  example: Jane von Doe
+                title:
+                  type: string
+                  description: A user's job title
+                  example: Software Engineer
+                photos:
+                  type: array
+                  items:
+                    type: object
+                    maxProperties: 1
+                    properties:
+                      value:
+                        type: string
+                        format: uri
+                        description: The uri to the user's profile picture
+                        example: https://eu.ui-avatars.com/api/?name=Jane+Doe
+                externalId:
+                  type: string
+                  description: A user's id within an external system
+                  example: id::1234
+              required:
+              - userName
+      responses:
+        '201':
+          description: The user has been created.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Returned object for a newly created user. Empty object {} if the user already exists.
+                properties:
+                  id:
+                    type: string
+                    description: A user's id generated by Leapsome
+                  userName:
+                    type: string
+                    description: A user's email
+                  name:
+                    type: object
+                    properties:
+                      givenName:
+                        type: string
+                      familyName:
+                        type: string
+                  displayName:
+                    type: string
+                  title:
+                    type: string
+                    description: A user's job title
+                  photos:
+                    type: array
+                    items:
+                      type: object
+                      maxProperties: 1
+                      properties:
+                        value:
+                          type: string
+                          description: The uri to the user's profile picture
+                          format: uri
+                  externalId:
+                    type: string
+                    description: A user's id within an external system
+                  groups:
+                    type: array
+                    maxItems: 0
+                    items: {}
+                  meta:
+                    type: object
+                    properties:
+                      created:
+                        type: number
+                        description: Timestamp of the creation
+                      location:
+                        type: string
+                        description: The URI path to get the user details from the API
+                        format: uri
+        '400':
+          description: 'One of the following requirements is not met:
+
+            - The userName field is required.
+
+            - The userName field must be non-empty.
+
+            '
+        '401':
+          description: Client is not sufficiently authorized.
+        '403':
+          description: Invalid token passed
+        '409':
+          description: Username is already in use
+      summary: Create User
+      tags:
+      - users
+  /Users/{userId}:
+    get:
+      description: Queries a single user identity in the organization domain. If the provided id does not match a leapsome user's id in your organization, we try if we find a user with an externalId like that as fallback.
+      operationId: getUser
+      parameters:
+      - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: A user was found and is returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: No userId provided
+        '401':
+          description: Client is not sufficiently authorized
+        '403':
+          description: Invalid token passed
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schemas:
+                    type: array
+                    items:
+                      type: string
+                  detail:
+                    type: string
+                    example: Resource not found
+                  status:
+                    type: string
+                    example: '404'
+      summary: Get User
+      tags:
+      - users
+    patch:
+      description: Changes a limited set (or all if you choose) of the user's data. The updated user email domain must be an existing organization email domain.
+      operationId: updateUser
+      parameters:
+      - $ref: '#/components/parameters/userId'
+      requestBody:
+        description: The new user data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDefinition'
+      responses:
+        '200':
+          description: The user has been updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: 'One of the following requirements is not met:
+
+            - The userName field is required.
+
+            - The userName field must be non-empty.
+
+            - No userId provided
+
+            '
+        '401':
+          description: Client is not sufficiently authorized
+        '403':
+          description: Invalid token passed
+        '404':
+          description: User not found
+        '409':
+          description: Email address conflict
+      summary: Update User
+      tags:
+      - users
+    put:
+      description: 'Changes an existing user''s data. The request must include the full user definition (to modify one or more values without sending the full definition, use the `PATCH` request).
+
+
+
+        The replaced user email domain must be an existing organization email domain.
+
+        '
+      operationId: replaceUser
+      parameters:
+      - $ref: '#/components/parameters/userId'
+      requestBody:
+        description: The new user data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDefinition'
+      responses:
+        '200':
+          description: The user has been replaced.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: 'One of the following requirements is not met:
+
+            - The userName field is required.
+
+            - The userName field must be non-empty.
+
+            - No userId provided'
+        '401':
+          description: Client is not sufficiently authorized
+        '403':
+          description: Invalid token passed
+        '404':
+          description: User not found
+        '409':
+          description: Email address conflict
+      summary: Replace User
+      tags:
+      - users
+components:
+  schemas:
+    User:
+      description: Describes a user belonging to an organization
+      type: object
+      properties:
+        id:
+          description: A user's unique id (generated by Leapsome)
+          type: string
+        externalId:
+          description: A user's ID within an external system
+          type: string
+          nullable: true
+        title:
+          description: A user's job title
+          default: Colleague
+          type: string
+        photos:
+          description: ''
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: uri
+                description: A URI to the avatar of the user
+              type:
+                type: string
+                example: photo
+                description: Always set to "photo"
+        meta:
+          $ref: '#/components/schemas/UserMetadata'
+        name:
+          $ref: '#/components/schemas/UserFullName'
+        displayName:
+          description: A user's full displayed name
+          type: string
+        userName:
+          description: A user's username, usually their email address
+          type: string
+        urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:
+          type: object
+          properties:
+            manager:
+              $ref: '#/components/schemas/UserManager'
+            additionalManagers:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserManager'
+            attachments:
+              description: All attachments to a user's profile
+              type: array
+              items:
+                type: object
+                properties:
+                  fileName:
+                    type: string
+                    description: Name of the file
+                    example: Performance-Review-2022.pdf
+                  access:
+                    type: array
+                    description: All roles that have access
+                    items:
+                      type: string
+                      description: Role
+                      example: MANAGER
+            department:
+              type: string
+              description: The team name of the user's department
+            costCenter:
+              type: string
+              description: The team name of the user's cost center
+            division:
+              type: string
+            level:
+              description: Current level of the employee as a string.
+              type: string
+              example: Junior Engineer
+            startDate:
+              description: Employment start Date as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '2011-03-25'
+            endDate:
+              description: Employment end Date as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '2022-02-25'
+            birthday:
+              description: Birthday of the employee (used for data segmentation) as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '1985-07-20'
+            6140868326541a4da586db0b:
+              description: Value of a given custom attribute identified via its ID. Get the custom attribute ID from the Users & Teams tab.
+              type: string
+              example: Salary Class B
+            6140868326541a4da586db0c:
+              description: Value of a given custom attribute identified via its ID. Get the custom attribute ID from the Users & Teams tab.
+              type: string
+              example: Freelancer
+            gender:
+              description: Gender of the employee as a string(male, female, diverse)
+              type: string
+              example: female
+            employmentType:
+              description: Employment type of the user as a string(internal, external)
+              type: string
+              example: internal
+            location:
+              description: Location of the employee as a string.
+              type: string
+              example: Berlin
+        active:
+          description: Indicates if the user is activated in Leapsome
+          type: boolean
+        emails:
+          description: User's email
+          type: array
+          items:
+            type: object
+            properties:
+              primary:
+                type: boolean
+                description: Always true
+                example: true
+              type:
+                type: string
+                description: Always set to "work"
+                example: work
+              value:
+                type: string
+                description: A user's email
+        groups:
+          description: Represent teams in Leapsome
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: A teamId
+                example: 5ecba01fb567a5d046582027
+        manager:
+          description: ''
+          type: object
+          properties:
+            value:
+              type: string
+              description: A Leapsome userId of the manager
+              example: 5ecba01fb567a5d046582027
+        schemas:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - userName
+    UpdateEmployeeAccessRolesRequest:
+      type: object
+      required:
+      - accessRoleIds
+      properties:
+        accessRoleIds:
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9a-f]{24}$
+          description: Full desired set of secondary access role IDs for the employee. Primary access role IDs are not allowed.
+        accessRoleCustomConfigurations:
+          type: array
+          description: User-specific scope configurations for access roles with `userScopeType` set to `userSpecific`. Only `include.users` is supported.
+          items:
+            $ref: '#/components/schemas/PublicUserAccessRoleCustomConfiguration'
+    UserCollection:
+      description: Class describing a collection of users
+      type: object
+      title: UserCollection
+      properties:
+        Resources:
+          description: The list of users
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        totalResults:
+          description: The number of users in the collection
+          format: int64
+          type: integer
+        itemsPerPage:
+          type: integer
+        startIndex:
+          type: integer
+        schemas:
+          type: array
+          items:
+            type: string
+    UserMetadata:
+      description: User metadata
+      type: object
+      properties:
+        created:
+          description: The date and time the user was created
+          format: date-time
+          type: string
+        location:
+          description: The URL where the user can be accessed
+          type: string
+        version:
+          type: string
+        lastModified:
+          type: string
+          format: date-time
+      required:
+      - created
+      - location
+      - version
+      - lastModified
+    UserFullName:
+      description: The individual name parts of a user
+      type: object
+      title: UserName
+      properties:
+        familyName:
+          description: A user's surname
+          type: string
+        givenName:
+          description: A user's first name
+          type: string
+        formatted:
+          description: A user's full legal name
+          type: string
+      required:
+      - familyName
+      - givenName
+    PublicUserSpecificAccessScope:
+      type: object
+      required:
+      - include
+      additionalProperties: false
+      properties:
+        include:
+          type: object
+          required:
+          - users
+          additionalProperties: false
+          properties:
+            users:
+              type: array
+              minItems: 1
+              items:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+              description: User IDs the target employee may access when using this role
+    PublicUserAccessRoleCustomConfiguration:
+      type: object
+      required:
+      - accessRole
+      - userSpecificAccessScope
+      additionalProperties: false
+      properties:
+        accessRole:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: Access role ID this custom user scope belongs to
+        userSpecificAccessScope:
+          $ref: '#/components/schemas/PublicUserSpecificAccessScope'
+    UpdateEmployeeAccessRolesResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        accessRoleIds:
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9a-f]{24}$
+        accessRoleCustomConfigurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicUserAccessRoleCustomConfiguration'
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+          description: Leapsome user ID
+        email:
+          type: string
+          format: email
+          example: jane.doe@example.com
+          description: Employee email address
+        firstname:
+          type: string
+          example: Jane
+          description: Employee first name
+        lastname:
+          type: string
+          example: Doe
+          description: Employee last name
+        middlename:
+          type: string
+          example: von
+          description: Employee middle name
+        fullname:
+          type: string
+          example: Jane Doe
+          description: Employee full name
+        displayedName:
+          type: string
+          example: Jane von Doe
+          description: Employee displayed/preferred name
+        status:
+          type: string
+          enum:
+          - created
+          - active
+          - invited
+          - deactivated
+          - preBoardingInvited
+          - preBoardingActive
+          - removed
+          example: active
+          description: Current status of the employee
+        lifecycleStatus:
+          type: string
+          enum:
+          - hired
+          - active
+          - leave
+          - offboarding
+          - terminated
+          - deactivated
+          - notSet
+          - preBoarding
+          example: active
+          description: Current lifecycle status of the employee
+        manager:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: ^[0-9a-f]{24}$
+              example: 58d55e3ffdc2eb20547edd0a
+            name:
+              type: string
+        additionalManagers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+              name:
+                type: string
+                example: Jane Doe
+        indirectManagers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+              name:
+                type: string
+                example: John Doe
+        startDate:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+          description: Employee start date
+        endDate:
+          type: string
+          format: date-time
+          example: '2024-12-31T23:59:59.999Z'
+          description: Employee end date
+        phone:
+          type: string
+          example: '+1234567890'
+          description: Employee phone number
+        teams:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+              name:
+                type: string
+                example: Team Red
+          description: Teams the employee belongs to
+        departments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+              name:
+                type: string
+                example: Department Blue
+          description: Departments the employee belongs to
+        businessUnits:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+              name:
+                type: string
+                example: Business Unit Green
+          description: Business units the employee belongs to
+        costCenters:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+              name:
+                type: string
+                example: Cost Center Yellow
+          description: Cost centers the employee belongs to
+        divisions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+              name:
+                type: string
+                example: Division Purple
+          description: Divisions the employee belongs to
+        otherGroups:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+              name:
+                type: string
+                example: Other Group Orange
+          description: Other groups the employee belongs to
+        level:
+          type: string
+          example: Senior
+          description: Employee's level
+        title:
+          type: string
+          example: Software Engineer
+          description: Employee's job title
+        workLocation:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+              pattern: ^[0-9a-f]{24}$
+              example: 58d55e3ffdc2eb20547edd0a
+            name:
+              type: string
+              example: Berlin Office
+          description: Employee's work location
+        compensation:
+          type: object
+          nullable: true
+          properties:
+            salary:
+              type: number
+              example: 75000
+              description: Employee's salary amount
+            currency:
+              type: string
+              example: EUR
+              description: Currency of the salary
+            frequency:
+              type: string
+              enum:
+              - year
+              - month
+              - hour
+              example: year
+              description: Salary remuneration period
+          description: Employee's compensation information
+        additionalCompensations:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 58d55e3ffdc2eb20547edd0a
+                description: Compensation ID
+              name:
+                type: string
+                example: Annual Bonus
+                description: Name of the compensation
+              amount:
+                type: number
+                nullable: true
+                example: 5000
+                description: Amount of the compensation
+              amountType:
+                type: string
+                nullable: true
+                enum:
+                - fixed
+                - variable
+                example: fixed
+                description: Type of the compensation amount
+              recurrence:
+                type: string
+                enum:
+                - oneTime
+                - monthly
+                - every3Months
+                - every6Months
+                - every12Months
+                example: every12Months
+                description: Recurrence of the compensation
+              comment:
+                type: string
+                nullable: true
+                example: Performance bonus
+                description: Comment for the compensation
+              effectiveAt:
+                type: string
+                format: date-time
+                example: '2024-01-01T00:00:00.000Z'
+                description: Effective date of the compensation
+              validUntil:
+                type: string
+                format: date-time
+                nullable: true
+                example: '2024-12-31T23:59:59.999Z'
+                description: Valid until date of the compensation
+          description: Employee's additional compensations
+        customAttributes:
+          type: object
+          additionalProperties: true
+          description: Custom attributes defined for the employee
+    UserDefinition:
+      description: Describes a new user
+      type: object
+      x-examples: {}
+      properties:
+        externalId:
+          description: User's ID in external system
+          type: string
+        title:
+          description: User's job title
+          default: Colleague
+          type: string
+        photos:
+          description: Array of profile picture URL's. We take the first one as user avatar.
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: uri
+                description: Needs to be a complete and valid url.
+        name:
+          $ref: '#/components/schemas/UserFullName'
+        displayName:
+          description: A user's full displayed name
+          type: string
+        userName:
+          description: The user's username, usually their email address'
+          type: string
+        location:
+          description: User's location value
+          type: string
+        manager:
+          description: User ID of user's manager which can be a LeapsomeId, an email or the externalId
+          type: string
+        urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:
+          type: object
+          properties:
+            manager:
+              description: User ID of user's manager which can be a LeapsomeId, an email or the externalId
+              type: string
+            additionalManagers:
+              type: array
+              items:
+                description: User ID of user's additional manager which can be a LeapsomeId, an email or the externalId
+                type: string
+            department:
+              type: string
+              description: The team name of the user's department
+            costCenter:
+              type: string
+              description: The team name of the user's cost center
+            division:
+              type: string
+            level:
+              description: Current level of the employee as a string.
+              type: string
+              example: Junior Engineer
+            startDate:
+              description: Employment start Date as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '2011-03-25'
+            endDate:
+              description: Employment end Date as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '2022-02-25'
+            birthday:
+              description: Birthday of the employee (used for data segmentation) as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '1985-07-20'
+            6140868326541a4da586db0b:
+              description: Value of a given custom attribute identified via its ID. Get the custom attribute ID from the Users & Teams tab.
+              type: string
+              example: Salary Class B
+            6140868326541a4da586db0c:
+              description: Value of a given custom attribute identified via its ID. Get the custom attribute ID from the Users & Teams tab.
+              type: string
+              example: Freelancer
+            gender:
+              description: Gender of the employee as a string(male, female, diverse)
+              type: string
+              example: female
+            location:
+              description: Location of the employee as a string.
+              type: string
+              example: Berlin
+        active:
+          type: boolean
+          description: Activate (true) or deactivate (false) a user if provided. If the user has been active before, the account will be active again while it might be in a "invited" or "created" state if the user never accepted an invitation before.
+      required:
+      - userName
+    UserManager:
+      description: User's (additional) Manager
+      type: object
+      properties:
+        managerId:
+          type: string
+          description: A Leapsome userId of the  (additional) manager
+        displayName:
+          type: string
+          description: The full name of the defined (additional) manager
+    EmployeeList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              description: Current page number
+            pageSize:
+              type: integer
+              description: Number of items per page
+            totalCount:
+              type: integer
+              description: Total number of employees
+  parameters:
+    userId:
+      description: The key of the user to query. The user must be in the organization domain
+      in: path
+      name: userId
+      schema:
+        type: string
+      required: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
