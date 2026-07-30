@@ -11,7 +11,20 @@ description: Leapsome is an AI-powered people enablement platform that combines 
   via bearer tokens generated inside the platform settings and are documented through
   Swagger UI at api.leapsome.com.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: open
+  trial: true
+  try_now: true
+  public: true
+  label: Paid (free trial) · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/leapsome.png
 url: https://raw.githubusercontent.com/api-evangelist/leapsome/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -28,60 +41,244 @@ tags:
 - 1:1 Meetings
 - Learning
 apis:
-- aid: leapsome:leapsome-content-api
-  name: Leapsome Content API
-  description: The Leapsome Content API provides read access to performance review
-    data, OKRs and goal progress, employee attributes, payroll information, and time
-    tracking records. It enables one-way extraction of Leapsome data into external
-    analytics tools, data warehouses, and custom integrations. Access is authenticated
-    via a bearer token generated in Settings > Integrations and imports > Content
-    API.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+- aid: leapsome:leapsome-absences-api
+  name: Leapsome absences API
+  description: The absences API from Leapsome — 1 operation(s) for absences.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
-  - Performance Reviews
-  - Goals
-  - OKRs
-  - Employee Data
-  - Payroll
-  - Time Tracking
+  - absences
   properties:
+  - type: OpenAPI
+    url: openapi/leapsome-absences-api-openapi.yml
   - type: Documentation
     url: https://api.leapsome.com/v1/api-docs/
-  - type: OpenAPI
-    url: openapi/leapsome-content-api-openapi.yml
-  - url: graphql/leapsome-graphql.md
-    type: GraphQL
-  contact:
-  - FN: Leapsome Support
-    url: https://help.leapsome.com/
-- aid: leapsome:leapsome-scim-api
-  name: Leapsome SCIM API
-  description: The Leapsome SCIM 2.0 API enables automated user provisioning and lifecycle
-    management, supporting creation, update, deactivation, and deletion of users and
-    groups. It integrates with enterprise identity providers such as Okta, Azure Active
-    Directory, OneLogin, and any SCIM-compatible IdP. The API supports pagination,
-    partial updates via PATCH, and recommends soft-deactivation over hard delete to
-    preserve historical performance data. SCIM provisioning requires the Enterprise
-    plan.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://help.leapsome.com/hc/en-us/articles/8759199332765-SCIM-API-Access
-  baseURL: https://api.leapsome.com/scim/v1
-  tags:
-  - SCIM
-  - User Provisioning
-  - Identity
-  - SSO
-  - Enterprise
-  properties:
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
   - type: Documentation
     url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-accessroles-api
+  name: Leapsome accessRoles API
+  description: The accessRoles API from Leapsome — 1 operation(s) for accessroles.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - accessRoles
+  properties:
   - type: OpenAPI
-    url: openapi/leapsome-scim-api-openapi.yml
-  contact:
-  - FN: Leapsome Support
-    url: https://help.leapsome.com/
+    url: openapi/leapsome-accessroles-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-auth-api
+  name: Leapsome auth API
+  description: The auth API from Leapsome — 1 operation(s) for auth.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - auth
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-auth-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-documents-api
+  name: Leapsome documents API
+  description: The documents API from Leapsome — 2 operation(s) for documents.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - documents
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-documents-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-feedback-api
+  name: Leapsome feedback API
+  description: The feedback API from Leapsome — 4 operation(s) for feedback.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-feedback-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-goals-api
+  name: Leapsome goals API
+  description: The goals API from Leapsome — 6 operation(s) for goals.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - goals
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-goals-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-groups-api
+  name: Leapsome Groups API
+  description: Operations on groups belonging to an organization
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-groups-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-leapsome-api-api
+  name: Leapsome Leapsome API API
+  description: The Leapsome API API from Leapsome — 1 operation(s) for leapsome api.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - Leapsome API
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-leapsome-api-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-payroll-api
+  name: Leapsome payroll API
+  description: The payroll API from Leapsome — 2 operation(s) for payroll.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - payroll
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-payroll-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-reviews-api
+  name: Leapsome reviews API
+  description: The reviews API from Leapsome — 4 operation(s) for reviews.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - reviews
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-reviews-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-schemas-api
+  name: Leapsome Schemas API
+  description: Operations on schemas
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - Schemas
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-schemas-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-timetracking-api
+  name: Leapsome timeTracking API
+  description: The timeTracking API from Leapsome — 1 operation(s) for timetracking.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - timeTracking
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-timetracking-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-users-api
+  name: Leapsome users API
+  description: The users API from Leapsome — 4 operation(s) for users.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-users-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-worklocations-api
+  name: Leapsome workLocations API
+  description: The workLocations API from Leapsome — 1 operation(s) for worklocations.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - workLocations
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-worklocations-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
 common:
 - type: AgenticAccess
   url: agentic-access/leapsome-agentic-access.yml
