@@ -1,0 +1,40 @@
+{
+  "provider": "leapsome",
+  "sources": [
+    "leapsome-absences-api-openapi.yml",
+    "leapsome-accessroles-api-openapi.yml",
+    "leapsome-auth-api-openapi.yml",
+    "leapsome-documents-api-openapi.yml",
+    "leapsome-feedback-api-openapi.yml",
+    "leapsome-goals-api-openapi.yml",
+    "leapsome-groups-api-openapi.yml",
+    "leapsome-leapsome-api-api-openapi.yml",
+    "leapsome-payroll-api-openapi.yml",
+    "leapsome-reviews-api-openapi.yml",
+    "leapsome-schemas-api-openapi.yml",
+    "leapsome-timetracking-api-openapi.yml",
+    "leapsome-users-api-openapi.yml",
+    "leapsome-worklocations-api-openapi.yml"
+  ],
+  "outputs": [
+    "leapsome-absences-api-openapi.yml",
+    "leapsome-accessroles-api-openapi.yml",
+    "leapsome-auth-api-openapi.yml",
+    "leapsome-documents-api-openapi.yml",
+    "leapsome-feedback-api-openapi.yml",
+    "leapsome-goals-api-openapi.yml",
+    "leapsome-groups-api-openapi.yml",
+    "leapsome-leapsome-api-api-openapi.yml",
+    "leapsome-payroll-api-openapi.yml",
+    "leapsome-reviews-api-openapi.yml",
+    "leapsome-schemas-api-openapi.yml",
+    "leapsome-timetracking-api-openapi.yml",
+    "leapsome-users-api-openapi.yml",
+    "leapsome-worklocations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
