@@ -1,0 +1,99 @@
+{
+  "item": [
+    {
+      "id": "6940a359-2025-4948-811c-419ed8b9b0c2",
+      "name": "Leapsome API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b33de1ca-8658-4a0c-adba-f8d72369df98",
+          "name": "API info",
+          "request": {
+            "name": "API info",
+            "description": {},
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3499baa-ec74-47c0-90e6-d4d84968e173",
+              "name": "success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Leapsome API\",\n  \"version\": \"1.0.0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1cd9a3a9-f2ca-4888-9ae2-a2620ee4e8b7",
+    "name": "Leapsome absences Leapsome API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}

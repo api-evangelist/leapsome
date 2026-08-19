@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "absences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List absences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/absences",
+            "params": [
+              {
+                "name": "absenceStartFrom",
+                "value": "2024-01-01T00:00:00.000Z",
+                "type": "query",
+                "description": "Filter absences that start on or after this date"
+              },
+              {
+                "name": "absenceStartUntil",
+                "value": "2024-12-31T23:59:59.999Z",
+                "type": "query",
+                "description": "Filter absences that start on or before this date"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by absence status"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Filter absences for a specific user"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (starts at 1)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a paginated list of absences in your Leapsome instance. You can filter by date range, \nstatus, and user. Requires admin permissions for absence management.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

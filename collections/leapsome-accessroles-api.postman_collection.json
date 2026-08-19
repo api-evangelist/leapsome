@@ -1,0 +1,196 @@
+{
+  "item": [
+    {
+      "id": "52b32487-536b-4216-b686-09a592c035ac",
+      "name": "accessRoles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e555aab-84bc-4fc2-92ff-d7883601f8b9",
+          "name": "List access roles",
+          "request": {
+            "name": "List access roles",
+            "description": {
+              "content": "Get a list of all access roles for the account. Returns role details including name,\nscope type, and system default information.\n\nRequires the standard Super Admin access role; for API tokens, assign that role to the API key.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access-roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "821b3ead-ab4b-483c-8ce2-f23537ae83c0",
+              "name": "List of access roles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"6d71e54e0bdbc168fb86721f\",\n    \"name\": \"string\",\n    \"userScopeType\": \"none\",\n    \"isSystemDefault\": false,\n    \"systemDefaultType\": \"string\",\n    \"active\": false\n  },\n  {\n    \"id\": \"73100e5de7237b8a725c707f\",\n    \"name\": \"string\",\n    \"userScopeType\": \"userSpecific\",\n    \"isSystemDefault\": false,\n    \"systemDefaultType\": \"string\",\n    \"active\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a88a0fca-ec74-43b2-b783-ecb9f08c54d4",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "651655dd-56d6-4a53-8092-f2c59c5c090d",
+              "name": "Insufficient permissions. Super Admin access role is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "55fc2fd0-1e33-4783-aaa5-02b1285bf6ed",
+    "name": "Leapsome absences accessRoles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}

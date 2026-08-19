@@ -1,0 +1,131 @@
+{
+  "item": [
+    {
+      "id": "b2c078ac-88e4-4f78-889a-45d953627c50",
+      "name": "Schemas",
+      "description": {
+        "content": "Operations on schemas",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a2a1106-1a9b-46e9-a15e-ee72600093d7",
+          "name": "Get Service Provider Configurations",
+          "request": {
+            "name": "Get Service Provider Configurations",
+            "description": {
+              "content": "Queries service provider configurations.\nThe service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6).\nThis call returns a description, a documentationURL, name, and specURL.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ServiceProviderConfig"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8423c235-01da-40cf-9e26-16532a23ea3d",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ServiceProviderConfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentationUrl\": \"string\",\n  \"patch\": {\n    \"supported\": true\n  },\n  \"bulk\": {\n    \"supported\": false\n  },\n  \"filter\": {\n    \"supported\": true\n  },\n  \"changePassword\": {\n    \"supported\": false\n  },\n  \"sort\": {\n    \"supported\": false\n  },\n  \"etag\": {\n    \"supported\": true\n  },\n  \"authenticationSchemes\": {\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"specUrl\": \"string\",\n    \"documentationUrl\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55f38ca9-bfa3-4718-ae71-d9296cff53cd",
+              "name": "Invalid token passed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ServiceProviderConfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "47fb420d-6e4e-4090-9d7e-935226a25447",
+    "name": "Leapsome absences Schemas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences Leapsome API API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leapsome API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "API info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/"
+          },
+          "docs": "API info"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

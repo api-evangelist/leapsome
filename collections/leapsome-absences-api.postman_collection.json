@@ -1,0 +1,308 @@
+{
+  "item": [
+    {
+      "id": "03a3c8a0-2507-43fb-8ea8-025c9578f13f",
+      "name": "absences",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1d9bba9e-a89c-42c3-8255-50f30f418e24",
+          "name": "List absences",
+          "request": {
+            "name": "List absences",
+            "description": {
+              "content": "Get a paginated list of absences in your Leapsome instance. You can filter by date range, \nstatus, and user. Requires admin permissions for absence management.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "absenceStartFrom",
+                  "value": "<dateTime>",
+                  "description": "Filter absences that start on or after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "absenceStartUntil",
+                  "value": "<dateTime>",
+                  "description": "Filter absences that start on or before this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by absence status"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Filter absences for a specific user"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination (starts at 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "16d756d2-04da-4b9e-9bd4-4dbb7e1300a8",
+              "name": "A list of absences",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "absenceStartFrom",
+                      "value": "2024-01-01T00:00:00.000Z"
+                    },
+                    {
+                      "key": "absenceStartUntil",
+                      "value": "2024-12-31T23:59:59.999Z"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "58d55e3ffdc2eb20547edd0a"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"66a1b2c3d4e5f6789012345a\",\n    \"createdAt\": \"2024-01-15T08:30:00.000Z\",\n    \"updatedAt\": \"2024-01-15T08:30:00.000Z\",\n    \"userId\": \"58d55e3ffdc2eb20547edd0a\",\n    \"start\": \"2024-02-01T00:00:00.000Z\",\n    \"end\": \"2024-02-05T23:59:59.999Z\",\n    \"absenceType\": \"paidVacation\",\n    \"activityType\": \"nonWorkingPaid\",\n    \"status\": \"active\",\n    \"timeUnit\": \"days\",\n    \"actualAbsenceDuration\": 5\n  },\n  {\n    \"_id\": \"66a1b2c3d4e5f6789012345b\",\n    \"createdAt\": \"2024-01-20T09:15:00.000Z\",\n    \"updatedAt\": \"2024-01-20T09:15:00.000Z\",\n    \"userId\": \"58d55e3ffdc2eb20547edd0b\",\n    \"start\": \"2024-03-10T00:00:00.000Z\",\n    \"end\": \"2024-03-12T23:59:59.999Z\",\n    \"absenceType\": \"sickLeave\",\n    \"activityType\": \"nonWorkingPaid\",\n    \"status\": \"active\",\n    \"timeUnit\": \"days\",\n    \"actualAbsenceDuration\": 3\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "260a97c0-3297-41cd-8896-3175c74e90ad",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "absenceStartFrom",
+                      "value": "2024-01-01T00:00:00.000Z"
+                    },
+                    {
+                      "key": "absenceStartUntil",
+                      "value": "2024-12-31T23:59:59.999Z"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "58d55e3ffdc2eb20547edd0a"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a1d5ef9e-21cc-468d-a0bd-c97eb7012699",
+              "name": "Insufficient permissions. Admin access to absence management is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "absenceStartFrom",
+                      "value": "2024-01-01T00:00:00.000Z"
+                    },
+                    {
+                      "key": "absenceStartUntil",
+                      "value": "2024-12-31T23:59:59.999Z"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "58d55e3ffdc2eb20547edd0a"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "06f20c39-fb74-4855-aff9-cf5172a2e705",
+    "name": "Leapsome absences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences Schemas API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Service Provider Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/ServiceProviderConfig"
+          },
+          "docs": "Queries service provider configurations.\nThe service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6).\nThis call returns a description, a documentationURL, name, and specURL.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

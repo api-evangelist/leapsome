@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences workLocations API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "workLocations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List work locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/work-locations",
+            "params": [
+              {
+                "name": "workLocationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific work location ID"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by work location name (partial match, case-insensitive)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by work location status"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (starts at 1)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a paginated list of work locations with optional filtering by ID, name, or status. Returns full work location details including address information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

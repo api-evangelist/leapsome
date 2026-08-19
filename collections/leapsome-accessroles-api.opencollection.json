@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences accessRoles API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "accessRoles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List access roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/access-roles",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a list of all access roles for the account. Returns role details including name,\nscope type, and system default information.\n\nRequires the standard Super Admin access role; for API tokens, assign that role to the API key.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

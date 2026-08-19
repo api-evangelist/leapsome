@@ -1,0 +1,797 @@
+{
+  "item": [
+    {
+      "id": "ab54908c-632e-4ce5-afd0-1dc2dfcb568e",
+      "name": "feedback",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f79f2fed-68f9-4985-aa20-0b8fb1a4f6ef",
+          "name": "List feedback",
+          "request": {
+            "name": "List feedback",
+            "description": {
+              "content": "Get a paginated list of instant feedback and praise items. Supports filtering by\ntype (praise or instantFeedback), sender, and receiver.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "feedback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by feedback type"
+                },
+                {
+                  "disabled": false,
+                  "key": "receiverId",
+                  "value": "<string>",
+                  "description": "Filter by receiver user ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "senderId",
+                  "value": "<string>",
+                  "description": "Filter by sender user ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "28e6ec7d-4fa7-4344-a086-5b8d6fb34cd4",
+              "name": "A list of feedback items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "receiverId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"type\": \"instantFeedback\",\n      \"sender\": {\n        \"id\": \"f2db921eb99ab34e4d86f1ab\",\n        \"name\": \"string\"\n      },\n      \"receivers\": [\n        {\n          \"id\": \"1bbd4506892fd0ba9b26d82a\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": \"946037fa7514bc9024fe6cb9\",\n          \"name\": \"string\"\n        }\n      ],\n      \"message\": \"string\",\n      \"badge\": {\n        \"name\": \"string\",\n        \"icon\": \"string\"\n      },\n      \"visibility\": \"senderOnly\",\n      \"createdAt\": \"2002-10-28T17:26:11.456Z\",\n      \"likesCount\": 9785,\n      \"commentsCount\": 9590\n    },\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"type\": \"praise\",\n      \"sender\": {\n        \"id\": \"2672a8bcd2df7df6c5f4f206\",\n        \"name\": \"string\"\n      },\n      \"receivers\": [\n        {\n          \"id\": \"d288e1a03cda3b058988464c\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": \"122a18a552629f7576704e3d\",\n          \"name\": \"string\"\n        }\n      ],\n      \"message\": \"string\",\n      \"badge\": {\n        \"name\": \"string\",\n        \"icon\": \"string\"\n      },\n      \"visibility\": \"receiver\",\n      \"createdAt\": \"1955-03-18T02:35:29.947Z\",\n      \"likesCount\": 2436,\n      \"commentsCount\": 3182\n    }\n  ],\n  \"meta\": {\n    \"offset\": 5382,\n    \"limit\": 8849,\n    \"totalCount\": 458\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "928ef6b5-39d6-46c7-ac41-ee1bbc2ebae6",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "receiverId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d617bee-f36f-495d-9b2a-ee6a8461eb92",
+          "name": "Create praise",
+          "request": {
+            "name": "Create praise",
+            "description": {
+              "content": "Create a new praise item. Requires the instant feedback praise permission.\nReturns the ID of the created feedback.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "feedback",
+                "praise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverIds\": [\n    \"<string>\"\n  ],\n  \"message\": \"<string>\",\n  \"visibility\": \"public\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23abdb8b-5a21-4995-b0c2-5a528e8f6794",
+              "name": "Praise created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback",
+                    "praise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverIds\": [\n    \"<string>\"\n  ],\n  \"message\": \"<string>\",\n  \"visibility\": \"public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"68c7151949e6f5fec2af3846\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd09838a-a095-4b37-ac69-c2582839cb8e",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback",
+                    "praise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverIds\": [\n    \"<string>\"\n  ],\n  \"message\": \"<string>\",\n  \"visibility\": \"public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e62f36e7-52b4-4353-b72b-1482a2fa36c0",
+              "name": "Insufficient permissions. Praise permission is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback",
+                    "praise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverIds\": [\n    \"<string>\"\n  ],\n  \"message\": \"<string>\",\n  \"visibility\": \"public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c87d97be-e81e-4975-920f-3dc9714fd534",
+          "name": "Create instant feedback",
+          "request": {
+            "name": "Create instant feedback",
+            "description": {
+              "content": "Create instant feedback for a user. By default only visible to the receiver.\nRequires the instant feedback permission.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "feedback",
+                "instant"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"visibility\": \"receiver\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "08063b38-a99e-46fa-a792-17a910a02ec1",
+              "name": "Instant feedback created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback",
+                    "instant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"visibility\": \"receiver\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"68c7151949e6f5fec2af3846\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3efabe56-a40c-4569-9ce8-934dc494bf7d",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback",
+                    "instant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"visibility\": \"receiver\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53298b24-f786-4caf-95c8-9805018c58aa",
+              "name": "Insufficient permissions. Instant feedback permission is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback",
+                    "instant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"visibility\": \"receiver\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da68e94d-4a8d-4034-9ad3-6777e698ce53",
+          "name": "Create private note",
+          "request": {
+            "name": "Create private note",
+            "description": {
+              "content": "Create a private note about a user. Private notes are only visible to the\nsender and cannot be seen by the receiver or anyone else.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "feedback",
+                "private-note"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverId\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "463bb173-eb2f-4ee2-8ddc-202b9b64513f",
+              "name": "Private note created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback",
+                    "private-note"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverId\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"68c7151949e6f5fec2af3846\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "650ce8f0-e84b-441c-988e-6aa13b3a98e1",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback",
+                    "private-note"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"<string>\",\n  \"receiverId\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "11989446-606e-40e3-bbda-08c217d069ca",
+    "name": "Leapsome absences feedback API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}

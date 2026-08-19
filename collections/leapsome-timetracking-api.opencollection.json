@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences timeTracking API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "timeTracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List timesheets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/time-tracking/timesheets",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Filter by employee email address"
+              },
+              {
+                "name": "employeeId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Leapsome employee ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a paginated list of timesheets with optional filtering by username (email) or employee ID. Returns timesheet details including status, dates, and work hour calculations. Requires permission to manage time tracking policies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

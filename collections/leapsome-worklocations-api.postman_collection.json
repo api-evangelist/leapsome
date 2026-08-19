@@ -1,0 +1,230 @@
+{
+  "item": [
+    {
+      "id": "f3e1ed9c-58ee-4ee5-9e29-0f89caa372ff",
+      "name": "workLocations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b1c5fe28-64b1-403a-ab17-3484f34de391",
+          "name": "List work locations",
+          "request": {
+            "name": "List work locations",
+            "description": {
+              "content": "Get a paginated list of work locations with optional filtering by ID, name, or status. Returns full work location details including address information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "work-locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workLocationId",
+                  "value": "<string>",
+                  "description": "Filter by specific work location ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by work location name (partial match, case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by work location status"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination (starts at 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "11f9fc5d-8b26-4577-8bfb-cbde926f0465",
+              "name": "A list of work locations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workLocationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"name\": \"Berlin Office\",\n      \"status\": \"active\",\n      \"remote\": false,\n      \"currency\": \"EUR\",\n      \"street\": \"123 Main Street\",\n      \"zip\": \"10115\",\n      \"city\": \"Berlin\",\n      \"administrativeDivision\": \"Berlin\",\n      \"country\": \"Germany\",\n      \"dateFormat\": \"DD.MM.YYYY\",\n      \"primary\": true,\n      \"createdAt\": \"2024-01-15T08:30:00.000Z\",\n      \"updatedAt\": \"2024-01-20T10:15:00.000Z\"\n    },\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"name\": \"Berlin Office\",\n      \"status\": \"active\",\n      \"remote\": false,\n      \"currency\": \"EUR\",\n      \"street\": \"123 Main Street\",\n      \"zip\": \"10115\",\n      \"city\": \"Berlin\",\n      \"administrativeDivision\": \"Berlin\",\n      \"country\": \"Germany\",\n      \"dateFormat\": \"DD.MM.YYYY\",\n      \"primary\": true,\n      \"createdAt\": \"2024-01-15T08:30:00.000Z\",\n      \"updatedAt\": \"2024-01-20T10:15:00.000Z\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 9433,\n    \"pageSize\": 9519,\n    \"totalCount\": 5622\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddadc521-f6c1-4098-8b03-3aff7ace5c85",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "work-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workLocationId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d421baf5-7abb-4613-970b-a4fa07f38042",
+    "name": "Leapsome absences workLocations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}

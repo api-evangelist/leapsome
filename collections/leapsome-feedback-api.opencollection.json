@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences feedback API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/feedback",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by feedback type"
+              },
+              {
+                "name": "receiverId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by receiver user ID"
+              },
+              {
+                "name": "senderId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sender user ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a paginated list of instant feedback and praise items. Supports filtering by\ntype (praise or instantFeedback), sender, and receiver.\n"
+        },
+        {
+          "info": {
+            "name": "Create praise",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.leapsome.com/v1/feedback/praise",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new praise item. Requires the instant feedback praise permission.\nReturns the ID of the created feedback.\n"
+        },
+        {
+          "info": {
+            "name": "Create instant feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.leapsome.com/v1/feedback/instant",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create instant feedback for a user. By default only visible to the receiver.\nRequires the instant feedback permission.\n"
+        },
+        {
+          "info": {
+            "name": "Create private note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.leapsome.com/v1/feedback/private-note",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a private note about a user. Private notes are only visible to the\nsender and cannot be seen by the receiver or anyone else.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

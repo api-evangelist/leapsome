@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences documents API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List document categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/documents/categories",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all active user document categories for the team.\nUse the returned category IDs when uploading documents via the upload endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "Upload user document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.leapsome.com/v1/users/:userId/documents",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Leapsome user ID of the document owner"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload a document to a user's profile in a single request. Send the file as\nmultipart/form-data along with the target category. The backend handles storage\nand confirmation automatically.\n\nMaximum file size: 25 MB.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

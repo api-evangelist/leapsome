@@ -1,0 +1,210 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences goals API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "goals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List goals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/goals",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "select goals containing *any* of the userIds."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "select goals containing *any* of the teamIds."
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "query",
+                "description": "select goals containing *all* of the tagIds."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "select goals that match by `type` to *any* of the types listed."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "search on title, user name and team name fields. Special symbols must be URL-encoded.\nSearch is performed on a whole value of a text field, without splitting it into words\n(e.g. search for `ark` will match `Marketing`).\n"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "only include goals that match provided state"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximal number of results in a response"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Start showing results from this location. Typically, you do not\nneed to set this parameter manually, it is mainly used in\n\"x-next\" header\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Setting multiple filters will result in a subset of goals that satisfy *all* constraints.\nAll filters except for `search` accept comma-separated values.\n"
+        },
+        {
+          "info": {
+            "name": "get list of goal tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/goals/tags",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "get list of goal tags"
+        },
+        {
+          "info": {
+            "name": "Get goal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/goals/:goalId",
+            "params": [
+              {
+                "name": "goalId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the goal"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get goal details"
+        },
+        {
+          "info": {
+            "name": "get list of comments for a goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/goals/:goalId/comments",
+            "params": [
+              {
+                "name": "goalId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the goal"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "get list of comments for a goal"
+        },
+        {
+          "info": {
+            "name": "Update key result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.leapsome.com/v1/goals/:goalId/key-results/:keyResultId",
+            "params": [
+              {
+                "name": "goalId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the goal"
+              },
+              {
+                "name": "keyResultId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the key result"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update key result"
+        },
+        {
+          "info": {
+            "name": "Update initiative",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.leapsome.com/v1/goals/:goalId/initiatives/:initiativeId",
+            "params": [
+              {
+                "name": "goalId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the goal"
+              },
+              {
+                "name": "initiativeId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the initiative"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update initiative"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

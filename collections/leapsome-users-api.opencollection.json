@@ -1,0 +1,209 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences users API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List employees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/employees",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter by employee email address"
+              },
+              {
+                "name": "employeeId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Leapsome user ID"
+              },
+              {
+                "name": "displayedName",
+                "value": "",
+                "type": "query",
+                "description": "Filter by displayed name (partial match, case-insensitive)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user status"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (starts at 1)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a paginated list of employees with optional filtering by email, Leapsome ID, displayed name, or status. Returns basic employee information including teams, departments, and custom attributes."
+        },
+        {
+          "info": {
+            "name": "Update employee access roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.leapsome.com/v1/employees/:userId/access-roles",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Employee ID whose secondary access roles are being updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the secondary access roles and user-specific access scope for one employee.\nPrimary access roles cannot be updated through this endpoint.\n\nFor roles with `userScopeType` set to `userSpecific`, provide a matching\n`accessRoleCustomConfigurations` entry. The public API only supports `include.users`\nin user-specific access scope configurations.\n\nRequires the standard Super Admin access role; for API tokens, assign that role to the API key.\n"
+        },
+        {
+          "info": {
+            "name": "Get Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/Users",
+            "params": [
+              {
+                "name": "filter",
+                "value": "userName eq Smith",
+                "type": "query",
+                "description": "The filter parameter must be a properly formed SCIM filter using the operator \"eq\" (equals). We support a \"userName\" filter only."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The amount of elements you would like to get returned."
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "The offset (starts from 1, not 0) used to lookup elements. If you need to paginate, your next startIndex value would be \"startIndex + count\"."
+              }
+            ]
+          },
+          "docs": "Queries multiple user identities in the organization domain. Filtering is available and we return a maximum of 5000 users if no smaller value is provided."
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.leapsome.com/v1/Users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new organization user and adds them to the user domain. The user email domain must match an existing organization email domain.\n\nNote: All user need to get created before you start assigning managers or groups using the other PATCH and PUT endpoints."
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/Users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The key of the user to query. The user must be in the organization domain"
+              }
+            ]
+          },
+          "docs": "Queries a single user identity in the organization domain. If the provided id does not match a leapsome user's id in your organization, we try if we find a user with an externalId like that as fallback."
+        },
+        {
+          "info": {
+            "name": "Replace User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.leapsome.com/v1/Users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The key of the user to query. The user must be in the organization domain"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes an existing user's data. The request must include the full user definition (to modify one or more values without sending the full definition, use the `PATCH` request).\n\n\nThe replaced user email domain must be an existing organization email domain.\n"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.leapsome.com/v1/Users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The key of the user to query. The user must be in the organization domain"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes a limited set (or all if you choose) of the user's data. The updated user email domain must be an existing organization email domain."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,618 @@
+{
+  "item": [
+    {
+      "id": "d37dec39-ff7b-4e89-9d9b-b32f0d09068b",
+      "name": "payroll",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3bab97b-cf56-4b80-a478-d7d10459002b",
+          "name": "List payroll cycles",
+          "request": {
+            "name": "List payroll cycles",
+            "description": {
+              "content": "Get a paginated list of payroll cycles with optional filtering by name or status. Returns payroll cycle details including dates, status, and compensation configuration. Requires permission to manage payroll policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payroll-cycles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by payroll cycle name (partial match, case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by payroll cycle status"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e9bc2abb-3615-4dc4-993e-bb35f643f58b",
+              "name": "A list of payroll cycles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll-cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"name\": \"Q1 2024 Payroll\",\n      \"status\": \"open\",\n      \"startAt\": \"2006-07-23T11:39:55.378Z\",\n      \"endAt\": \"1954-01-07T19:23:16.661Z\",\n      \"customPeriodStartAt\": \"1971-03-21T22:18:44.071Z\",\n      \"customPeriodEndAt\": \"2014-09-18T05:26:51.675Z\",\n      \"reviewStartAt\": \"2004-12-29T12:12:55.095Z\",\n      \"approvalStartAt\": \"1993-04-20T04:03:40.027Z\",\n      \"approvedAt\": \"1958-05-11T05:45:28.667Z\",\n      \"approvedBy\": \"69ed2531885791f51b7e37f4\",\n      \"prorateType\": \"weekly\",\n      \"compensations\": {\n        \"salaryTypeCustomName\": \"string\",\n        \"baseSalaryCustomName\": \"string\",\n        \"salaryPerHourCustomName\": \"string\",\n        \"compensableTimeCustomName\": \"string\",\n        \"hoursWorkedCustomName\": \"string\",\n        \"paidAbsencesCustomName\": \"string\"\n      },\n      \"createdAt\": \"1972-01-03T01:58:34.716Z\",\n      \"updatedAt\": \"2016-01-10T17:22:38.646Z\"\n    },\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"name\": \"Q1 2024 Payroll\",\n      \"status\": \"open\",\n      \"startAt\": \"2014-10-26T16:51:31.563Z\",\n      \"endAt\": \"2003-10-15T04:28:40.158Z\",\n      \"customPeriodStartAt\": \"2025-02-15T13:40:59.211Z\",\n      \"customPeriodEndAt\": \"2002-09-03T18:53:12.077Z\",\n      \"reviewStartAt\": \"1988-06-21T21:11:31.115Z\",\n      \"approvalStartAt\": \"1995-02-12T02:03:40.612Z\",\n      \"approvedAt\": \"2021-02-17T14:59:09.924Z\",\n      \"approvedBy\": \"1fcac47483d4de958ef5ccc8\",\n      \"prorateType\": \"weekly\",\n      \"compensations\": {\n        \"salaryTypeCustomName\": \"string\",\n        \"baseSalaryCustomName\": \"string\",\n        \"salaryPerHourCustomName\": \"string\",\n        \"compensableTimeCustomName\": \"string\",\n        \"hoursWorkedCustomName\": \"string\",\n        \"paidAbsencesCustomName\": \"string\"\n      },\n      \"createdAt\": \"1994-06-25T01:19:11.983Z\",\n      \"updatedAt\": \"1980-12-07T05:14:25.799Z\"\n    }\n  ],\n  \"meta\": {\n    \"page\": 9928,\n    \"pageSize\": 742,\n    \"totalCount\": 2432\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61ad983b-1d7b-4390-b893-ecb1f2c06aec",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll-cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54483e21-01b5-4c9e-9d54-dcf5826f6d1b",
+              "name": "Insufficient permissions. Permission to manage payroll policies is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll-cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c3b7307-195a-438b-bc87-c74580ab89d4",
+          "name": "List payroll cycle participants",
+          "request": {
+            "name": "List payroll cycle participants",
+            "description": {
+              "content": "Get participants for a specific payroll cycle with optional filtering by username (email) or employee ID. Requires permission to manage payroll policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payroll-cycles",
+                ":payrollCycleId",
+                "participants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<email>",
+                  "description": "Filter by employee email address"
+                },
+                {
+                  "disabled": false,
+                  "key": "employeeId",
+                  "value": "<string>",
+                  "description": "Filter by Leapsome employee ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payrollCycleId",
+                  "description": "(Required) ID of the payroll cycle"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1bf6be59-e7b6-4e4a-8fbf-714cb35e300b",
+              "name": "A list of payroll cycle participants",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll-cycles",
+                    ":payrollCycleId",
+                    "participants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "employeeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payrollCycleId",
+                      "description": "(Required) ID of the payroll cycle"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"name\": \"John Doe\",\n      \"email\": \"jane.doe@example.com\",\n      \"compensations\": [\n        {\n          \"name\": \"string\",\n          \"amount\": 2659.6463050413367,\n          \"amountType\": \"variable\",\n          \"recurrence\": \"every12Months\",\n          \"comment\": \"string\",\n          \"effectiveAt\": \"2018-07-23T12:01:17.555Z\",\n          \"validUntil\": \"2021-01-30T23:58:34.831Z\"\n        },\n        {\n          \"name\": \"string\",\n          \"amount\": 5947.322702223862,\n          \"amountType\": \"variable\",\n          \"recurrence\": \"monthly\",\n          \"comment\": \"string\",\n          \"effectiveAt\": \"1993-01-22T14:38:24.724Z\",\n          \"validUntil\": \"1987-03-03T13:00:14.074Z\"\n        }\n      ],\n      \"salaryInfoPeriods\": [\n        {\n          \"currency\": \"string\",\n          \"salary\": 4179.0018008149045,\n          \"salaryRemunerationPeriod\": \"year\",\n          \"compensationType\": \"hourly\",\n          \"baseSalary\": 5034.882674395811\n        },\n        {\n          \"currency\": \"string\",\n          \"salary\": 6094.3273666476025,\n          \"salaryRemunerationPeriod\": \"hour\",\n          \"compensationType\": \"hourly\",\n          \"baseSalary\": 3959.477749483743\n        }\n      ],\n      \"isActiveParticipant\": true\n    },\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"name\": \"John Doe\",\n      \"email\": \"jane.doe@example.com\",\n      \"compensations\": [\n        {\n          \"name\": \"string\",\n          \"amount\": 8153.892426904387,\n          \"amountType\": \"variable\",\n          \"recurrence\": \"every6Months\",\n          \"comment\": \"string\",\n          \"effectiveAt\": \"1978-05-02T12:08:56.542Z\",\n          \"validUntil\": \"2000-03-13T05:40:02.829Z\"\n        },\n        {\n          \"name\": \"string\",\n          \"amount\": 554.9951411644449,\n          \"amountType\": \"fixed\",\n          \"recurrence\": \"every6Months\",\n          \"comment\": \"string\",\n          \"effectiveAt\": \"1966-03-11T12:58:54.543Z\",\n          \"validUntil\": \"1961-07-26T05:07:32.056Z\"\n        }\n      ],\n      \"salaryInfoPeriods\": [\n        {\n          \"currency\": \"string\",\n          \"salary\": 6.719534567287688,\n          \"salaryRemunerationPeriod\": \"year\",\n          \"compensationType\": \"fixed\",\n          \"baseSalary\": 6399.927078558891\n        },\n        {\n          \"currency\": \"string\",\n          \"salary\": 6146.397260012276,\n          \"salaryRemunerationPeriod\": \"hour\",\n          \"compensationType\": \"hourly\",\n          \"baseSalary\": 9851.65935418277\n        }\n      ],\n      \"isActiveParticipant\": false\n    }\n  ],\n  \"meta\": {\n    \"page\": 183,\n    \"pageSize\": 4579,\n    \"totalCount\": 3783\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3b75139-7065-4125-a5f4-1e829a948a94",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll-cycles",
+                    ":payrollCycleId",
+                    "participants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "employeeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payrollCycleId",
+                      "description": "(Required) ID of the payroll cycle"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e2cc00ea-15d5-410f-9805-3cc1992608c6",
+              "name": "Insufficient permissions. Permission to manage payroll policies is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll-cycles",
+                    ":payrollCycleId",
+                    "participants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "employeeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payrollCycleId",
+                      "description": "(Required) ID of the payroll cycle"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0a840b5-9bb5-49f4-ae24-364ec9d083e8",
+              "name": "Payroll cycle not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll-cycles",
+                    ":payrollCycleId",
+                    "participants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "employeeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payrollCycleId",
+                      "description": "(Required) ID of the payroll cycle"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f2ee8077-1f7c-488d-a3cd-1d0dec6c8d4c",
+    "name": "Leapsome absences payroll API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}

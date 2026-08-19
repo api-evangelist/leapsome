@@ -1,0 +1,1948 @@
+{
+  "item": [
+    {
+      "id": "c09accc3-8a96-4440-8580-6d64176f0b59",
+      "name": "users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f781f88b-10b5-4572-bda7-72c9e34daca7",
+          "name": "List employees",
+          "request": {
+            "name": "List employees",
+            "description": {
+              "content": "Get a paginated list of employees with optional filtering by email, Leapsome ID, displayed name, or status. Returns basic employee information including teams, departments, and custom attributes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "Filter by employee email address"
+                },
+                {
+                  "disabled": false,
+                  "key": "employeeId",
+                  "value": "<string>",
+                  "description": "Filter by Leapsome user ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "displayedName",
+                  "value": "<string>",
+                  "description": "Filter by displayed name (partial match, case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by user status"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination (starts at 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6c2cd2b8-978c-4efc-bf11-4b3bdab4f619",
+              "name": "A list of employees",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "employeeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "displayedName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"email\": \"jane.doe@example.com\",\n      \"firstname\": \"Jane\",\n      \"lastname\": \"Doe\",\n      \"middlename\": \"von\",\n      \"fullname\": \"Jane Doe\",\n      \"displayedName\": \"Jane von Doe\",\n      \"status\": \"active\",\n      \"lifecycleStatus\": \"active\",\n      \"manager\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"name\": \"string\"\n      },\n      \"additionalManagers\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Jane Doe\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Jane Doe\"\n        }\n      ],\n      \"indirectManagers\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"John Doe\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"John Doe\"\n        }\n      ],\n      \"startDate\": \"2024-01-01T00:00:00.000Z\",\n      \"endDate\": \"2024-12-31T23:59:59.999Z\",\n      \"phone\": \"+1234567890\",\n      \"teams\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Team Red\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Team Red\"\n        }\n      ],\n      \"departments\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Department Blue\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Department Blue\"\n        }\n      ],\n      \"businessUnits\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Business Unit Green\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Business Unit Green\"\n        }\n      ],\n      \"costCenters\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Cost Center Yellow\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Cost Center Yellow\"\n        }\n      ],\n      \"divisions\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Division Purple\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Division Purple\"\n        }\n      ],\n      \"otherGroups\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Other Group Orange\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Other Group Orange\"\n        }\n      ],\n      \"level\": \"Senior\",\n      \"title\": \"Software Engineer\",\n      \"workLocation\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"name\": \"Berlin Office\"\n      },\n      \"compensation\": {\n        \"salary\": 75000,\n        \"currency\": \"EUR\",\n        \"frequency\": \"year\"\n      },\n      \"additionalCompensations\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Annual Bonus\",\n          \"amount\": 5000,\n          \"amountType\": \"fixed\",\n          \"recurrence\": \"every12Months\",\n          \"comment\": \"Performance bonus\",\n          \"effectiveAt\": \"2024-01-01T00:00:00.000Z\",\n          \"validUntil\": \"2024-12-31T23:59:59.999Z\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Annual Bonus\",\n          \"amount\": 5000,\n          \"amountType\": \"fixed\",\n          \"recurrence\": \"every12Months\",\n          \"comment\": \"Performance bonus\",\n          \"effectiveAt\": \"2024-01-01T00:00:00.000Z\",\n          \"validUntil\": \"2024-12-31T23:59:59.999Z\"\n        }\n      ],\n      \"customAttributes\": {\n        \"key_0\": true\n      }\n    },\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"email\": \"jane.doe@example.com\",\n      \"firstname\": \"Jane\",\n      \"lastname\": \"Doe\",\n      \"middlename\": \"von\",\n      \"fullname\": \"Jane Doe\",\n      \"displayedName\": \"Jane von Doe\",\n      \"status\": \"active\",\n      \"lifecycleStatus\": \"active\",\n      \"manager\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"name\": \"string\"\n      },\n      \"additionalManagers\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Jane Doe\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Jane Doe\"\n        }\n      ],\n      \"indirectManagers\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"John Doe\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"John Doe\"\n        }\n      ],\n      \"startDate\": \"2024-01-01T00:00:00.000Z\",\n      \"endDate\": \"2024-12-31T23:59:59.999Z\",\n      \"phone\": \"+1234567890\",\n      \"teams\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Team Red\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Team Red\"\n        }\n      ],\n      \"departments\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Department Blue\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Department Blue\"\n        }\n      ],\n      \"businessUnits\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Business Unit Green\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Business Unit Green\"\n        }\n      ],\n      \"costCenters\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Cost Center Yellow\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Cost Center Yellow\"\n        }\n      ],\n      \"divisions\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Division Purple\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Division Purple\"\n        }\n      ],\n      \"otherGroups\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Other Group Orange\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Other Group Orange\"\n        }\n      ],\n      \"level\": \"Senior\",\n      \"title\": \"Software Engineer\",\n      \"workLocation\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"name\": \"Berlin Office\"\n      },\n      \"compensation\": {\n        \"salary\": 75000,\n        \"currency\": \"EUR\",\n        \"frequency\": \"year\"\n      },\n      \"additionalCompensations\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Annual Bonus\",\n          \"amount\": 5000,\n          \"amountType\": \"fixed\",\n          \"recurrence\": \"every12Months\",\n          \"comment\": \"Performance bonus\",\n          \"effectiveAt\": \"2024-01-01T00:00:00.000Z\",\n          \"validUntil\": \"2024-12-31T23:59:59.999Z\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"name\": \"Annual Bonus\",\n          \"amount\": 5000,\n          \"amountType\": \"fixed\",\n          \"recurrence\": \"every12Months\",\n          \"comment\": \"Performance bonus\",\n          \"effectiveAt\": \"2024-01-01T00:00:00.000Z\",\n          \"validUntil\": \"2024-12-31T23:59:59.999Z\"\n        }\n      ],\n      \"customAttributes\": {\n        \"key_0\": 8678\n      }\n    }\n  ],\n  \"meta\": {\n    \"page\": 8138,\n    \"pageSize\": 6141,\n    \"totalCount\": 573\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "508f8ae6-8952-4d7a-8b60-422226ac7036",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "employeeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "displayedName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69e836c2-efa2-48db-b754-b2e07033b052",
+          "name": "Update employee access roles",
+          "request": {
+            "name": "Update employee access roles",
+            "description": {
+              "content": "Update the secondary access roles and user-specific access scope for one employee.\nPrimary access roles cannot be updated through this endpoint.\n\nFor roles with `userScopeType` set to `userSpecific`, provide a matching\n`accessRoleCustomConfigurations` entry. The public API only supports `include.users`\nin user-specific access scope configurations.\n\nRequires the standard Super Admin access role; for API tokens, assign that role to the API key.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":userId",
+                "access-roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Employee ID whose secondary access roles are being updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessRoleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accessRoleCustomConfigurations\": [\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    },\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "27486e6d-c491-428f-b011-5677957bd252",
+              "name": "Updated employee access roles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":userId",
+                    "access-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Employee ID whose secondary access roles are being updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessRoleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accessRoleCustomConfigurations\": [\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    },\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userId\": \"7090fbd4b02a2de4c2976546\",\n  \"accessRoleIds\": [\n    \"91ceabe28096170f2761e3be\",\n    \"3b1f8fdcbea71f29fb5dc00f\"\n  ],\n  \"accessRoleCustomConfigurations\": [\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    },\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e94b765-d3be-4792-b3ef-4deb4f1768a8",
+              "name": "Invalid request. Primary access roles are not allowed, roles must belong to the account, and USER_SPECIFIC roles require a matching include.users scope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":userId",
+                    "access-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Employee ID whose secondary access roles are being updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessRoleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accessRoleCustomConfigurations\": [\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    },\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d92f3a06-f38a-4891-b992-4b200b86da7c",
+              "name": "Authorization failed. Token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":userId",
+                    "access-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Employee ID whose secondary access roles are being updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessRoleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accessRoleCustomConfigurations\": [\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    },\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a8317680-6aed-42ba-93b7-ee3746454c64",
+              "name": "Insufficient permissions. Super Admin access role is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":userId",
+                    "access-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Employee ID whose secondary access roles are being updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessRoleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accessRoleCustomConfigurations\": [\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    },\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "155f75a0-a602-4259-950c-8328536cab3e",
+              "name": "Employee not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":userId",
+                    "access-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Employee ID whose secondary access roles are being updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accessRoleIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accessRoleCustomConfigurations\": [\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    },\n    {\n      \"accessRole\": \"<string>\",\n      \"userSpecificAccessScope\": {\n        \"include\": {\n          \"users\": [\n            \"<string>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4aed012e-5368-405e-815b-33069741f3a7",
+          "name": "Get Users",
+          "request": {
+            "name": "Get Users",
+            "description": {
+              "content": "Queries multiple user identities in the organization domain. Filtering is available and we return a maximum of 5000 users if no smaller value is provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The filter parameter must be a properly formed SCIM filter using the operator \"eq\" (equals). We support a \"userName\" filter only."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "The amount of elements you would like to get returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "<integer>",
+                  "description": "The offset (starts from 1, not 0) used to lookup elements. If you need to paginate, your next startIndex value would be \"startIndex + count\"."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f03e9b82-77be-4caf-ac35-409618185b32",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "userName eq Smith"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Resources\": [\n    {\n      \"id\": \"string\",\n      \"userName\": \"string\",\n      \"externalId\": \"string\",\n      \"title\": \"Colleague\",\n      \"photos\": [\n        {\n          \"value\": \"https://VsfpoxtDHjXpHCwRRDE.edMFwgJGOGEzrsd,DrDGqqh.JmPSbHwwkoz9stxG5lHVUV1K5Puo,IhJ29QUX-\",\n          \"type\": \"photo\"\n        },\n        {\n          \"value\": \"http://IXUJ.fcgshaerxwtGF1UxIsykzASAxXbQZfmfbEsjqi43XjdU3POPxS\",\n          \"type\": \"photo\"\n        }\n      ],\n      \"meta\": {\n        \"created\": \"1996-01-04T20:33:32.277Z\",\n        \"location\": \"string\",\n        \"version\": \"string\",\n        \"lastModified\": \"1951-07-24T04:28:30.275Z\"\n      },\n      \"name\": {\n        \"familyName\": \"string\",\n        \"givenName\": \"string\",\n        \"formatted\": \"string\"\n      },\n      \"displayName\": \"string\",\n      \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n        \"manager\": {\n          \"managerId\": \"string\",\n          \"displayName\": \"string\"\n        },\n        \"additionalManagers\": [\n          {\n            \"managerId\": \"string\",\n            \"displayName\": \"string\"\n          },\n          {\n            \"managerId\": \"string\",\n            \"displayName\": \"string\"\n          }\n        ],\n        \"attachments\": [\n          {\n            \"fileName\": \"Performance-Review-2022.pdf\",\n            \"access\": [\n              \"MANAGER\",\n              \"MANAGER\"\n            ]\n          },\n          {\n            \"fileName\": \"Performance-Review-2022.pdf\",\n            \"access\": [\n              \"MANAGER\",\n              \"MANAGER\"\n            ]\n          }\n        ],\n        \"department\": \"string\",\n        \"costCenter\": \"string\",\n        \"division\": \"string\",\n        \"level\": \"Junior Engineer\",\n        \"startDate\": \"2011-03-25\",\n        \"endDate\": \"2022-02-25\",\n        \"birthday\": \"1985-07-20\",\n        \"6140868326541a4da586db0b\": \"Salary Class B\",\n        \"6140868326541a4da586db0c\": \"Freelancer\",\n        \"gender\": \"female\",\n        \"employmentType\": \"internal\",\n        \"location\": \"Berlin\"\n      },\n      \"active\": false,\n      \"emails\": [\n        {\n          \"primary\": true,\n          \"type\": \"work\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": true,\n          \"type\": \"work\",\n          \"value\": \"string\"\n        }\n      ],\n      \"groups\": [\n        {\n          \"value\": \"5ecba01fb567a5d046582027\"\n        },\n        {\n          \"value\": \"5ecba01fb567a5d046582027\"\n        }\n      ],\n      \"manager\": {\n        \"value\": \"5ecba01fb567a5d046582027\"\n      },\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"userName\": \"string\",\n      \"externalId\": \"string\",\n      \"title\": \"Colleague\",\n      \"photos\": [\n        {\n          \"value\": \"http://PjdAFdCvIwgoJ.tqxezk4ERo+y6wBz7sShQt+0RyFNyghEYH0PV3pEV92q2bDAjj6A\",\n          \"type\": \"photo\"\n        },\n        {\n          \"value\": \"https://ImZbgAeZUykdHLuEagTsOKDblvXvXEKc.xeqdxX,PSWvTTmFg\",\n          \"type\": \"photo\"\n        }\n      ],\n      \"meta\": {\n        \"created\": \"2002-03-23T13:48:03.528Z\",\n        \"location\": \"string\",\n        \"version\": \"string\",\n        \"lastModified\": \"2011-01-27T16:57:42.182Z\"\n      },\n      \"name\": {\n        \"familyName\": \"string\",\n        \"givenName\": \"string\",\n        \"formatted\": \"string\"\n      },\n      \"displayName\": \"string\",\n      \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n        \"manager\": {\n          \"managerId\": \"string\",\n          \"displayName\": \"string\"\n        },\n        \"additionalManagers\": [\n          {\n            \"managerId\": \"string\",\n            \"displayName\": \"string\"\n          },\n          {\n            \"managerId\": \"string\",\n            \"displayName\": \"string\"\n          }\n        ],\n        \"attachments\": [\n          {\n            \"fileName\": \"Performance-Review-2022.pdf\",\n            \"access\": [\n              \"MANAGER\",\n              \"MANAGER\"\n            ]\n          },\n          {\n            \"fileName\": \"Performance-Review-2022.pdf\",\n            \"access\": [\n              \"MANAGER\",\n              \"MANAGER\"\n            ]\n          }\n        ],\n        \"department\": \"string\",\n        \"costCenter\": \"string\",\n        \"division\": \"string\",\n        \"level\": \"Junior Engineer\",\n        \"startDate\": \"2011-03-25\",\n        \"endDate\": \"2022-02-25\",\n        \"birthday\": \"1985-07-20\",\n        \"6140868326541a4da586db0b\": \"Salary Class B\",\n        \"6140868326541a4da586db0c\": \"Freelancer\",\n        \"gender\": \"female\",\n        \"employmentType\": \"internal\",\n        \"location\": \"Berlin\"\n      },\n      \"active\": false,\n      \"emails\": [\n        {\n          \"primary\": true,\n          \"type\": \"work\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": true,\n          \"type\": \"work\",\n          \"value\": \"string\"\n        }\n      ],\n      \"groups\": [\n        {\n          \"value\": \"5ecba01fb567a5d046582027\"\n        },\n        {\n          \"value\": \"5ecba01fb567a5d046582027\"\n        }\n      ],\n      \"manager\": {\n        \"value\": \"5ecba01fb567a5d046582027\"\n      },\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"totalResults\": 3897,\n  \"itemsPerPage\": 9228,\n  \"startIndex\": 3538,\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69b4e7fd-785e-44ac-a09b-b46dbe444972",
+              "name": "Client is not sufficiently authorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "userName eq Smith"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6bee0c8c-f5ef-4042-b8e3-a1b163ef483f",
+              "name": "Invalid token passed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "userName eq Smith"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1233dfd2-cafb-46d0-a935-2b815e9bd669",
+          "name": "Create User",
+          "request": {
+            "name": "Create User",
+            "description": {
+              "content": "Creates a new organization user and adds them to the user domain. The user email domain must match an existing organization email domain.\n\nNote: All user need to get created before you start assigning managers or groups using the other PATCH and PUT endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"title\": \"<string>\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"externalId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ccc479d4-fc04-4dad-9cb5-3f82d727f8cc",
+              "name": "The user has been created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"Jane\",\n    \"familyName\": \"Doe\"\n  },\n  \"displayName\": \"Jane von Doe\",\n  \"title\": \"Software Engineer\",\n  \"photos\": [\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    },\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    }\n  ],\n  \"externalId\": \"id::1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\"\n  },\n  \"displayName\": \"string\",\n  \"title\": \"string\",\n  \"photos\": [\n    {\n      \"value\": \"http://CetaKtj.irpsUy0.KhtBxZ8DXR1VmW0e4\"\n    },\n    {\n      \"value\": \"https://SIXgSpheHNyXNns.xnuqPUogyyfNL7cfYoy6FGEAKeyLgadwI0Fs8jak,9cgjkRExCvqG+\"\n    }\n  ],\n  \"externalId\": \"string\",\n  \"meta\": {\n    \"created\": 5554.050211078998,\n    \"location\": \"https://gMUIAVkwQhG.rqRUNgS8fmuS6L8TLiLmq9ZctnrXGy1yfKElyWG6kT+3hsLYFbOnOXGpFMgKJqi8yz\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a06558d6-b041-4847-8025-d669f0b3d010",
+              "name": "One of the following requirements is not met:\n- The userName field is required.\n- The userName field must be non-empty.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"Jane\",\n    \"familyName\": \"Doe\"\n  },\n  \"displayName\": \"Jane von Doe\",\n  \"title\": \"Software Engineer\",\n  \"photos\": [\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    },\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    }\n  ],\n  \"externalId\": \"id::1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6df764f-bd1a-4d10-9a97-192945053985",
+              "name": "Client is not sufficiently authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"Jane\",\n    \"familyName\": \"Doe\"\n  },\n  \"displayName\": \"Jane von Doe\",\n  \"title\": \"Software Engineer\",\n  \"photos\": [\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    },\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    }\n  ],\n  \"externalId\": \"id::1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f147ce59-f4ef-42f1-978b-756c771f31d4",
+              "name": "Invalid token passed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"Jane\",\n    \"familyName\": \"Doe\"\n  },\n  \"displayName\": \"Jane von Doe\",\n  \"title\": \"Software Engineer\",\n  \"photos\": [\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    },\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    }\n  ],\n  \"externalId\": \"id::1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c675d6d6-7090-4252-928a-0dc0627f8cb3",
+              "name": "Username is already in use",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"Jane\",\n    \"familyName\": \"Doe\"\n  },\n  \"displayName\": \"Jane von Doe\",\n  \"title\": \"Software Engineer\",\n  \"photos\": [\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    },\n    {\n      \"value\": \"https://eu.ui-avatars.com/api/?name=Jane+Doe\"\n    }\n  ],\n  \"externalId\": \"id::1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f91c0503-7f8e-46b9-a224-f11c571ff08e",
+          "name": "Get User",
+          "request": {
+            "name": "Get User",
+            "description": {
+              "content": "Queries a single user identity in the organization domain. If the provided id does not match a leapsome user's id in your organization, we try if we find a user with an externalId like that as fallback.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e71f612-bbfe-43ba-8bb2-43b5fb3150c0",
+              "name": "A user was found and is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"externalId\": \"string\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"https://bZxjLZCHutZRs.cyasJwXzL9UegDNZJqzE4YI5NByUaO4e5ssJkwWHi8crqFRtkaQeoI\",\n      \"type\": \"photo\"\n    },\n    {\n      \"value\": \"http://GGvDftpdWZ.xeqDL.7bX3wvT\",\n      \"type\": \"photo\"\n    }\n  ],\n  \"meta\": {\n    \"created\": \"2011-05-03T15:05:40.009Z\",\n    \"location\": \"string\",\n    \"version\": \"string\",\n    \"lastModified\": \"1995-10-25T20:47:27.972Z\"\n  },\n  \"name\": {\n    \"familyName\": \"string\",\n    \"givenName\": \"string\",\n    \"formatted\": \"string\"\n  },\n  \"displayName\": \"string\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": {\n      \"managerId\": \"string\",\n      \"displayName\": \"string\"\n    },\n    \"additionalManagers\": [\n      {\n        \"managerId\": \"string\",\n        \"displayName\": \"string\"\n      },\n      {\n        \"managerId\": \"string\",\n        \"displayName\": \"string\"\n      }\n    ],\n    \"attachments\": [\n      {\n        \"fileName\": \"Performance-Review-2022.pdf\",\n        \"access\": [\n          \"MANAGER\",\n          \"MANAGER\"\n        ]\n      },\n      {\n        \"fileName\": \"Performance-Review-2022.pdf\",\n        \"access\": [\n          \"MANAGER\",\n          \"MANAGER\"\n        ]\n      }\n    ],\n    \"department\": \"string\",\n    \"costCenter\": \"string\",\n    \"division\": \"string\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"employmentType\": \"internal\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": false,\n  \"emails\": [\n    {\n      \"primary\": true,\n      \"type\": \"work\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"work\",\n      \"value\": \"string\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"5ecba01fb567a5d046582027\"\n    },\n    {\n      \"value\": \"5ecba01fb567a5d046582027\"\n    }\n  ],\n  \"manager\": {\n    \"value\": \"5ecba01fb567a5d046582027\"\n  },\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a3d2204-37d9-4ed5-a967-05f38e0d443e",
+              "name": "No userId provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da7c3188-cb70-41aa-a804-91a864edd50d",
+              "name": "Client is not sufficiently authorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6fd74f7-2503-4bfc-afb5-01e821c548c1",
+              "name": "Invalid token passed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76152ebf-45b7-43c8-b8db-77eb691c652c",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"detail\": \"Resource not found\",\n  \"status\": \"404\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c396d62f-e8c0-4e2c-8622-4d2e9098bbbc",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {
+              "content": "Changes a limited set (or all if you choose) of the user's data. The updated user email domain must be an existing organization email domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"<string>\",\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\",\n    \"birthday\": \"<string>\",\n    \"6140868326541a4da586db0b\": \"<string>\",\n    \"6140868326541a4da586db0c\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"location\": \"<string>\"\n  },\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70afd989-a902-4f40-b085-d4706fc15165",
+              "name": "The user has been updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"externalId\": \"string\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"https://yWgNNmjPHFfbSyVVolJgeTjQRG.rfcFhwDTea6BFKEyw,Dye0ZpBG5BZngGXGa2ChVc\",\n      \"type\": \"photo\"\n    },\n    {\n      \"value\": \"http://fewyQLwqTQthnMNFZAfPsJMNCLvHgOvoA.mcZ387Nynv9a0AeZBmVjdDOVdK1FHrgA1oiiCQuYi5BG3uRewZ2\",\n      \"type\": \"photo\"\n    }\n  ],\n  \"meta\": {\n    \"created\": \"1997-05-07T10:34:17.800Z\",\n    \"location\": \"string\",\n    \"version\": \"string\",\n    \"lastModified\": \"2004-12-12T11:25:49.052Z\"\n  },\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"string\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": {\n      \"managerId\": \"string\",\n      \"displayName\": \"string\"\n    },\n    \"additionalManagers\": [\n      {\n        \"managerId\": \"string\",\n        \"displayName\": \"string\"\n      },\n      {\n        \"managerId\": \"string\",\n        \"displayName\": \"string\"\n      }\n    ],\n    \"attachments\": [\n      {\n        \"fileName\": \"Performance-Review-2022.pdf\",\n        \"access\": [\n          \"MANAGER\",\n          \"MANAGER\"\n        ]\n      },\n      {\n        \"fileName\": \"Performance-Review-2022.pdf\",\n        \"access\": [\n          \"MANAGER\",\n          \"MANAGER\"\n        ]\n      }\n    ],\n    \"department\": \"string\",\n    \"costCenter\": \"string\",\n    \"division\": \"string\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"employmentType\": \"internal\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": true,\n  \"emails\": [\n    {\n      \"primary\": true,\n      \"type\": \"work\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"work\",\n      \"value\": \"string\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"5ecba01fb567a5d046582027\"\n    },\n    {\n      \"value\": \"5ecba01fb567a5d046582027\"\n    }\n  ],\n  \"manager\": {\n    \"value\": \"5ecba01fb567a5d046582027\"\n  },\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7778c51b-527b-48ed-b6ed-60a442087df2",
+              "name": "One of the following requirements is not met:\n- The userName field is required.\n- The userName field must be non-empty.\n- No userId provided\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d262b4ac-69f1-4fb8-b4b0-2e4d30626825",
+              "name": "Client is not sufficiently authorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "580b02e1-b194-413d-92b1-69da2c732aa8",
+              "name": "Invalid token passed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4756938b-602a-4263-adcb-0c54c5628b46",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba37b9c3-9744-4359-acd1-5f16ded7e1bb",
+              "name": "Email address conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c3d0381-9ade-4885-a38b-94d2b98ecec6",
+          "name": "Replace User",
+          "request": {
+            "name": "Replace User",
+            "description": {
+              "content": "Changes an existing user's data. The request must include the full user definition (to modify one or more values without sending the full definition, use the `PATCH` request).\n\n\nThe replaced user email domain must be an existing organization email domain.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"<string>\",\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\",\n    \"birthday\": \"<string>\",\n    \"6140868326541a4da586db0b\": \"<string>\",\n    \"6140868326541a4da586db0c\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"location\": \"<string>\"\n  },\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2225bee-ccb3-419a-9cdb-619a2b80ca53",
+              "name": "The user has been replaced.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"externalId\": \"string\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"https://yWgNNmjPHFfbSyVVolJgeTjQRG.rfcFhwDTea6BFKEyw,Dye0ZpBG5BZngGXGa2ChVc\",\n      \"type\": \"photo\"\n    },\n    {\n      \"value\": \"http://fewyQLwqTQthnMNFZAfPsJMNCLvHgOvoA.mcZ387Nynv9a0AeZBmVjdDOVdK1FHrgA1oiiCQuYi5BG3uRewZ2\",\n      \"type\": \"photo\"\n    }\n  ],\n  \"meta\": {\n    \"created\": \"1997-05-07T10:34:17.800Z\",\n    \"location\": \"string\",\n    \"version\": \"string\",\n    \"lastModified\": \"2004-12-12T11:25:49.052Z\"\n  },\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"string\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": {\n      \"managerId\": \"string\",\n      \"displayName\": \"string\"\n    },\n    \"additionalManagers\": [\n      {\n        \"managerId\": \"string\",\n        \"displayName\": \"string\"\n      },\n      {\n        \"managerId\": \"string\",\n        \"displayName\": \"string\"\n      }\n    ],\n    \"attachments\": [\n      {\n        \"fileName\": \"Performance-Review-2022.pdf\",\n        \"access\": [\n          \"MANAGER\",\n          \"MANAGER\"\n        ]\n      },\n      {\n        \"fileName\": \"Performance-Review-2022.pdf\",\n        \"access\": [\n          \"MANAGER\",\n          \"MANAGER\"\n        ]\n      }\n    ],\n    \"department\": \"string\",\n    \"costCenter\": \"string\",\n    \"division\": \"string\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"employmentType\": \"internal\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": true,\n  \"emails\": [\n    {\n      \"primary\": true,\n      \"type\": \"work\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"work\",\n      \"value\": \"string\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"5ecba01fb567a5d046582027\"\n    },\n    {\n      \"value\": \"5ecba01fb567a5d046582027\"\n    }\n  ],\n  \"manager\": {\n    \"value\": \"5ecba01fb567a5d046582027\"\n  },\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86ffd115-1855-4ad8-a8be-8710f3d40d26",
+              "name": "One of the following requirements is not met:\n- The userName field is required.\n- The userName field must be non-empty.\n- No userId provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7125f582-5369-459d-9f85-f78a317ea8f5",
+              "name": "Client is not sufficiently authorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f040e4ef-5acd-4e7a-b439-4bf4b46a5c03",
+              "name": "Invalid token passed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4aa9c3fb-97b8-4407-8ce2-4c51ac9e8885",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "644c42ca-6db7-4e11-b54b-0ce9d80211ee",
+              "name": "Email address conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The key of the user to query. The user must be in the organization domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"title\": \"Colleague\",\n  \"photos\": [\n    {\n      \"value\": \"<uri>\"\n    },\n    {\n      \"value\": \"<uri>\"\n    }\n  ],\n  \"name\": {\n    \"familyName\": \"<string>\",\n    \"givenName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"location\": \"<string>\",\n  \"manager\": \"<string>\",\n  \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {\n    \"manager\": \"<string>\",\n    \"additionalManagers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"department\": \"<string>\",\n    \"costCenter\": \"<string>\",\n    \"division\": \"<string>\",\n    \"level\": \"Junior Engineer\",\n    \"startDate\": \"2011-03-25\",\n    \"endDate\": \"2022-02-25\",\n    \"birthday\": \"1985-07-20\",\n    \"6140868326541a4da586db0b\": \"Salary Class B\",\n    \"6140868326541a4da586db0c\": \"Freelancer\",\n    \"gender\": \"female\",\n    \"location\": \"Berlin\"\n  },\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "895cbdf5-c028-4a04-a341-a9ef77ed2287",
+    "name": "Leapsome absences users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}

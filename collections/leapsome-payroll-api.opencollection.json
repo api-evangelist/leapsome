@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Leapsome absences payroll API",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "payroll",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payroll cycles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/payroll-cycles",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payroll cycle name (partial match, case-insensitive)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payroll cycle status"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a paginated list of payroll cycles with optional filtering by name or status. Returns payroll cycle details including dates, status, and compensation configuration. Requires permission to manage payroll policies."
+        },
+        {
+          "info": {
+            "name": "List payroll cycle participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.leapsome.com/v1/payroll-cycles/:payrollCycleId/participants",
+            "params": [
+              {
+                "name": "payrollCycleId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the payroll cycle"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Filter by employee email address"
+              },
+              {
+                "name": "employeeId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Leapsome employee ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get participants for a specific payroll cycle with optional filtering by username (email) or employee ID. Requires permission to manage payroll policies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

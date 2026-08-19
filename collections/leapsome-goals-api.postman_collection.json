@@ -1,0 +1,775 @@
+{
+  "item": [
+    {
+      "id": "0c3ccebb-6bdd-4424-ab6c-23b6c21ff5c2",
+      "name": "goals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "36ac325d-0147-4bc9-a351-6be5ca356017",
+          "name": "List goals",
+          "request": {
+            "name": "List goals",
+            "description": {
+              "content": "Setting multiple filters will result in a subset of goals that satisfy *all* constraints.\nAll filters except for `search` accept comma-separated values.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>,<string>",
+                  "description": "select goals containing *any* of the userIds."
+                },
+                {
+                  "disabled": false,
+                  "key": "teamId",
+                  "value": "<string>,<string>",
+                  "description": "select goals containing *any* of the teamIds."
+                },
+                {
+                  "disabled": false,
+                  "key": "tagId",
+                  "value": "<string>,<string>",
+                  "description": "select goals containing *all* of the tagIds."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>,<string>",
+                  "description": "select goals that match by `type` to *any* of the types listed."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "search on title, user name and team name fields. Special symbols must be URL-encoded.\nSearch is performed on a whole value of a text field, without splitting it into words\n(e.g. search for `ark` will match `Marketing`).\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>,<string>",
+                  "description": "only include goals that match provided state"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximal number of results in a response"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Start showing results from this location. Typically, you do not\nneed to set this parameter manually, it is mainly used in\n\"x-next\" header\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a6bc6e45-82a5-4a94-a371-993d4497a1c3",
+              "name": "A paginated array of user goals",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "58d55e3ffdc2eb20547edd0a,58d55e3ffdc2eb20547edd0a"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "58d55e3ffdc2eb20547edd0a,58d55e3ffdc2eb20547edd0a"
+                    },
+                    {
+                      "key": "tagId",
+                      "value": "58d55e3ffdc2eb20547edd0a,58d55e3ffdc2eb20547edd0a"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A link to the next page of responses",
+                  "key": "X-Next",
+                  "value": "https://api.leapsome.com/v1/goals?cursor=58d55e3ffdc2eb20547edd0a&limit=100"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"count\": 1,\n    \"cursor\": \"58d55e3ffdc2eb20547edd0a\",\n    \"nextPage\": \"string\"\n  },\n  \"data\": [\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"type\": \"user\",\n      \"user\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"email\": \"example@example.com\",\n        \"fullName\": \"John Doe\",\n        \"preferredName\": \"John Doe\"\n      },\n      \"team\": {\n        \"id\": \"5b237f6868794d5c08555812\",\n        \"name\": \"Rocket Scientists\"\n      },\n      \"name\": \"Become a great place to work (d)\",\n      \"description\": \"Make it entertaining\",\n      \"contributors\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John Doe\"\n        }\n      ],\n      \"progress\": 50,\n      \"status\": \"live\",\n      \"managedBy\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"email\": \"example@example.com\",\n        \"fullName\": \"John Doe\",\n        \"preferredName\": \"John Doe\"\n      },\n      \"tags\": [\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"string\"\n        }\n      ],\n      \"deadline\": \"2019-08-24T14:15:22Z\",\n      \"keyResults\": [\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Bring Glassdoor score up above 4\",\n          \"metric\": {\n            \"type\": \"currency\",\n            \"start\": 0,\n            \"end\": 1000,\n            \"current\": 650\n          },\n          \"weight\": 30,\n          \"ownerUser\": {\n            \"id\": \"58d55e3ffdc2eb20547edd0a\",\n            \"email\": \"example@example.com\",\n            \"fullName\": \"John Doe\",\n            \"preferredName\": \"John Doe\"\n          },\n          \"ownerTeam\": {\n            \"id\": \"5b237f6868794d5c08555812\",\n            \"name\": \"Engineer\"\n          }\n        }\n      ],\n      \"parent\": {\n        \"_id\": \"5cb0855f0f089e6924b742e4\",\n        \"name\": \"Enhance Employee Experience and Retention\",\n        \"status\": \"live\"\n      },\n      \"progressStatus\": \"onTrack\",\n      \"createdAt\": \"2019-08-23T11:53:06.741Z\",\n      \"updatedAt\": \"2019-08-23T11:53:06.741Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f8b5de3-465e-42da-9bf3-e97002a3f4a6",
+          "name": "get list of goal tags",
+          "request": {
+            "name": "get list of goal tags",
+            "description": {},
+            "url": {
+              "path": [
+                "goals",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "99747494-5279-4086-9af6-a9c48c088944",
+              "name": "An array of goal tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goals",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"5b237f6868794d5c08555812\",\n    \"name\": \"Marketing\",\n    \"status\": \"active\",\n    \"createdAt\": \"2019-08-23T11:53:06.741Z\",\n    \"updatedAt\": \"2019-08-23T11:53:06.741Z\"\n  },\n  {\n    \"id\": \"5b237f6868794d5c08555812\",\n    \"name\": \"Marketing\",\n    \"status\": \"viewOnly\",\n    \"createdAt\": \"2019-08-23T11:53:06.741Z\",\n    \"updatedAt\": \"2019-08-23T11:53:06.741Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee4d4833-e216-48b5-b819-ea31929a9245",
+          "name": "Get goal details",
+          "request": {
+            "name": "Get goal details",
+            "description": {},
+            "url": {
+              "path": [
+                "goals",
+                ":goalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "goalId",
+                  "description": "(Required) ID of the goal"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a0df21e6-e19d-4123-a3e0-33226db03724",
+              "name": "Goal details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goals",
+                    ":goalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goalId",
+                      "description": "(Required) ID of the goal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5b237f6868794d5c08555812\",\n  \"type\": \"user\",\n  \"name\": \"Become a great place to work (d)\",\n  \"description\": \"Make it entertaining\",\n  \"contributors\": [\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"email\": \"example@example.com\",\n      \"fullName\": \"John Doe\",\n      \"preferredName\": \"John von Doe (Full name)\"\n    },\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"email\": \"example@example.com\",\n      \"fullName\": \"John Doe\",\n      \"preferredName\": \"John von Doe (Full name)\"\n    }\n  ],\n  \"progress\": 50,\n  \"status\": \"live\",\n  \"managedBy\": {\n    \"id\": \"58d55e3ffdc2eb20547edd0a\",\n    \"email\": \"example@example.com\",\n    \"fullName\": \"John Doe\",\n    \"preferredName\": \"John von Doe (Full name)\"\n  },\n  \"tags\": [\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"string\"\n    }\n  ],\n  \"deadline\": \"2002-01-11T18:06:30.641Z\",\n  \"keyResults\": [\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"Bring Glassdoor score up above 4\",\n      \"metric\": {\n        \"type\": \"currency\",\n        \"start\": 6341,\n        \"end\": 3915,\n        \"current\": 1521\n      },\n      \"weight\": 30,\n      \"ownerTeam\": {\n        \"id\": \"5b237f6868794d5c08555812\",\n        \"name\": \"Engineer\"\n      },\n      \"ownerUser\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"email\": \"example@example.com\",\n        \"fullName\": \"John Doe\",\n        \"preferredName\": \"John von Doe (Full name)\"\n      },\n      \"contributors\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        }\n      ],\n      \"contributorTeams\": [\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        },\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        }\n      ]\n    },\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"Bring Glassdoor score up above 4\",\n      \"metric\": {\n        \"type\": \"currency\",\n        \"start\": 6085,\n        \"end\": 1129,\n        \"current\": 5187\n      },\n      \"weight\": 30,\n      \"ownerTeam\": {\n        \"id\": \"5b237f6868794d5c08555812\",\n        \"name\": \"Engineer\"\n      },\n      \"ownerUser\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"email\": \"example@example.com\",\n        \"fullName\": \"John Doe\",\n        \"preferredName\": \"John von Doe (Full name)\"\n      },\n      \"contributors\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        }\n      ],\n      \"contributorTeams\": [\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        },\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        }\n      ]\n    }\n  ],\n  \"parent\": {\n    \"_id\": \"5cb0855f0f089e6924b742e4\",\n    \"name\": \"Enhance Employee Experience and Retention\",\n    \"status\": \"live\"\n  },\n  \"createdAt\": \"2019-08-23T11:53:06.741Z\",\n  \"updatedAt\": \"2019-08-23T11:53:06.741Z\",\n  \"user\": {\n    \"id\": \"58d55e3ffdc2eb20547edd0a\",\n    \"email\": \"example@example.com\",\n    \"fullName\": \"John Doe\",\n    \"preferredName\": \"John von Doe (Full name)\"\n  },\n  \"team\": {\n    \"id\": \"5b237f6868794d5c08555812\",\n    \"name\": \"Rocket Scientists\"\n  },\n  \"progressStatus\": \"done\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "523571cf-26cc-42a1-84a8-385a50084a24",
+          "name": "get list of comments for a goal",
+          "request": {
+            "name": "get list of comments for a goal",
+            "description": {},
+            "url": {
+              "path": [
+                "goals",
+                ":goalId",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "goalId",
+                  "description": "(Required) ID of the goal"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d3afd0d8-9733-4ff0-9318-17172c420e62",
+              "name": "An array of goal comments ordered by creation date (descending)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goals",
+                    ":goalId",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goalId",
+                      "description": "(Required) ID of the goal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"content\": \"string\",\n      \"sender\": {\n        \"id\": \"string\",\n        \"firstname\": \"string\",\n        \"lastname\": \"string\",\n        \"picture\": \"string\"\n      },\n      \"createdAt\": \"2019-08-23T11:53:06.741Z\",\n      \"updatedAt\": \"2019-08-23T11:53:06.741Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"content\": \"string\",\n      \"sender\": {\n        \"id\": \"string\",\n        \"firstname\": \"string\",\n        \"lastname\": \"string\",\n        \"picture\": \"string\"\n      },\n      \"createdAt\": \"2019-08-23T11:53:06.741Z\",\n      \"updatedAt\": \"2019-08-23T11:53:06.741Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a72b30aa-d3ad-4df4-ae83-ab777a517857",
+          "name": "Update key result",
+          "request": {
+            "name": "Update key result",
+            "description": {},
+            "url": {
+              "path": [
+                "goals",
+                ":goalId",
+                "key-results",
+                ":keyResultId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "goalId",
+                  "description": "(Required) ID of the goal"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "keyResultId",
+                  "description": "(Required) ID of the key result"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"metric\": {\n    \"type\": \"<string>\",\n    \"start\": \"<integer>\",\n    \"end\": \"<integer>\",\n    \"current\": \"<integer>\"\n  },\n  \"weight\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4e24bfd-0387-4489-93f0-aeea6911236b",
+              "name": "Updated goal",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goals",
+                    ":goalId",
+                    "key-results",
+                    ":keyResultId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goalId",
+                      "description": "(Required) ID of the goal"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "keyResultId",
+                      "description": "(Required) ID of the key result"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Bring Glassdoor score up above 4\",\n  \"metric\": {\n    \"type\": \"<string>\",\n    \"start\": \"<integer>\",\n    \"end\": \"<integer>\",\n    \"current\": \"<integer>\"\n  },\n  \"weight\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5b237f6868794d5c08555812\",\n  \"type\": \"user\",\n  \"name\": \"Become a great place to work (d)\",\n  \"description\": \"Make it entertaining\",\n  \"contributors\": [\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"email\": \"example@example.com\",\n      \"fullName\": \"John Doe\",\n      \"preferredName\": \"John von Doe (Full name)\"\n    },\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"email\": \"example@example.com\",\n      \"fullName\": \"John Doe\",\n      \"preferredName\": \"John von Doe (Full name)\"\n    }\n  ],\n  \"progress\": 50,\n  \"status\": \"live\",\n  \"managedBy\": {\n    \"id\": \"58d55e3ffdc2eb20547edd0a\",\n    \"email\": \"example@example.com\",\n    \"fullName\": \"John Doe\",\n    \"preferredName\": \"John von Doe (Full name)\"\n  },\n  \"tags\": [\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"string\"\n    }\n  ],\n  \"deadline\": \"1984-02-13T10:50:47.590Z\",\n  \"keyResults\": [\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"Bring Glassdoor score up above 4\",\n      \"metric\": {\n        \"type\": \"currency\",\n        \"start\": 7095,\n        \"end\": 2760,\n        \"current\": 4457\n      },\n      \"weight\": 30,\n      \"ownerTeam\": {\n        \"id\": \"5b237f6868794d5c08555812\",\n        \"name\": \"Engineer\"\n      },\n      \"ownerUser\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"email\": \"example@example.com\",\n        \"fullName\": \"John Doe\",\n        \"preferredName\": \"John von Doe (Full name)\"\n      },\n      \"contributors\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        }\n      ],\n      \"contributorTeams\": [\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        },\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        }\n      ]\n    },\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"Bring Glassdoor score up above 4\",\n      \"metric\": {\n        \"type\": \"currency\",\n        \"start\": 8864,\n        \"end\": 2723,\n        \"current\": 8721\n      },\n      \"weight\": 30,\n      \"ownerTeam\": {\n        \"id\": \"5b237f6868794d5c08555812\",\n        \"name\": \"Engineer\"\n      },\n      \"ownerUser\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"email\": \"example@example.com\",\n        \"fullName\": \"John Doe\",\n        \"preferredName\": \"John von Doe (Full name)\"\n      },\n      \"contributors\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        }\n      ],\n      \"contributorTeams\": [\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        },\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        }\n      ]\n    }\n  ],\n  \"parent\": {\n    \"_id\": \"5cb0855f0f089e6924b742e4\",\n    \"name\": \"Enhance Employee Experience and Retention\",\n    \"status\": \"live\"\n  },\n  \"createdAt\": \"2019-08-23T11:53:06.741Z\",\n  \"updatedAt\": \"2019-08-23T11:53:06.741Z\",\n  \"user\": {\n    \"id\": \"58d55e3ffdc2eb20547edd0a\",\n    \"email\": \"example@example.com\",\n    \"fullName\": \"John Doe\",\n    \"preferredName\": \"John von Doe (Full name)\"\n  },\n  \"team\": {\n    \"id\": \"5b237f6868794d5c08555812\",\n    \"name\": \"Rocket Scientists\"\n  },\n  \"progressStatus\": \"onTrack\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afa36340-ef7d-4382-ab11-2b0dc06c8bf2",
+          "name": "Update initiative",
+          "request": {
+            "name": "Update initiative",
+            "description": {},
+            "url": {
+              "path": [
+                "goals",
+                ":goalId",
+                "initiatives",
+                ":initiativeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "goalId",
+                  "description": "(Required) ID of the goal"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "initiativeId",
+                  "description": "(Required) ID of the initiative"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6058f295-7d74-4ee3-a694-420b540bb97b",
+              "name": "Updated goal",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goals",
+                    ":goalId",
+                    "initiatives",
+                    ":initiativeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goalId",
+                      "description": "(Required) ID of the goal"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "initiativeId",
+                      "description": "(Required) ID of the initiative"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5b237f6868794d5c08555812\",\n  \"type\": \"user\",\n  \"name\": \"Become a great place to work (d)\",\n  \"description\": \"Make it entertaining\",\n  \"contributors\": [\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"email\": \"example@example.com\",\n      \"fullName\": \"John Doe\",\n      \"preferredName\": \"John von Doe (Full name)\"\n    },\n    {\n      \"id\": \"58d55e3ffdc2eb20547edd0a\",\n      \"email\": \"example@example.com\",\n      \"fullName\": \"John Doe\",\n      \"preferredName\": \"John von Doe (Full name)\"\n    }\n  ],\n  \"progress\": 50,\n  \"status\": \"live\",\n  \"managedBy\": {\n    \"id\": \"58d55e3ffdc2eb20547edd0a\",\n    \"email\": \"example@example.com\",\n    \"fullName\": \"John Doe\",\n    \"preferredName\": \"John von Doe (Full name)\"\n  },\n  \"tags\": [\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"string\"\n    }\n  ],\n  \"deadline\": \"1984-02-13T10:50:47.590Z\",\n  \"keyResults\": [\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"Bring Glassdoor score up above 4\",\n      \"metric\": {\n        \"type\": \"currency\",\n        \"start\": 7095,\n        \"end\": 2760,\n        \"current\": 4457\n      },\n      \"weight\": 30,\n      \"ownerTeam\": {\n        \"id\": \"5b237f6868794d5c08555812\",\n        \"name\": \"Engineer\"\n      },\n      \"ownerUser\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"email\": \"example@example.com\",\n        \"fullName\": \"John Doe\",\n        \"preferredName\": \"John von Doe (Full name)\"\n      },\n      \"contributors\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        }\n      ],\n      \"contributorTeams\": [\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        },\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        }\n      ]\n    },\n    {\n      \"id\": \"5b237f6868794d5c08555812\",\n      \"name\": \"Bring Glassdoor score up above 4\",\n      \"metric\": {\n        \"type\": \"currency\",\n        \"start\": 8864,\n        \"end\": 2723,\n        \"current\": 8721\n      },\n      \"weight\": 30,\n      \"ownerTeam\": {\n        \"id\": \"5b237f6868794d5c08555812\",\n        \"name\": \"Engineer\"\n      },\n      \"ownerUser\": {\n        \"id\": \"58d55e3ffdc2eb20547edd0a\",\n        \"email\": \"example@example.com\",\n        \"fullName\": \"John Doe\",\n        \"preferredName\": \"John von Doe (Full name)\"\n      },\n      \"contributors\": [\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        },\n        {\n          \"id\": \"58d55e3ffdc2eb20547edd0a\",\n          \"email\": \"example@example.com\",\n          \"fullName\": \"John Doe\",\n          \"preferredName\": \"John von Doe (Full name)\"\n        }\n      ],\n      \"contributorTeams\": [\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        },\n        {\n          \"id\": \"5b237f6868794d5c08555812\",\n          \"name\": \"Engineer\"\n        }\n      ]\n    }\n  ],\n  \"parent\": {\n    \"_id\": \"5cb0855f0f089e6924b742e4\",\n    \"name\": \"Enhance Employee Experience and Retention\",\n    \"status\": \"live\"\n  },\n  \"createdAt\": \"2019-08-23T11:53:06.741Z\",\n  \"updatedAt\": \"2019-08-23T11:53:06.741Z\",\n  \"user\": {\n    \"id\": \"58d55e3ffdc2eb20547edd0a\",\n    \"email\": \"example@example.com\",\n    \"fullName\": \"John Doe\",\n    \"preferredName\": \"John von Doe (Full name)\"\n  },\n  \"team\": {\n    \"id\": \"5b237f6868794d5c08555812\",\n    \"name\": \"Rocket Scientists\"\n  },\n  \"progressStatus\": \"onTrack\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.leapsome.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "177f7a70-236c-4649-9436-993ee34aad55",
+    "name": "Leapsome absences goals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.\n\nContact Support:\n Name: Support",
+      "type": "text/plain"
+    }
+  }
+}
