@@ -48,6 +48,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Absences
+  tags_raw:
   - absences
   properties:
   - type: OpenAPI
@@ -65,6 +67,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Access Roles
+  tags_raw:
   - accessRoles
   properties:
   - type: OpenAPI
@@ -82,6 +86,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Authentication
+  tags_raw:
   - auth
   properties:
   - type: OpenAPI
@@ -99,6 +105,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Documents
+  tags_raw:
   - documents
   properties:
   - type: OpenAPI
@@ -116,6 +124,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Feedback
+  tags_raw:
   - feedback
   properties:
   - type: OpenAPI
@@ -133,6 +143,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Goals
+  tags_raw:
   - goals
   properties:
   - type: OpenAPI
@@ -150,6 +162,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -184,6 +198,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Payroll
+  tags_raw:
   - payroll
   properties:
   - type: OpenAPI
@@ -201,6 +217,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Reviews
+  tags_raw:
   - reviews
   properties:
   - type: OpenAPI
@@ -235,6 +253,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - Time Tracking
+  tags_raw:
   - timeTracking
   properties:
   - type: OpenAPI
@@ -252,6 +272,8 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -268,7 +290,8 @@ apis:
   humanURL: >-
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - workLocations
   properties:
   - type: OpenAPI
