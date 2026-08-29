@@ -11,6 +11,18 @@ description: Leapsome is an AI-powered people enablement platform that combines 
   via bearer tokens generated inside the platform settings and are documented through
   Swagger UI at api.leapsome.com.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: open
