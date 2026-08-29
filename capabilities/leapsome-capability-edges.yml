@@ -1,0 +1,53 @@
+slug: leapsome
+provider: Leapsome
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: reviews
+  spec_file: leapsome-reviews-api-openapi.yml
+  capability_id: BC-300.20
+  capability_id_l1: BC-300
+  capability_name: Talent Management
+  confidence: 0.9
+  evidence: GET /reviews  listReviews  List review cycles; GET /reviews/{reviewCycleId}/participants/{userId}/overview  getReviewParticipantResults  Get
+    results for a specific reviewee
+  reason: Performance review cycles, participants and reviewee results — clearly employee performance
+    management under Talent Management, consistent with the vendor's stated performance-review module.
+- tag: feedback
+  spec_file: leapsome-feedback-api-openapi.yml
+  capability_id: BC-300.20
+  capability_id_l1: BC-300
+  capability_name: Talent Management
+  confidence: 0.8
+  evidence: POST /feedback/praise  createPraise; POST /feedback/instant  createInstantFeedback; POST /feedback/private-note
+  reason: Employee praise, instant feedback and private notes are performance/development feedback within
+    a people-enablement platform — Talent Management (performance, career development), not customer feedback.
+- tag: absences
+  spec_file: leapsome-absences-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: 'GET /absences  listAbsences  List absences; schemas: Absence'
+  reason: Exports employee absence/leave records from an HRIS. Absence administration sits within HR Operations
+    Management (employee records, HR service delivery). Title's 'Absences' matches the tag here, and the
+    single Absence schema grounds it.
+- tag: payroll
+  spec_file: leapsome-payroll-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: GET /payroll-cycles  listPayrollCycles; GET /payroll-cycles/{payrollCycleId}/participants  listPayrollCycleParticipants
+  reason: Payroll cycle and participant data — payroll administration, which the frame places under HR
+    Operations Management. Could alternatively be Compensation & Benefits, hence not top confidence.

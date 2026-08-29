@@ -315,6 +315,9 @@ apis:
   - type: Documentation
     url: https://api.leapsome.com/scim/v1/api-docs/
 common:
+- type: CapabilityMap
+  url: capabilities/leapsome-capability-edges.yml
+  name: Leapsome Business Capability Map
 - type: AgenticAccess
   url: agentic-access/leapsome-agentic-access.yml
 - type: TrustCenter
