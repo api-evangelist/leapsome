@@ -60,7 +60,7 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
-  - Absences
+  - absences
   tags_raw:
   - absences
   properties:
@@ -78,8 +78,7 @@ apis:
   humanURL: >-
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
-  tags:
-  - Access Roles
+  tags: []
   tags_raw:
   - accessRoles
   properties:
@@ -210,7 +209,7 @@ apis:
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
-  - Payroll
+  - payroll
   tags_raw:
   - payroll
   properties:
@@ -264,8 +263,7 @@ apis:
   humanURL: >-
     https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
-  tags:
-  - Time Tracking
+  tags: []
   tags_raw:
   - timeTracking
   properties:
