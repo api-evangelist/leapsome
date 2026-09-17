@@ -54,7 +54,8 @@ apis:
 - aid: leapsome:leapsome-absences-api
   name: Leapsome absences API
   description: The absences API from Leapsome — 1 operation(s) for absences.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Absences
@@ -69,28 +70,11 @@ apis:
     url: graphql/leapsome-graphql.md
   - type: Documentation
     url: https://api.leapsome.com/scim/v1/api-docs/
-- aid: leapsome:leapsome-accessroles-api
-  name: Leapsome accessRoles API
-  description: The accessRoles API from Leapsome — 1 operation(s) for accessroles.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
-  baseURL: https://api.leapsome.com/v1
-  tags:
-  - Access Roles
-  tags_raw:
-  - accessRoles
-  properties:
-  - type: OpenAPI
-    url: openapi/leapsome-accessroles-api-openapi.yml
-  - type: Documentation
-    url: https://api.leapsome.com/v1/api-docs/
-  - type: GraphQL
-    url: graphql/leapsome-graphql.md
-  - type: Documentation
-    url: https://api.leapsome.com/scim/v1/api-docs/
 - aid: leapsome:leapsome-auth-api
   name: Leapsome auth API
   description: The auth API from Leapsome — 1 operation(s) for auth.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Authentication
@@ -108,7 +92,8 @@ apis:
 - aid: leapsome:leapsome-documents-api
   name: Leapsome documents API
   description: The documents API from Leapsome — 2 operation(s) for documents.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Documents
@@ -126,7 +111,8 @@ apis:
 - aid: leapsome:leapsome-feedback-api
   name: Leapsome feedback API
   description: The feedback API from Leapsome — 4 operation(s) for feedback.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Feedback
@@ -144,7 +130,8 @@ apis:
 - aid: leapsome:leapsome-goals-api
   name: Leapsome goals API
   description: The goals API from Leapsome — 6 operation(s) for goals.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Goals
@@ -162,7 +149,8 @@ apis:
 - aid: leapsome:leapsome-groups-api
   name: Leapsome Groups API
   description: Operations on groups belonging to an organization
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Group
@@ -180,7 +168,8 @@ apis:
 - aid: leapsome:leapsome-leapsome-api-api
   name: Leapsome API
   description: The Leapsome API API from Leapsome — 1 operation(s) for leapsome api.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Leapsome API
@@ -196,7 +185,8 @@ apis:
 - aid: leapsome:leapsome-payroll-api
   name: Leapsome payroll API
   description: The payroll API from Leapsome — 2 operation(s) for payroll.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Payroll
@@ -214,7 +204,8 @@ apis:
 - aid: leapsome:leapsome-reviews-api
   name: Leapsome reviews API
   description: The reviews API from Leapsome — 4 operation(s) for reviews.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Reviews
@@ -232,7 +223,8 @@ apis:
 - aid: leapsome:leapsome-schemas-api
   name: Leapsome Schemas API
   description: Operations on schemas
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - Schemas
@@ -245,28 +237,11 @@ apis:
     url: graphql/leapsome-graphql.md
   - type: Documentation
     url: https://api.leapsome.com/scim/v1/api-docs/
-- aid: leapsome:leapsome-timetracking-api
-  name: Leapsome timeTracking API
-  description: The timeTracking API from Leapsome — 1 operation(s) for timetracking.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
-  baseURL: https://api.leapsome.com/v1
-  tags:
-  - Time Tracking
-  tags_raw:
-  - timeTracking
-  properties:
-  - type: OpenAPI
-    url: openapi/leapsome-timetracking-api-openapi.yml
-  - type: Documentation
-    url: https://api.leapsome.com/v1/api-docs/
-  - type: GraphQL
-    url: graphql/leapsome-graphql.md
-  - type: Documentation
-    url: https://api.leapsome.com/scim/v1/api-docs/
 - aid: leapsome:leapsome-users-api
   name: Leapsome users API
   description: The users API from Leapsome — 4 operation(s) for users.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags:
   - User
@@ -284,7 +259,8 @@ apis:
 - aid: leapsome:leapsome-worklocations-api
   name: Leapsome workLocations API
   description: The workLocations API from Leapsome — 1 operation(s) for worklocations.
-  humanURL: https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
   baseURL: https://api.leapsome.com/v1
   tags: []
   tags_raw:
@@ -292,6 +268,40 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/leapsome-worklocations-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-access-roles-api
+  name: Leapsome Access Roles API
+  description: The Access Roles API from Leapsome — 1 operation(s) for access roles.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - Access Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-access-roles-api-openapi.yml
+  - type: Documentation
+    url: https://api.leapsome.com/v1/api-docs/
+  - type: GraphQL
+    url: graphql/leapsome-graphql.md
+  - type: Documentation
+    url: https://api.leapsome.com/scim/v1/api-docs/
+- aid: leapsome:leapsome-time-tracking-api
+  name: Leapsome Time Tracking API
+  description: The Time Tracking API from Leapsome — 1 operation(s) for time tracking.
+  humanURL: >-
+    https://help.leapsome.com/hc/en-us/articles/9251417820061-Content-API-Access-Reviews-Goals
+  baseURL: https://api.leapsome.com/v1
+  tags:
+  - Time Tracking
+  properties:
+  - type: OpenAPI
+    url: openapi/leapsome-time-tracking-api-openapi.yml
   - type: Documentation
     url: https://api.leapsome.com/v1/api-docs/
   - type: GraphQL
