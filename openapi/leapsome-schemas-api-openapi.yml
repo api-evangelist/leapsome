@@ -1,13 +1,15 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  version: 1.0.1
-  title: Leapsome absences Schemas API
+  version: 1.1.3
+  title: Leapsome SCIM Schemas API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
-  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+  description: The SCIM API lets you manage users in your organization.
 servers:
-- url: https://api.leapsome.com/v1
+- url: https://api.leapsome.com/scim/v1
+security:
+- SCIM-Token: []
 tags:
 - description: Operations on schemas
   name: Schemas
@@ -18,9 +20,7 @@ paths:
 
         The service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6).
 
-        This call returns a description, a documentationURL, name, and specURL.
-
-        '
+        This call returns a description, a documentationURL, name, and specURL.'
       operationId: getServiceProviderConfig
       responses:
         '200':
@@ -36,24 +36,16 @@ paths:
       - Schemas
 components:
   schemas:
-    Filter:
-      description: Specifies FILTER options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Etag:
-      description: Specifies Etag configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
     ChangePassword:
       description: Specifies Change Password configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Sort:
+      description: Specifies Sort configuration options
       properties:
         supported:
           description: Specifies whether the operation is supported
@@ -80,6 +72,38 @@ components:
       - description
       - specUrl
       - documentationUrl
+    Etag:
+      description: Specifies Etag configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Patch:
+      description: Specifies PATCH configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Filter:
+      description: Specifies FILTER options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Bulk:
+      description: Specifies BULK configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
     ServiceProviderConfig:
       description: Represents the Service Provider's configuration
       properties:
@@ -109,32 +133,8 @@ components:
       - sort
       - etag
       - authenticationSchemes
-    Sort:
-      description: Specifies Sort configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Patch:
-      description: Specifies PATCH configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Bulk:
-      description: Specifies BULK configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
   securitySchemes:
-    bearerAuth:
+    SCIM-Token:
       type: http
       scheme: bearer
-      bearerFormat: JWT
+      description: 'The SCIM-Authentication-Token token you generated within the Leapsome admin area (Section: HRIS integrations -> SCIM)'

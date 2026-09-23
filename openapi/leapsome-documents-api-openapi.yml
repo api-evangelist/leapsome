@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences documents API
+  title: Leapsome Documents API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -9,21 +9,19 @@ info:
 servers:
 - url: https://api.leapsome.com/v1
 tags:
-- name: documents
+- name: Documents
 paths:
   /documents/categories:
     get:
       summary: List document categories
       description: 'List all active user document categories for the team.
 
-        Use the returned category IDs when uploading documents via the upload endpoint.
-
-        '
+        Use the returned category IDs when uploading documents via the upload endpoint.'
       operationId: listDocumentCategories
       security:
       - bearerAuth: []
       tags:
-      - documents
+      - Documents
       responses:
         '200':
           description: List of document categories
@@ -45,14 +43,12 @@ paths:
         and confirmation automatically.
 
 
-        Maximum file size: 25 MB.
-
-        '
+        Maximum file size: 25 MB.'
       operationId: uploadUserDocument
       security:
       - bearerAuth: []
       tags:
-      - documents
+      - Documents
       parameters:
       - name: userId
         in: path
@@ -104,6 +100,14 @@ components:
           type: string
           description: Optional human-readable description for the document
           example: Annual performance review for 2024
+    UploadUserDocumentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: ID of the uploaded document
+          example: 58d55e3ffdc2eb20547edd0a
     DocumentCategory:
       type: object
       properties:
@@ -116,14 +120,6 @@ components:
           type: string
           description: Display name of the category
           example: Past Reviews
-    UploadUserDocumentResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: ID of the uploaded document
-          example: 58d55e3ffdc2eb20547edd0a
   securitySchemes:
     bearerAuth:
       type: http

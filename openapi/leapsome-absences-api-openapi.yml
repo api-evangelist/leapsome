@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences API
+  title: Leapsome Absences API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -9,17 +9,19 @@ info:
 servers:
 - url: https://api.leapsome.com/v1
 tags:
-- name: absences
+- name: Absences
 paths:
   /absences:
     get:
       summary: List absences
-      description: "Get a paginated list of absences in your Leapsome instance. You can filter by date range, \nstatus, and user. Requires admin permissions for absence management.\n"
+      description: 'Get a paginated list of absences in your Leapsome instance. You can filter by date range,
+
+        status, and user. Requires admin permissions for absence management.'
       operationId: listAbsences
       security:
       - bearerAuth: []
       tags:
-      - absences
+      - Absences
       parameters:
       - name: absenceStartFrom
         in: query
@@ -234,8 +236,9 @@ components:
           example: Medical appointment
           description: Optional comment or note about the absence
         actualAbsenceDuration:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           example: 5
           description: Actual duration of the absence in the specified time unit
   securitySchemes:

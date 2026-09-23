@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences accessRoles API
+  title: Leapsome Access Roles API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -9,7 +9,7 @@ info:
 servers:
 - url: https://api.leapsome.com/v1
 tags:
-- name: accessRoles
+- name: Access Roles
 paths:
   /access-roles:
     get:
@@ -19,14 +19,12 @@ paths:
         scope type, and system default information.
 
 
-        Requires the standard Super Admin access role; for API tokens, assign that role to the API key.
-
-        '
+        Requires the standard Super Admin access role; for API tokens, assign that role to the API key.'
       operationId: listAccessRoles
       security:
       - bearerAuth: []
       tags:
-      - accessRoles
+      - Access Roles
       responses:
         '200':
           description: List of access roles

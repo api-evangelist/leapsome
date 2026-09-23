@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences reviews API
+  title: Leapsome Reviews API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -9,7 +9,7 @@ info:
 servers:
 - url: https://api.leapsome.com/v1
 tags:
-- name: reviews
+- name: Reviews
 paths:
   /reviews:
     parameters: []
@@ -141,7 +141,7 @@ paths:
                       template: 63e42f779f7f18396a38f54d
                       lastModifiedOn: '2018-02-20T10:15:30.000Z'
       tags:
-      - reviews
+      - Reviews
   /reviews/{reviewCycleId}:
     parameters:
     - schema:
@@ -286,7 +286,7 @@ paths:
                       createdAt: '2018-02-16T08:48:48.363Z'
                     __v2: true
       tags:
-      - reviews
+      - Reviews
   /reviews/{reviewCycleId}/participants:
     parameters:
     - schema:
@@ -523,7 +523,7 @@ paths:
                         lastModifiedBy: 62ab64e3339234d9c4a527f1
                     __v2: true
       tags:
-      - reviews
+      - Reviews
   /reviews/{reviewCycleId}/participants/{userId}/overview:
     parameters:
     - schema:
@@ -648,7 +648,6 @@ paths:
                               example: 75
                               minimum: 0
                               maximum: 100
-                              exclusiveMinimum: false
                               description: Normalized average score (0-100) of all answers to this question
                       answers:
                         type: array
@@ -792,7 +791,7 @@ paths:
                         location: Berlin
                     __v2: true
       tags:
-      - reviews
+      - Reviews
 components:
   securitySchemes:
     bearerAuth:

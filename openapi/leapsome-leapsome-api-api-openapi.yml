@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences Leapsome API API
+  title: Leapsome API
   contact:
     name: Support
     url: https://leapsome.zendesk.com

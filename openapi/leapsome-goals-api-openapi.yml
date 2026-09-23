@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences goals API
+  title: Leapsome Goals API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -9,21 +9,19 @@ info:
 servers:
 - url: https://api.leapsome.com/v1
 tags:
-- name: goals
+- name: Goals
 paths:
   /goals:
     get:
       summary: List goals
       description: 'Setting multiple filters will result in a subset of goals that satisfy *all* constraints.
 
-        All filters except for `search` accept comma-separated values.
-
-        '
+        All filters except for `search` accept comma-separated values.'
       operationId: listGoals
       security:
       - bearerAuth: []
       tags:
-      - goals
+      - Goals
       parameters:
       - name: userId
         in: query
@@ -174,7 +172,7 @@ paths:
       security:
       - bearerAuth: []
       tags:
-      - goals
+      - Goals
       responses:
         '200':
           description: An array of goal tags
@@ -197,7 +195,7 @@ paths:
       security:
       - bearerAuth: []
       tags:
-      - goals
+      - Goals
       responses:
         '200':
           description: Goal details
@@ -219,7 +217,7 @@ paths:
       security:
       - bearerAuth: []
       tags:
-      - goals
+      - Goals
       responses:
         '200':
           description: An array of goal comments ordered by creation date (descending)
@@ -249,7 +247,7 @@ paths:
       security:
       - bearerAuth: []
       tags:
-      - goals
+      - Goals
       requestBody:
         required: true
         content:
@@ -285,7 +283,7 @@ paths:
       security:
       - bearerAuth: []
       tags:
-      - goals
+      - Goals
       requestBody:
         required: true
         content:
@@ -301,115 +299,42 @@ paths:
                 $ref: '#/components/schemas/Goal'
 components:
   schemas:
-    User:
+    Comments:
       type: object
       required:
-      - id
-      - email
-      - fullName
+      - data
       properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          example: 58d55e3ffdc2eb20547edd0a
-        email:
-          type: string
-          format: email
-          example: example@example.com
-        fullName:
-          type: string
-          example: John Doe
-        preferredName:
-          type: string
-          example: John von Doe (Full name)
-    ParentGoal:
-      type: object
-      nullable: true
-      properties:
-        _id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          example: 5cb0855f0f089e6924b742e4
-        name:
-          type: string
-          example: Enhance Employee Experience and Retention
-        status:
-          type: string
-          enum:
-          - live
-          - draft
-          - archived
-          example: live
-    PaginatedGoals:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Goal'
-    Tag:
+            $ref: '#/components/schemas/Comment'
+    Meta:
       type: object
       required:
-      - id
-      - name
-      - status
-      - createdAt
-      - updatedAt
+      - count
+      - cursor
+      - nextPage
       properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          example: 5b237f6868794d5c08555812
-        name:
-          type: string
-          example: Marketing
-        status:
-          type: string
-          enum:
-          - active
-          - viewOnly
-          - removed
-        createdAt:
-          type: string
-          format: date-time
-          example: '2019-08-23T11:53:06.741Z'
-        updatedAt:
-          type: string
-          format: date-time
-          example: '2019-08-23T11:53:06.741Z'
-    KeyResultUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Bring Glassdoor score up above 4
-        metric:
-          type: object
-          required:
-          - type
-          - start
-          - end
-          - current
-          properties:
-            type:
-              type: string
-              enum:
-              - none
-              - numerical
-              - percentage
-              - currency
-            start:
-              type: integer
-            end:
-              type: integer
-            current:
-              type: integer
-        weight:
+        count:
           type: integer
-          minimum: 0
-          maximum: 100
+          description: number of results returned in this request
+          minimum: 1
+          maximum: 1000
+        cursor:
+          type:
+          - string
+          - 'null'
+          description: 'Will be set to `null` if complete set have been returned.
+
+            '
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+        nextPage:
+          type:
+          - string
+          - 'null'
+          format: url
+          description: URL of the next result page. `null` means no more results available.
     Goal:
       type: object
       required:
@@ -442,15 +367,15 @@ components:
         user:
           allOf:
           - $ref: '#/components/schemas/User'
-          - nullable: true
-            description: 'Information about the user, who''s assigned to this goal.
+          - description: 'Information about the user, who''s assigned to this goal.
 
               Will be `null` for Team and Company goals.
 
               '
         team:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           description: 'Information about the team, that''s assigned to this goal.
 
             Will be `null` for User and Company goals.
@@ -504,9 +429,10 @@ components:
               name:
                 type: string
         deadline:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         keyResults:
           type: array
           items:
@@ -514,14 +440,15 @@ components:
         parent:
           $ref: '#/components/schemas/ParentGoal'
         progressStatus:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - onTrack
           - offTrack
           - inputNeeded
           - done
           - canceled
-          nullable: true
         createdAt:
           type: string
           format: date-time
@@ -604,6 +531,89 @@ components:
               name:
                 type: string
                 example: Engineer
+    Tag:
+      type: object
+      required:
+      - id
+      - name
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5b237f6868794d5c08555812
+        name:
+          type: string
+          example: Marketing
+        status:
+          type: string
+          enum:
+          - active
+          - viewOnly
+          - removed
+        createdAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+    ParentGoal:
+      type:
+      - object
+      - 'null'
+      properties:
+        _id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5cb0855f0f089e6924b742e4
+        name:
+          type: string
+          example: Enhance Employee Experience and Retention
+        status:
+          type: string
+          enum:
+          - live
+          - draft
+          - archived
+          example: live
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    User:
+      type: object
+      required:
+      - id
+      - email
+      - fullName
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+        email:
+          type: string
+          format: email
+          example: example@example.com
+        fullName:
+          type: string
+          example: John Doe
+        preferredName:
+          type: string
+          example: John von Doe (Full name)
+    PaginatedGoals:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal'
     Comment:
       type: object
       required:
@@ -643,40 +653,37 @@ components:
           type: string
           format: date-time
           example: '2019-08-23T11:53:06.741Z'
-    Meta:
+    KeyResultUpdate:
       type: object
-      required:
-      - count
-      - cursor
-      - nextPage
       properties:
-        count:
+        name:
+          type: string
+          example: Bring Glassdoor score up above 4
+        metric:
+          type: object
+          required:
+          - type
+          - start
+          - end
+          - current
+          properties:
+            type:
+              type: string
+              enum:
+              - none
+              - numerical
+              - percentage
+              - currency
+            start:
+              type: integer
+            end:
+              type: integer
+            current:
+              type: integer
+        weight:
           type: integer
-          description: number of results returned in this request
-          minimum: 1
-          maximum: 1000
-        cursor:
-          type: string
-          description: 'Will be set to `null` if complete set have been returned.
-
-            '
-          pattern: ^[0-9a-f]{24}$
-          example: 58d55e3ffdc2eb20547edd0a
-          nullable: true
-        nextPage:
-          type: string
-          format: url
-          description: URL of the next result page. `null` means no more results available.
-          nullable: true
-    Comments:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Comment'
+          minimum: 0
+          maximum: 100
     InitiativeUpdate:
       type: object
       properties:
@@ -691,10 +698,6 @@ components:
           - inProgress
           - completed
           - blocked
-    Tags:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
   parameters:
     limitParam:
       name: limit

@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences workLocations API
+  title: Leapsome Work Locations API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -72,25 +72,6 @@ paths:
           description: Authorization failed. Token is missing or invalid.
 components:
   schemas:
-    WorkLocationList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkLocation'
-        meta:
-          type: object
-          properties:
-            page:
-              type: integer
-              description: Current page number
-            pageSize:
-              type: integer
-              description: Number of items per page
-            totalCount:
-              type: integer
-              description: Total number of work locations
     WorkLocation:
       type: object
       properties:
@@ -111,43 +92,51 @@ components:
           example: active
           description: Current status of the work location
         remote:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           example: false
           description: Whether this is a remote work location
         currency:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: EUR
           description: Default currency for this work location
         street:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: 123 Main Street
           description: Street address
         zip:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: '10115'
           description: ZIP/postal code
         city:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: Berlin
           description: City
         administrativeDivision:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: Berlin
           description: State/province/administrative division
         country:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: Germany
           description: Country
         dateFormat:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           enum:
           - MM-DD-YYYY
           - DD-MM-YYYY
@@ -162,22 +151,44 @@ components:
           example: DD.MM.YYYY
           description: Date format used in this work location
         primary:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           example: true
           description: Whether this is the primary work location
         createdAt:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           example: '2024-01-15T08:30:00.000Z'
           description: When the work location was created
         updatedAt:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           example: '2024-01-20T10:15:00.000Z'
           description: When the work location was last updated
+    WorkLocationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkLocation'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              description: Current page number
+            pageSize:
+              type: integer
+              description: Number of items per page
+            totalCount:
+              type: integer
+              description: Total number of work locations
   securitySchemes:
     bearerAuth:
       type: http

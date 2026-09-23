@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences timeTracking API
+  title: Leapsome Time Tracking API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -9,7 +9,7 @@ info:
 servers:
 - url: https://api.leapsome.com/v1
 tags:
-- name: timeTracking
+- name: Time Tracking
 paths:
   /time-tracking/timesheets:
     get:
@@ -19,7 +19,7 @@ paths:
       security:
       - bearerAuth: []
       tags:
-      - timeTracking
+      - Time Tracking
       parameters:
       - name: username
         in: query
@@ -65,6 +65,25 @@ paths:
           description: Insufficient permissions. Permission to manage time tracking policies is required.
 components:
   schemas:
+    TimesheetList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Timesheet'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              description: Current page number
+            pageSize:
+              type: integer
+              description: Number of items per page
+            totalCount:
+              type: integer
+              description: Total number of timesheets
     Timesheet:
       type: object
       properties:
@@ -130,25 +149,6 @@ components:
               title:
                 type: string
           description: Projects the employee worked on in the timesheet period
-    TimesheetList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Timesheet'
-        meta:
-          type: object
-          properties:
-            page:
-              type: integer
-              description: Current page number
-            pageSize:
-              type: integer
-              description: Number of items per page
-            totalCount:
-              type: integer
-              description: Total number of timesheets
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,40 +1,65 @@
 {
   "provider": "leapsome",
   "sources": [
-    "leapsome-absences-api-openapi.yml",
-    "leapsome-accessroles-api-openapi.yml",
-    "leapsome-auth-api-openapi.yml",
-    "leapsome-documents-api-openapi.yml",
-    "leapsome-feedback-api-openapi.yml",
-    "leapsome-goals-api-openapi.yml",
-    "leapsome-groups-api-openapi.yml",
-    "leapsome-leapsome-api-api-openapi.yml",
-    "leapsome-payroll-api-openapi.yml",
-    "leapsome-reviews-api-openapi.yml",
-    "leapsome-schemas-api-openapi.yml",
-    "leapsome-timetracking-api-openapi.yml",
-    "leapsome-users-api-openapi.yml",
-    "leapsome-worklocations-api-openapi.yml"
+    "_original/leapsome-content-api-openapi.yml",
+    "_original/leapsome-scim-api-openapi.yml"
   ],
   "outputs": [
+    "leapsome-leapsome-api-api-openapi.yml",
     "leapsome-absences-api-openapi.yml",
     "leapsome-accessroles-api-openapi.yml",
     "leapsome-auth-api-openapi.yml",
     "leapsome-documents-api-openapi.yml",
     "leapsome-feedback-api-openapi.yml",
     "leapsome-goals-api-openapi.yml",
-    "leapsome-groups-api-openapi.yml",
-    "leapsome-leapsome-api-api-openapi.yml",
     "leapsome-payroll-api-openapi.yml",
     "leapsome-reviews-api-openapi.yml",
-    "leapsome-schemas-api-openapi.yml",
     "leapsome-timetracking-api-openapi.yml",
     "leapsome-users-api-openapi.yml",
-    "leapsome-worklocations-api-openapi.yml"
+    "leapsome-worklocations-api-openapi.yml",
+    "leapsome-groups-api-openapi.yml",
+    "leapsome-schemas-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 2 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "leapsome-content-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "leapsome-content-api-openapi.yml: tagged paths GET / -> Leapsome API",
+    "leapsome-content-api-openapi.yml: declared missing tag: Leapsome API",
+    "leapsome-content-api-openapi.yml: declared missing tag: absences",
+    "leapsome-content-api-openapi.yml: declared missing tag: accessRoles",
+    "leapsome-content-api-openapi.yml: declared missing tag: auth",
+    "leapsome-content-api-openapi.yml: declared missing tag: documents",
+    "leapsome-content-api-openapi.yml: declared missing tag: feedback",
+    "leapsome-content-api-openapi.yml: declared missing tag: goals",
+    "leapsome-content-api-openapi.yml: declared missing tag: payroll",
+    "leapsome-content-api-openapi.yml: declared missing tag: reviews",
+    "leapsome-content-api-openapi.yml: declared missing tag: timeTracking",
+    "leapsome-content-api-openapi.yml: declared missing tag: users",
+    "leapsome-content-api-openapi.yml: declared missing tag: workLocations",
+    "leapsome-scim-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "tag 'users' spans 2 source specs (leapsome-content-api-openapi.yml, leapsome-scim-api-openapi.yml): per-path servers applied",
+    "superseded outputs removed: leapsome-access-roles-api-openapi.yml, leapsome-time-tracking-api-openapi.yml",
+    "apis.yml register: written (+2 apis, 14 total)"
+  ],
+  "skipped": [
+    "leapsome-absences-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-access-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-feedback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-goals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-leapsome-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-payroll-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-reviews-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-schemas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-time-tracking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leapsome-worklocations-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

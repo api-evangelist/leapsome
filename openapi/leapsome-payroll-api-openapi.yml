@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences payroll API
+  title: Leapsome Payroll API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -9,7 +9,7 @@ info:
 servers:
 - url: https://api.leapsome.com/v1
 tags:
-- name: payroll
+- name: Payroll
 paths:
   /payroll-cycles:
     get:
@@ -19,7 +19,7 @@ paths:
       security:
       - bearerAuth: []
       tags:
-      - payroll
+      - Payroll
       parameters:
       - name: name
         in: query
@@ -74,7 +74,7 @@ paths:
       security:
       - bearerAuth: []
       tags:
-      - payroll
+      - Payroll
       parameters:
       - name: payrollCycleId
         in: path
@@ -129,25 +129,6 @@ paths:
           description: Payroll cycle not found.
 components:
   schemas:
-    PayrollCycleList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PayrollCycle'
-        meta:
-          type: object
-          properties:
-            page:
-              type: integer
-              description: Current page number
-            pageSize:
-              type: integer
-              description: Number of items per page
-            totalCount:
-              type: integer
-              description: Total number of payroll cycles
     PayrollCycleParticipantList:
       type: object
       properties:
@@ -167,6 +148,88 @@ components:
             totalCount:
               type: integer
               description: Total number of participants
+    PayrollCycleParticipant:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+          description: Payroll cycle participant ID
+        name:
+          type: string
+          example: John Doe
+          description: Name of the participant
+        email:
+          type: string
+          format: email
+          example: jane.doe@example.com
+          description: Email address of the participant
+        compensations:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the compensation
+              amount:
+                type: number
+                description: Amount of the compensation
+              amountType:
+                type: string
+                enum:
+                - fixed
+                - variable
+                description: Type of the compensation
+              recurrence:
+                type: string
+                enum:
+                - monthly
+                - every3Months
+                - every6Months
+                - every12Months
+                description: Recurrence of the compensation
+              comment:
+                type: string
+                description: Comment for the compensation
+              effectiveAt:
+                type: string
+                format: date-time
+                description: Effective date of the compensation
+              validUntil:
+                type: string
+                format: date-time
+                description: Valid until date of the compensation
+        salaryInfoPeriods:
+          type: array
+          items:
+            type: object
+            properties:
+              currency:
+                type: string
+              salary:
+                type: number
+                description: Salary for the period
+              salaryRemunerationPeriod:
+                type: string
+                enum:
+                - year
+                - month
+                - hour
+                description: Remuneration period of the salary
+              compensationType:
+                type: string
+                enum:
+                - fixed
+                - hourly
+                description: Type of the compensation
+              baseSalary:
+                type: number
+                description: Base salary for the period
+        isActiveParticipant:
+          type: boolean
+          description: Whether the participant is active in the payroll cycle
     PayrollCycle:
       type: object
       properties:
@@ -261,88 +324,25 @@ components:
           type: string
           format: date-time
           description: When the payroll cycle was last updated
-    PayrollCycleParticipant:
+    PayrollCycleList:
       type: object
       properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          example: 58d55e3ffdc2eb20547edd0a
-          description: Payroll cycle participant ID
-        name:
-          type: string
-          example: John Doe
-          description: Name of the participant
-        email:
-          type: string
-          format: email
-          example: jane.doe@example.com
-          description: Email address of the participant
-        compensations:
+        data:
           type: array
           items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: Name of the compensation
-              amount:
-                type: number
-                description: Amount of the compensation
-              amountType:
-                type: string
-                enum:
-                - fixed
-                - variable
-                description: Type of the compensation
-              recurrence:
-                type: string
-                enum:
-                - monthly
-                - every3Months
-                - every6Months
-                - every12Months
-                description: Recurrence of the compensation
-              comment:
-                type: string
-                description: Comment for the compensation
-              effectiveAt:
-                type: string
-                format: date-time
-                description: Effective date of the compensation
-              validUntil:
-                type: string
-                format: date-time
-                description: Valid until date of the compensation
-        salaryInfoPeriods:
-          type: array
-          items:
-            type: object
-            properties:
-              currency:
-                type: string
-              salary:
-                type: number
-                description: Salary for the period
-              salaryRemunerationPeriod:
-                type: string
-                enum:
-                - year
-                - month
-                - hour
-                description: Remuneration period of the salary
-              compensationType:
-                type: string
-                enum:
-                - fixed
-                - hourly
-                description: Type of the compensation
-              baseSalary:
-                type: number
-                description: Base salary for the period
-        isActiveParticipant:
-          type: boolean
-          description: Whether the participant is active in the payroll cycle
+            $ref: '#/components/schemas/PayrollCycle'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              description: Current page number
+            pageSize:
+              type: integer
+              description: Number of items per page
+            totalCount:
+              type: integer
+              description: Total number of payroll cycles
   securitySchemes:
     bearerAuth:
       type: http

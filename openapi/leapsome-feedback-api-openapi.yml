@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   version: 1.0.1
-  title: Leapsome absences feedback API
+  title: Leapsome Feedback API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
@@ -9,21 +9,19 @@ info:
 servers:
 - url: https://api.leapsome.com/v1
 tags:
-- name: feedback
+- name: Feedback
 paths:
   /feedback:
     get:
       summary: List feedback
       description: 'Get a paginated list of instant feedback and praise items. Supports filtering by
 
-        type (praise or instantFeedback), sender, and receiver.
-
-        '
+        type (praise or instantFeedback), sender, and receiver.'
       operationId: listFeedback
       security:
       - bearerAuth: []
       tags:
-      - feedback
+      - Feedback
       parameters:
       - name: type
         in: query
@@ -79,14 +77,12 @@ paths:
       summary: Create praise
       description: 'Create a new praise item. Requires the instant feedback praise permission.
 
-        Returns the ID of the created feedback.
-
-        '
+        Returns the ID of the created feedback.'
       operationId: createPraise
       security:
       - bearerAuth: []
       tags:
-      - feedback
+      - Feedback
       requestBody:
         required: true
         content:
@@ -109,14 +105,12 @@ paths:
       summary: Create instant feedback
       description: 'Create instant feedback for a user. By default only visible to the receiver.
 
-        Requires the instant feedback permission.
-
-        '
+        Requires the instant feedback permission.'
       operationId: createInstantFeedback
       security:
       - bearerAuth: []
       tags:
-      - feedback
+      - Feedback
       requestBody:
         required: true
         content:
@@ -139,14 +133,12 @@ paths:
       summary: Create private note
       description: 'Create a private note about a user. Private notes are only visible to the
 
-        sender and cannot be seen by the receiver or anyone else.
-
-        '
+        sender and cannot be seen by the receiver or anyone else.'
       operationId: createPrivateNote
       security:
       - bearerAuth: []
       tags:
-      - feedback
+      - Feedback
       requestBody:
         required: true
         content:
@@ -164,33 +156,14 @@ paths:
           description: Authorization failed. Token is missing or invalid.
 components:
   schemas:
-    CreateFeedbackResponse:
+    CreatePraiseResponse:
       type: object
       properties:
         id:
           type: string
           pattern: ^[0-9a-f]{24}$
           description: ID of the created feedback item
-    FeedbackList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeedbackItem'
-        meta:
-          type: object
-          properties:
-            offset:
-              type: integer
-              description: Number of results skipped
-            limit:
-              type: integer
-              description: Maximum number of results returned
-            totalCount:
-              type: integer
-              description: Total number of feedback items
-    CreatePraiseResponse:
+    CreateFeedbackResponse:
       type: object
       properties:
         id:
@@ -273,6 +246,25 @@ components:
           type: string
           minLength: 1
           description: The private note content
+    FeedbackList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedbackItem'
+        meta:
+          type: object
+          properties:
+            offset:
+              type: integer
+              description: Number of results skipped
+            limit:
+              type: integer
+              description: Maximum number of results returned
+            totalCount:
+              type: integer
+              description: Total number of feedback items
     FeedbackItem:
       type: object
       properties:
@@ -288,13 +280,15 @@ components:
           - instantFeedback
           description: Type of feedback
         sender:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             id:
-              type: string
+              type:
+              - string
+              - 'null'
               pattern: ^[0-9a-f]{24}$
-              nullable: true
               description: Sender user ID (null if anonymous)
             name:
               type: string
@@ -314,12 +308,14 @@ components:
                 description: Receiver display name
           description: Users or teams who received the feedback
         message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The feedback message content
         badge:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             name:
               type: string

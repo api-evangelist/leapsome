@@ -1,13 +1,15 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  version: 1.0.1
-  title: Leapsome absences Groups API
+  version: 1.1.3
+  title: Leapsome SCIM Groups API
   contact:
     name: Support
     url: https://leapsome.zendesk.com
-  description: The Content API enables you to export some raw data from Leapsome for usage within your own systems and beyond what the Leapsome application offers natively. Usage is restricted to a maximum of 20 requests per second when making requests in parallel. If you exceed this limit, you will receive a 429 status code.
+  description: The SCIM API lets you manage users in your organization.
 servers:
-- url: https://api.leapsome.com/v1
+- url: https://api.leapsome.com/scim/v1
+security:
+- SCIM-Token: []
 tags:
 - description: Operations on groups belonging to an organization
   name: Groups
@@ -52,9 +54,7 @@ paths:
     post:
       description: 'Creates a new organization group and adds it to the user domain.
 
-        Member groups and member users must be in the organization.
-
-        '
+        Member groups and member users must be in the organization.'
       operationId: createGroup
       requestBody:
         description: The details of the group to create
@@ -112,9 +112,7 @@ paths:
       tags:
       - Groups
     patch:
-      description: 'Updates one or more values of an existing group without sending the full definition. For members you need to send the complete list of all members. Member groups and member users must be in the organization.
-
-        '
+      description: Updates one or more values of an existing group without sending the full definition. For members you need to send the complete list of all members. Member groups and member users must be in the organization.
       operationId: updateGroup
       parameters:
       - $ref: '#/components/parameters/groupId'
@@ -170,34 +168,18 @@ paths:
       - Groups
 components:
   schemas:
-    Member:
-      description: A member of a group. This can be a group or an user
+    GroupDefinition:
+      description: Describes the group to create
       type: object
       properties:
-        value:
-          description: The Leapsome ID of a user
+        displayName:
+          description: The group's display name
           type: string
-    GroupCollection:
-      description: Class describing a collection of groups
-      type: object
-      properties:
-        Resources:
-          description: An array of groups
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-        totalResults:
-          description: The number of groups in the collection
-          format: int64
-          type: integer
-        itemsPerPage:
-          type: integer
-        startIndex:
-          type: integer
-        schemas:
-          type: array
-          items:
-            type: string
+        externalId:
+          type: string
+          description: The id of the group in an external system
+      required:
+      - displayName
     Group:
       description: Describes a group belonging to an organization
       type: object
@@ -226,18 +208,34 @@ components:
       required:
       - id
       - displayName
-    GroupDefinition:
-      description: Describes the group to create
+    GroupCollection:
+      description: Class describing a collection of groups
       type: object
       properties:
-        displayName:
-          description: The group's display name
+        Resources:
+          description: An array of groups
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        totalResults:
+          description: The number of groups in the collection
+          format: int64
+          type: integer
+        itemsPerPage:
+          type: integer
+        startIndex:
+          type: integer
+        schemas:
+          type: array
+          items:
+            type: string
+    Member:
+      description: A member of a group. This can be a group or an user
+      type: object
+      properties:
+        value:
+          description: The Leapsome ID of a user
           type: string
-        externalId:
-          type: string
-          description: The id of the group in an external system
-      required:
-      - displayName
     GroupMetadata:
       description: Group metadata
       type: object
@@ -264,7 +262,7 @@ components:
       schema:
         type: string
   securitySchemes:
-    bearerAuth:
+    SCIM-Token:
       type: http
       scheme: bearer
-      bearerFormat: JWT
+      description: 'The SCIM-Authentication-Token token you generated within the Leapsome admin area (Section: HRIS integrations -> SCIM)'
