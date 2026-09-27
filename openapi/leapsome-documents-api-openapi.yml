@@ -81,6 +81,18 @@ paths:
           description: User not found.
 components:
   schemas:
+    DocumentCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: Category ID. Use this value as the `category` field when uploading documents.
+          example: 58d55e3ffdc2eb20547edd0a
+        name:
+          type: string
+          description: Display name of the category
+          example: Past Reviews
     UploadUserDocumentRequest:
       type: object
       required:
@@ -108,18 +120,6 @@ components:
           pattern: ^[0-9a-f]{24}$
           description: ID of the uploaded document
           example: 58d55e3ffdc2eb20547edd0a
-    DocumentCategory:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: Category ID. Use this value as the `category` field when uploading documents.
-          example: 58d55e3ffdc2eb20547edd0a
-        name:
-          type: string
-          description: Display name of the category
-          example: Past Reviews
   securitySchemes:
     bearerAuth:
       type: http

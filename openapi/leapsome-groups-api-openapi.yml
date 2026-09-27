@@ -168,18 +168,6 @@ paths:
       - Groups
 components:
   schemas:
-    GroupDefinition:
-      description: Describes the group to create
-      type: object
-      properties:
-        displayName:
-          description: The group's display name
-          type: string
-        externalId:
-          type: string
-          description: The id of the group in an external system
-      required:
-      - displayName
     Group:
       description: Describes a group belonging to an organization
       type: object
@@ -208,6 +196,42 @@ components:
       required:
       - id
       - displayName
+    GroupMetadata:
+      description: Group metadata
+      type: object
+      properties:
+        created:
+          description: The date and time the group was created
+          format: date-time
+          type: string
+        location:
+          description: A URI to get the group details through this API
+          type: string
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification date & time
+        version:
+          type: string
+    Member:
+      description: A member of a group. This can be a group or an user
+      type: object
+      properties:
+        value:
+          description: The Leapsome ID of a user
+          type: string
+    GroupDefinition:
+      description: Describes the group to create
+      type: object
+      properties:
+        displayName:
+          description: The group's display name
+          type: string
+        externalId:
+          type: string
+          description: The id of the group in an external system
+      required:
+      - displayName
     GroupCollection:
       description: Class describing a collection of groups
       type: object
@@ -229,30 +253,6 @@ components:
           type: array
           items:
             type: string
-    Member:
-      description: A member of a group. This can be a group or an user
-      type: object
-      properties:
-        value:
-          description: The Leapsome ID of a user
-          type: string
-    GroupMetadata:
-      description: Group metadata
-      type: object
-      properties:
-        created:
-          description: The date and time the group was created
-          format: date-time
-          type: string
-        location:
-          description: A URI to get the group details through this API
-          type: string
-        lastModified:
-          type: string
-          format: date-time
-          description: Last modification date & time
-        version:
-          type: string
   parameters:
     groupId:
       description: The key of the group to query. The group must be in the organization domain

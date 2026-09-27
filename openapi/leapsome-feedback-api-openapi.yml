@@ -156,13 +156,54 @@ paths:
           description: Authorization failed. Token is missing or invalid.
 components:
   schemas:
-    CreatePraiseResponse:
+    CreatePraiseRequest:
       type: object
+      required:
+      - senderId
+      - receiverIds
+      - message
       properties:
-        id:
+        senderId:
           type: string
           pattern: ^[0-9a-f]{24}$
-          description: ID of the created feedback item
+          description: User ID of the sender
+        receiverIds:
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9a-f]{24}$
+          minItems: 1
+          description: User IDs of the praise receivers
+        message:
+          type: string
+          minLength: 1
+          description: The praise message content
+        visibility:
+          type: string
+          enum:
+          - public
+          - receiver
+          default: public
+          description: Visibility level of the praise
+    FeedbackList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedbackItem'
+        meta:
+          type: object
+          properties:
+            offset:
+              type: integer
+              description: Number of results skipped
+            limit:
+              type: integer
+              description: Maximum number of results returned
+            totalCount:
+              type: integer
+              description: Total number of feedback items
     CreateFeedbackResponse:
       type: object
       properties:
@@ -198,35 +239,13 @@ components:
           - senderOnly
           default: receiver
           description: Visibility level of the feedback
-    CreatePraiseRequest:
+    CreatePraiseResponse:
       type: object
-      required:
-      - senderId
-      - receiverIds
-      - message
       properties:
-        senderId:
+        id:
           type: string
           pattern: ^[0-9a-f]{24}$
-          description: User ID of the sender
-        receiverIds:
-          type: array
-          items:
-            type: string
-            pattern: ^[0-9a-f]{24}$
-          minItems: 1
-          description: User IDs of the praise receivers
-        message:
-          type: string
-          minLength: 1
-          description: The praise message content
-        visibility:
-          type: string
-          enum:
-          - public
-          - receiver
-          default: public
-          description: Visibility level of the praise
+          description: ID of the created feedback item
     CreatePrivateNoteRequest:
       type: object
       required:
@@ -246,25 +265,6 @@ components:
           type: string
           minLength: 1
           description: The private note content
-    FeedbackList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeedbackItem'
-        meta:
-          type: object
-          properties:
-            offset:
-              type: integer
-              description: Number of results skipped
-            limit:
-              type: integer
-              description: Maximum number of results returned
-            totalCount:
-              type: integer
-              description: Total number of feedback items
     FeedbackItem:
       type: object
       properties:

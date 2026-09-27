@@ -36,6 +36,30 @@ paths:
       - Schemas
 components:
   schemas:
+    Filter:
+      description: Specifies FILTER options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Bulk:
+      description: Specifies BULK configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Patch:
+      description: Specifies PATCH configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
     ChangePassword:
       description: Specifies Change Password configuration options
       properties:
@@ -44,8 +68,8 @@ components:
           type: boolean
       required:
       - supported
-    Sort:
-      description: Specifies Sort configuration options
+    Etag:
+      description: Specifies Etag configuration options
       properties:
         supported:
           description: Specifies whether the operation is supported
@@ -72,32 +96,8 @@ components:
       - description
       - specUrl
       - documentationUrl
-    Etag:
-      description: Specifies Etag configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Patch:
-      description: Specifies PATCH configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Filter:
-      description: Specifies FILTER options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Bulk:
-      description: Specifies BULK configuration options
+    Sort:
+      description: Specifies Sort configuration options
       properties:
         supported:
           description: Specifies whether the operation is supported
