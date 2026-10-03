@@ -93,6 +93,14 @@ components:
           type: string
           description: Display name of the category
           example: Past Reviews
+    UploadUserDocumentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: ID of the uploaded document
+          example: 58d55e3ffdc2eb20547edd0a
     UploadUserDocumentRequest:
       type: object
       required:
@@ -112,14 +120,6 @@ components:
           type: string
           description: Optional human-readable description for the document
           example: Annual performance review for 2024
-    UploadUserDocumentResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: ID of the uploaded document
-          example: 58d55e3ffdc2eb20547edd0a
   securitySchemes:
     bearerAuth:
       type: http

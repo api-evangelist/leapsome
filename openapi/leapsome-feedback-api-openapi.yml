@@ -185,32 +185,6 @@ components:
           - receiver
           default: public
           description: Visibility level of the praise
-    FeedbackList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeedbackItem'
-        meta:
-          type: object
-          properties:
-            offset:
-              type: integer
-              description: Number of results skipped
-            limit:
-              type: integer
-              description: Maximum number of results returned
-            totalCount:
-              type: integer
-              description: Total number of feedback items
-    CreateFeedbackResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: ID of the created feedback item
     CreateInstantFeedbackRequest:
       type: object
       required:
@@ -239,13 +213,6 @@ components:
           - senderOnly
           default: receiver
           description: Visibility level of the feedback
-    CreatePraiseResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: ID of the created feedback item
     CreatePrivateNoteRequest:
       type: object
       required:
@@ -341,6 +308,39 @@ components:
         commentsCount:
           type: integer
           description: Number of comments on the feedback
+    CreateFeedbackResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: ID of the created feedback item
+    CreatePraiseResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: ID of the created feedback item
+    FeedbackList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedbackItem'
+        meta:
+          type: object
+          properties:
+            offset:
+              type: integer
+              description: Number of results skipped
+            limit:
+              type: integer
+              description: Maximum number of results returned
+            totalCount:
+              type: integer
+              description: Total number of feedback items
   securitySchemes:
     bearerAuth:
       type: http

@@ -433,19 +433,25 @@ paths:
     - url: https://api.leapsome.com/scim/v1
 components:
   schemas:
-    PublicUserAccessRoleCustomConfiguration:
+    EmployeeList:
       type: object
-      required:
-      - accessRole
-      - userSpecificAccessScope
-      additionalProperties: false
       properties:
-        accessRole:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: Access role ID this custom user scope belongs to
-        userSpecificAccessScope:
-          $ref: '#/components/schemas/PublicUserSpecificAccessScope'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              description: Current page number
+            pageSize:
+              type: integer
+              description: Number of items per page
+            totalCount:
+              type: integer
+              description: Total number of employees
     UpdateEmployeeAccessRolesResponse:
       type: object
       properties:
@@ -461,25 +467,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublicUserAccessRoleCustomConfiguration'
-    PublicUserSpecificAccessScope:
-      type: object
-      required:
-      - include
-      additionalProperties: false
-      properties:
-        include:
-          type: object
-          required:
-          - users
-          additionalProperties: false
-          properties:
-            users:
-              type: array
-              minItems: 1
-              items:
-                type: string
-                pattern: ^[0-9a-f]{24}$
-              description: User IDs the target employee may access when using this role
     Employee:
       type: object
       properties:
@@ -786,117 +773,69 @@ components:
           description: User-specific scope configurations for access roles with `userScopeType` set to `userSpecific`. Only `include.users` is supported.
           items:
             $ref: '#/components/schemas/PublicUserAccessRoleCustomConfiguration'
-    EmployeeList:
+    PublicUserSpecificAccessScope:
       type: object
+      required:
+      - include
+      additionalProperties: false
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Employee'
-        meta:
+        include:
           type: object
+          required:
+          - users
+          additionalProperties: false
           properties:
-            page:
-              type: integer
-              description: Current page number
-            pageSize:
-              type: integer
-              description: Number of items per page
-            totalCount:
-              type: integer
-              description: Total number of employees
-    UserDefinition:
-      description: Describes a new user
-      type: object
-      x-examples: {}
-      properties:
-        externalId:
-          description: User's ID in external system
-          type: string
-        title:
-          description: User's job title
-          default: Colleague
-          type: string
-        photos:
-          description: Array of profile picture URL's. We take the first one as user avatar.
-          type: array
-          items:
-            type: object
-            properties:
-              value:
+            users:
+              type: array
+              minItems: 1
+              items:
                 type: string
-                format: uri
-                description: Needs to be a complete and valid url.
-        name:
-          $ref: '#/components/schemas/UserFullName'
-        displayName:
-          description: A user's full displayed name
+                pattern: ^[0-9a-f]{24}$
+              description: User IDs the target employee may access when using this role
+    PublicUserAccessRoleCustomConfiguration:
+      type: object
+      required:
+      - accessRole
+      - userSpecificAccessScope
+      additionalProperties: false
+      properties:
+        accessRole:
           type: string
-        userName:
-          description: The user's username, usually their email address'
+          pattern: ^[0-9a-f]{24}$
+          description: Access role ID this custom user scope belongs to
+        userSpecificAccessScope:
+          $ref: '#/components/schemas/PublicUserSpecificAccessScope'
+    UserMetadata:
+      description: User metadata
+      type: object
+      properties:
+        created:
+          description: The date and time the user was created
+          format: date-time
           type: string
         location:
-          description: User's location value
+          description: The URL where the user can be accessed
           type: string
-        manager:
-          description: User ID of user's manager which can be a LeapsomeId, an email or the externalId
+        version:
           type: string
-        urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:
-          type: object
-          properties:
-            manager:
-              description: User ID of user's manager which can be a LeapsomeId, an email or the externalId
-              type: string
-            additionalManagers:
-              type: array
-              items:
-                description: User ID of user's additional manager which can be a LeapsomeId, an email or the externalId
-                type: string
-            department:
-              type: string
-              description: The team name of the user's department
-            costCenter:
-              type: string
-              description: The team name of the user's cost center
-            division:
-              type: string
-            level:
-              description: Current level of the employee as a string.
-              type: string
-              example: Junior Engineer
-            startDate:
-              description: Employment start Date as a string in ISO-8601 format (YYYY-MM-DD).
-              type: string
-              example: '2011-03-25'
-            endDate:
-              description: Employment end Date as a string in ISO-8601 format (YYYY-MM-DD).
-              type: string
-              example: '2022-02-25'
-            birthday:
-              description: Birthday of the employee (used for data segmentation) as a string in ISO-8601 format (YYYY-MM-DD).
-              type: string
-              example: '1985-07-20'
-            6140868326541a4da586db0b:
-              description: Value of a given custom attribute identified via its ID. Get the custom attribute ID from the Users & Teams tab.
-              type: string
-              example: Salary Class B
-            6140868326541a4da586db0c:
-              description: Value of a given custom attribute identified via its ID. Get the custom attribute ID from the Users & Teams tab.
-              type: string
-              example: Freelancer
-            gender:
-              description: Gender of the employee as a string(male, female, diverse)
-              type: string
-              example: female
-            location:
-              description: Location of the employee as a string.
-              type: string
-              example: Berlin
-        active:
-          type: boolean
-          description: Activate (true) or deactivate (false) a user if provided. If the user has been active before, the account will be active again while it might be in a "invited" or "created" state if the user never accepted an invitation before.
+        lastModified:
+          type: string
+          format: date-time
       required:
-      - userName
+      - created
+      - location
+      - version
+      - lastModified
+    UserManager:
+      description: User's (additional) Manager
+      type: object
+      properties:
+        managerId:
+          type: string
+          description: A Leapsome userId of the  (additional) manager
+        displayName:
+          type: string
+          description: The full name of the defined (additional) manager
     User:
       description: Describes a user belonging to an organization
       type: object
@@ -1074,37 +1013,6 @@ components:
           type: array
           items:
             type: string
-    UserMetadata:
-      description: User metadata
-      type: object
-      properties:
-        created:
-          description: The date and time the user was created
-          format: date-time
-          type: string
-        location:
-          description: The URL where the user can be accessed
-          type: string
-        version:
-          type: string
-        lastModified:
-          type: string
-          format: date-time
-      required:
-      - created
-      - location
-      - version
-      - lastModified
-    UserManager:
-      description: User's (additional) Manager
-      type: object
-      properties:
-        managerId:
-          type: string
-          description: A Leapsome userId of the  (additional) manager
-        displayName:
-          type: string
-          description: The full name of the defined (additional) manager
     UserFullName:
       description: The individual name parts of a user
       type: object
@@ -1122,6 +1030,98 @@ components:
       required:
       - familyName
       - givenName
+    UserDefinition:
+      description: Describes a new user
+      type: object
+      x-examples: {}
+      properties:
+        externalId:
+          description: User's ID in external system
+          type: string
+        title:
+          description: User's job title
+          default: Colleague
+          type: string
+        photos:
+          description: Array of profile picture URL's. We take the first one as user avatar.
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: uri
+                description: Needs to be a complete and valid url.
+        name:
+          $ref: '#/components/schemas/UserFullName'
+        displayName:
+          description: A user's full displayed name
+          type: string
+        userName:
+          description: The user's username, usually their email address'
+          type: string
+        location:
+          description: User's location value
+          type: string
+        manager:
+          description: User ID of user's manager which can be a LeapsomeId, an email or the externalId
+          type: string
+        urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:
+          type: object
+          properties:
+            manager:
+              description: User ID of user's manager which can be a LeapsomeId, an email or the externalId
+              type: string
+            additionalManagers:
+              type: array
+              items:
+                description: User ID of user's additional manager which can be a LeapsomeId, an email or the externalId
+                type: string
+            department:
+              type: string
+              description: The team name of the user's department
+            costCenter:
+              type: string
+              description: The team name of the user's cost center
+            division:
+              type: string
+            level:
+              description: Current level of the employee as a string.
+              type: string
+              example: Junior Engineer
+            startDate:
+              description: Employment start Date as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '2011-03-25'
+            endDate:
+              description: Employment end Date as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '2022-02-25'
+            birthday:
+              description: Birthday of the employee (used for data segmentation) as a string in ISO-8601 format (YYYY-MM-DD).
+              type: string
+              example: '1985-07-20'
+            6140868326541a4da586db0b:
+              description: Value of a given custom attribute identified via its ID. Get the custom attribute ID from the Users & Teams tab.
+              type: string
+              example: Salary Class B
+            6140868326541a4da586db0c:
+              description: Value of a given custom attribute identified via its ID. Get the custom attribute ID from the Users & Teams tab.
+              type: string
+              example: Freelancer
+            gender:
+              description: Gender of the employee as a string(male, female, diverse)
+              type: string
+              example: female
+            location:
+              description: Location of the employee as a string.
+              type: string
+              example: Berlin
+        active:
+          type: boolean
+          description: Activate (true) or deactivate (false) a user if provided. If the user has been active before, the account will be active again while it might be in a "invited" or "created" state if the user never accepted an invitation before.
+      required:
+      - userName
   parameters:
     userId:
       description: The key of the user to query. The user must be in the organization domain

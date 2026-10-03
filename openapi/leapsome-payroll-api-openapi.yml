@@ -305,25 +305,6 @@ components:
         isActiveParticipant:
           type: boolean
           description: Whether the participant is active in the payroll cycle
-    PayrollCycleParticipantList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PayrollCycleParticipant'
-        meta:
-          type: object
-          properties:
-            page:
-              type: integer
-              description: Current page number
-            pageSize:
-              type: integer
-              description: Number of items per page
-            totalCount:
-              type: integer
-              description: Total number of participants
     PayrollCycleList:
       type: object
       properties:
@@ -343,6 +324,25 @@ components:
             totalCount:
               type: integer
               description: Total number of payroll cycles
+    PayrollCycleParticipantList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayrollCycleParticipant'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              description: Current page number
+            pageSize:
+              type: integer
+              description: Number of items per page
+            totalCount:
+              type: integer
+              description: Total number of participants
   securitySchemes:
     bearerAuth:
       type: http
