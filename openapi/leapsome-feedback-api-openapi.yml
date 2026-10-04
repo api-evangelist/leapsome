@@ -156,6 +156,60 @@ paths:
           description: Authorization failed. Token is missing or invalid.
 components:
   schemas:
+    FeedbackList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedbackItem'
+        meta:
+          type: object
+          properties:
+            offset:
+              type: integer
+              description: Number of results skipped
+            limit:
+              type: integer
+              description: Maximum number of results returned
+            totalCount:
+              type: integer
+              description: Total number of feedback items
+    CreateInstantFeedbackRequest:
+      type: object
+      required:
+      - senderId
+      - receiverId
+      - message
+      properties:
+        senderId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: User ID of the sender
+        receiverId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: User ID of the feedback receiver
+        message:
+          type: string
+          minLength: 1
+          description: The feedback message content
+        visibility:
+          type: string
+          enum:
+          - public
+          - receiver
+          - manager
+          - senderOnly
+          default: receiver
+          description: Visibility level of the feedback
+    CreatePraiseResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: ID of the created feedback item
     CreatePraiseRequest:
       type: object
       required:
@@ -185,53 +239,6 @@ components:
           - receiver
           default: public
           description: Visibility level of the praise
-    CreateInstantFeedbackRequest:
-      type: object
-      required:
-      - senderId
-      - receiverId
-      - message
-      properties:
-        senderId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: User ID of the sender
-        receiverId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: User ID of the feedback receiver
-        message:
-          type: string
-          minLength: 1
-          description: The feedback message content
-        visibility:
-          type: string
-          enum:
-          - public
-          - receiver
-          - manager
-          - senderOnly
-          default: receiver
-          description: Visibility level of the feedback
-    CreatePrivateNoteRequest:
-      type: object
-      required:
-      - senderId
-      - receiverId
-      - message
-      properties:
-        senderId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: User ID of the sender
-        receiverId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: User ID the private note is about
-        message:
-          type: string
-          minLength: 1
-          description: The private note content
     FeedbackItem:
       type: object
       properties:
@@ -315,32 +322,25 @@ components:
           type: string
           pattern: ^[0-9a-f]{24}$
           description: ID of the created feedback item
-    CreatePraiseResponse:
+    CreatePrivateNoteRequest:
       type: object
+      required:
+      - senderId
+      - receiverId
+      - message
       properties:
-        id:
+        senderId:
           type: string
           pattern: ^[0-9a-f]{24}$
-          description: ID of the created feedback item
-    FeedbackList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeedbackItem'
-        meta:
-          type: object
-          properties:
-            offset:
-              type: integer
-              description: Number of results skipped
-            limit:
-              type: integer
-              description: Maximum number of results returned
-            totalCount:
-              type: integer
-              description: Total number of feedback items
+          description: User ID of the sender
+        receiverId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: User ID the private note is about
+        message:
+          type: string
+          minLength: 1
+          description: The private note content
   securitySchemes:
     bearerAuth:
       type: http

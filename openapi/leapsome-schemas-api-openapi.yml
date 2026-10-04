@@ -44,6 +44,30 @@ components:
           type: boolean
       required:
       - supported
+    Bulk:
+      description: Specifies BULK configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Patch:
+      description: Specifies PATCH configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    ChangePassword:
+      description: Specifies Change Password configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
     AuthenticationSchemes:
       description: Specifies supported Authentication Scheme properties
       properties:
@@ -64,6 +88,22 @@ components:
       - description
       - specUrl
       - documentationUrl
+    Etag:
+      description: Specifies Etag configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Filter:
+      description: Specifies FILTER options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
     ServiceProviderConfig:
       description: Represents the Service Provider's configuration
       properties:
@@ -93,46 +133,6 @@ components:
       - sort
       - etag
       - authenticationSchemes
-    Etag:
-      description: Specifies Etag configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    ChangePassword:
-      description: Specifies Change Password configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Patch:
-      description: Specifies PATCH configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Bulk:
-      description: Specifies BULK configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Filter:
-      description: Specifies FILTER options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
   securitySchemes:
     SCIM-Token:
       type: http

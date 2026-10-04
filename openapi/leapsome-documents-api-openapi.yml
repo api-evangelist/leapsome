@@ -81,6 +81,25 @@ paths:
           description: User not found.
 components:
   schemas:
+    UploadUserDocumentRequest:
+      type: object
+      required:
+      - file
+      - category
+      properties:
+        file:
+          type: string
+          format: binary
+          description: The document file to upload (max 25 MB)
+        category:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          description: ID of the user document category (from GET /documents/categories)
+          example: 58d55e3ffdc2eb20547edd0a
+        description:
+          type: string
+          description: Optional human-readable description for the document
+          example: Annual performance review for 2024
     DocumentCategory:
       type: object
       properties:
@@ -101,25 +120,6 @@ components:
           pattern: ^[0-9a-f]{24}$
           description: ID of the uploaded document
           example: 58d55e3ffdc2eb20547edd0a
-    UploadUserDocumentRequest:
-      type: object
-      required:
-      - file
-      - category
-      properties:
-        file:
-          type: string
-          format: binary
-          description: The document file to upload (max 25 MB)
-        category:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          description: ID of the user document category (from GET /documents/categories)
-          example: 58d55e3ffdc2eb20547edd0a
-        description:
-          type: string
-          description: Optional human-readable description for the document
-          example: Annual performance review for 2024
   securitySchemes:
     bearerAuth:
       type: http

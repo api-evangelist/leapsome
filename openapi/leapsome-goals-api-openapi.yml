@@ -299,6 +299,60 @@ paths:
                 $ref: '#/components/schemas/Goal'
 components:
   schemas:
+    Meta:
+      type: object
+      required:
+      - count
+      - cursor
+      - nextPage
+      properties:
+        count:
+          type: integer
+          description: number of results returned in this request
+          minimum: 1
+          maximum: 1000
+        cursor:
+          type:
+          - string
+          - 'null'
+          description: 'Will be set to `null` if complete set have been returned.
+
+            '
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+        nextPage:
+          type:
+          - string
+          - 'null'
+          format: url
+          description: URL of the next result page. `null` means no more results available.
+    Comments:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    InitiativeUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - notStarted
+          - inProgress
+          - completed
+          - blocked
     Tag:
       type: object
       required:
@@ -321,119 +375,6 @@ components:
           - active
           - viewOnly
           - removed
-        createdAt:
-          type: string
-          format: date-time
-          example: '2019-08-23T11:53:06.741Z'
-        updatedAt:
-          type: string
-          format: date-time
-          example: '2019-08-23T11:53:06.741Z'
-    KeyResults:
-      type: object
-      required:
-      - id
-      - name
-      - metric
-      - weight
-      - ownerTeam
-      - ownerUser
-      - contributors
-      - contributorTeams
-      properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          example: 5b237f6868794d5c08555812
-        name:
-          type: string
-          example: Bring Glassdoor score up above 4
-        metric:
-          type: object
-          required:
-          - type
-          - start
-          - end
-          - current
-          properties:
-            type:
-              type: string
-              example: currency
-              enum:
-              - none
-              - numerical
-              - percentage
-              - currency
-            start:
-              type: integer
-            end:
-              type: integer
-            current:
-              type: integer
-        weight:
-          type: integer
-          minimum: 0
-          maximum: 100
-          example: 30
-        ownerUser:
-          $ref: '#/components/schemas/User'
-        ownerTeam:
-          type: object
-          properties:
-            id:
-              type: string
-              pattern: ^[0-9a-f]{24}$
-              example: 5b237f6868794d5c08555812
-            name:
-              type: string
-              example: Engineer
-        contributors:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        contributorTeams:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                pattern: ^[0-9a-f]{24}$
-                example: 5b237f6868794d5c08555812
-              name:
-                type: string
-                example: Engineer
-    Comment:
-      type: object
-      required:
-      - id
-      - content
-      - sender
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-        content:
-          type: string
-          description: The comment body which can contain html tags
-        sender:
-          type: object
-          required:
-          - id
-          - firstname
-          - lastname
-          - picture
-          properties:
-            id:
-              type: string
-            firstname:
-              type: string
-            lastname:
-              type: string
-            picture:
-              type: string
-              format: url
         createdAt:
           type: string
           format: date-time
@@ -564,6 +505,15 @@ components:
           type: string
           format: date-time
           example: '2019-08-23T11:53:06.741Z'
+    PaginatedGoals:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal'
     KeyResultUpdate:
       type: object
       properties:
@@ -595,6 +545,138 @@ components:
           type: integer
           minimum: 0
           maximum: 100
+    ParentGoal:
+      type:
+      - object
+      - 'null'
+      properties:
+        _id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5cb0855f0f089e6924b742e4
+        name:
+          type: string
+          example: Enhance Employee Experience and Retention
+        status:
+          type: string
+          enum:
+          - live
+          - draft
+          - archived
+          example: live
+    Comment:
+      type: object
+      required:
+      - id
+      - content
+      - sender
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+          description: The comment body which can contain html tags
+        sender:
+          type: object
+          required:
+          - id
+          - firstname
+          - lastname
+          - picture
+          properties:
+            id:
+              type: string
+            firstname:
+              type: string
+            lastname:
+              type: string
+            picture:
+              type: string
+              format: url
+        createdAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2019-08-23T11:53:06.741Z'
+    KeyResults:
+      type: object
+      required:
+      - id
+      - name
+      - metric
+      - weight
+      - ownerTeam
+      - ownerUser
+      - contributors
+      - contributorTeams
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5b237f6868794d5c08555812
+        name:
+          type: string
+          example: Bring Glassdoor score up above 4
+        metric:
+          type: object
+          required:
+          - type
+          - start
+          - end
+          - current
+          properties:
+            type:
+              type: string
+              example: currency
+              enum:
+              - none
+              - numerical
+              - percentage
+              - currency
+            start:
+              type: integer
+            end:
+              type: integer
+            current:
+              type: integer
+        weight:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 30
+        ownerUser:
+          $ref: '#/components/schemas/User'
+        ownerTeam:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: ^[0-9a-f]{24}$
+              example: 5b237f6868794d5c08555812
+            name:
+              type: string
+              example: Engineer
+        contributors:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        contributorTeams:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                pattern: ^[0-9a-f]{24}$
+                example: 5b237f6868794d5c08555812
+              name:
+                type: string
+                example: Engineer
     User:
       type: object
       required:
@@ -616,88 +698,6 @@ components:
         preferredName:
           type: string
           example: John von Doe (Full name)
-    ParentGoal:
-      type:
-      - object
-      - 'null'
-      properties:
-        _id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          example: 5cb0855f0f089e6924b742e4
-        name:
-          type: string
-          example: Enhance Employee Experience and Retention
-        status:
-          type: string
-          enum:
-          - live
-          - draft
-          - archived
-          example: live
-    InitiativeUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-          enum:
-          - notStarted
-          - inProgress
-          - completed
-          - blocked
-    PaginatedGoals:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/Meta'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Goal'
-    Comments:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Comment'
-    Meta:
-      type: object
-      required:
-      - count
-      - cursor
-      - nextPage
-      properties:
-        count:
-          type: integer
-          description: number of results returned in this request
-          minimum: 1
-          maximum: 1000
-        cursor:
-          type:
-          - string
-          - 'null'
-          description: 'Will be set to `null` if complete set have been returned.
-
-            '
-          pattern: ^[0-9a-f]{24}$
-          example: 58d55e3ffdc2eb20547edd0a
-        nextPage:
-          type:
-          - string
-          - 'null'
-          format: url
-          description: URL of the next result page. `null` means no more results available.
-    Tags:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
   headers:
     X-Next:
       description: A link to the next page of responses
@@ -706,15 +706,6 @@ components:
         format: url
         example: https://api.leapsome.com/v1/goals?cursor=58d55e3ffdc2eb20547edd0a&limit=100
   parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximal number of results in a response
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
     cursorParam:
       name: cursor
       in: query
@@ -729,6 +720,15 @@ components:
       schema:
         type: string
         pattern: ^[0-9a-f]{24}$
+    limitParam:
+      name: limit
+      in: query
+      description: Maximal number of results in a response
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
   securitySchemes:
     bearerAuth:
       type: http
