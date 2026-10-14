@@ -15,3 +15,29 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: leapsome-adp-own
+  label: ADP (own)
+  partner: adp
+  partner_name: ADP (own)
+  category: EeT
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://apps.adp.com/apps/354108/leapsome-performance-growth-connector-for-adp-workforce-now
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: leapsome-bamboohr-own
+  label: BambooHR (own)
+  partner: bamboohr
+  partner_name: BambooHR (own)
+  category: Performance
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.bamboohr.com/integrations/listings/leapsome
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

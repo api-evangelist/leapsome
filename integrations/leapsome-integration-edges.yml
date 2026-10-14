@@ -1,6 +1,8 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- adp/integrations/adp-integration-edges.yml
+- bamboohr/integrations/bamboohr-integration-edges.yml
 - https://marketplace.atlassian.com/
 marketplace_apps: []
 edges:
@@ -19,5 +21,39 @@ edges:
   publisher_name: Leapsome
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+- partner_name: ADP (own)
+  partner: adp
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://apps.adp.com/apps/354108/leapsome-performance-growth-connector-for-adp-workforce-now
+  mirror_of: adp/integrations/adp-integration-edges.yml
+  apps:
+  - Leapsome Performance & Growth Connector for ADP Workforce Now®
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: EeT
+- partner_name: BambooHR (own)
+  partner: bamboohr
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.bamboohr.com/integrations/listings/leapsome
+  mirror_of: bamboohr/integrations/bamboohr-integration-edges.yml
+  apps:
+  - Leapsome
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Performance
 source:
 - https://marketplace.atlassian.com/
