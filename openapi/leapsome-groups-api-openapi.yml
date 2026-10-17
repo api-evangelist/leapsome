@@ -201,6 +201,23 @@ components:
           type: array
           items:
             type: string
+    GroupMetadata:
+      description: Group metadata
+      type: object
+      properties:
+        created:
+          description: The date and time the group was created
+          format: date-time
+          type: string
+        location:
+          description: A URI to get the group details through this API
+          type: string
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification date & time
+        version:
+          type: string
     Member:
       description: A member of a group. This can be a group or an user
       type: object
@@ -236,23 +253,6 @@ components:
       required:
       - id
       - displayName
-    GroupMetadata:
-      description: Group metadata
-      type: object
-      properties:
-        created:
-          description: The date and time the group was created
-          format: date-time
-          type: string
-        location:
-          description: A URI to get the group details through this API
-          type: string
-        lastModified:
-          type: string
-          format: date-time
-          description: Last modification date & time
-        version:
-          type: string
   parameters:
     groupId:
       description: The key of the group to query. The group must be in the organization domain

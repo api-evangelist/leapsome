@@ -36,32 +36,8 @@ paths:
       - Schemas
 components:
   schemas:
-    Sort:
-      description: Specifies Sort configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Bulk:
-      description: Specifies BULK configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Patch:
-      description: Specifies PATCH configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    ChangePassword:
-      description: Specifies Change Password configuration options
+    Filter:
+      description: Specifies FILTER options
       properties:
         supported:
           description: Specifies whether the operation is supported
@@ -88,16 +64,8 @@ components:
       - description
       - specUrl
       - documentationUrl
-    Etag:
-      description: Specifies Etag configuration options
-      properties:
-        supported:
-          description: Specifies whether the operation is supported
-          type: boolean
-      required:
-      - supported
-    Filter:
-      description: Specifies FILTER options
+    Sort:
+      description: Specifies Sort configuration options
       properties:
         supported:
           description: Specifies whether the operation is supported
@@ -133,6 +101,38 @@ components:
       - sort
       - etag
       - authenticationSchemes
+    ChangePassword:
+      description: Specifies Change Password configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Bulk:
+      description: Specifies BULK configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Patch:
+      description: Specifies PATCH configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
+    Etag:
+      description: Specifies Etag configuration options
+      properties:
+        supported:
+          description: Specifies whether the operation is supported
+          type: boolean
+      required:
+      - supported
   securitySchemes:
     SCIM-Token:
       type: http

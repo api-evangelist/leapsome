@@ -72,6 +72,25 @@ paths:
           description: Authorization failed. Token is missing or invalid.
 components:
   schemas:
+    WorkLocationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkLocation'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              description: Current page number
+            pageSize:
+              type: integer
+              description: Number of items per page
+            totalCount:
+              type: integer
+              description: Total number of work locations
     WorkLocation:
       type: object
       properties:
@@ -170,25 +189,6 @@ components:
           format: date-time
           example: '2024-01-20T10:15:00.000Z'
           description: When the work location was last updated
-    WorkLocationList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkLocation'
-        meta:
-          type: object
-          properties:
-            page:
-              type: integer
-              description: Current page number
-            pageSize:
-              type: integer
-              description: Number of items per page
-            totalCount:
-              type: integer
-              description: Total number of work locations
   securitySchemes:
     bearerAuth:
       type: http

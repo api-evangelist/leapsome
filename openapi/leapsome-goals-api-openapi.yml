@@ -299,6 +299,81 @@ paths:
                 $ref: '#/components/schemas/Goal'
 components:
   schemas:
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    User:
+      type: object
+      required:
+      - id
+      - email
+      - fullName
+      properties:
+        id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 58d55e3ffdc2eb20547edd0a
+        email:
+          type: string
+          format: email
+          example: example@example.com
+        fullName:
+          type: string
+          example: John Doe
+        preferredName:
+          type: string
+          example: John von Doe (Full name)
+    ParentGoal:
+      type:
+      - object
+      - 'null'
+      properties:
+        _id:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+          example: 5cb0855f0f089e6924b742e4
+        name:
+          type: string
+          example: Enhance Employee Experience and Retention
+        status:
+          type: string
+          enum:
+          - live
+          - draft
+          - archived
+          example: live
+    KeyResultUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Bring Glassdoor score up above 4
+        metric:
+          type: object
+          required:
+          - type
+          - start
+          - end
+          - current
+          properties:
+            type:
+              type: string
+              enum:
+              - none
+              - numerical
+              - percentage
+              - currency
+            start:
+              type: integer
+            end:
+              type: integer
+            current:
+              type: integer
+        weight:
+          type: integer
+          minimum: 0
+          maximum: 100
     Meta:
       type: object
       required:
@@ -326,33 +401,6 @@ components:
           - 'null'
           format: url
           description: URL of the next result page. `null` means no more results available.
-    Comments:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Comment'
-    Tags:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-    InitiativeUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-          enum:
-          - notStarted
-          - inProgress
-          - completed
-          - blocked
     Tag:
       type: object
       required:
@@ -383,6 +431,15 @@ components:
           type: string
           format: date-time
           example: '2019-08-23T11:53:06.741Z'
+    Comments:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
     Goal:
       type: object
       required:
@@ -514,56 +571,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Goal'
-    KeyResultUpdate:
+    InitiativeUpdate:
       type: object
       properties:
         name:
           type: string
-          example: Bring Glassdoor score up above 4
-        metric:
-          type: object
-          required:
-          - type
-          - start
-          - end
-          - current
-          properties:
-            type:
-              type: string
-              enum:
-              - none
-              - numerical
-              - percentage
-              - currency
-            start:
-              type: integer
-            end:
-              type: integer
-            current:
-              type: integer
-        weight:
-          type: integer
-          minimum: 0
-          maximum: 100
-    ParentGoal:
-      type:
-      - object
-      - 'null'
-      properties:
-        _id:
+        description:
           type: string
-          pattern: ^[0-9a-f]{24}$
-          example: 5cb0855f0f089e6924b742e4
-        name:
-          type: string
-          example: Enhance Employee Experience and Retention
         status:
           type: string
           enum:
-          - live
-          - draft
-          - archived
-          example: live
+          - notStarted
+          - inProgress
+          - completed
+          - blocked
     Comment:
       type: object
       required:
@@ -677,34 +698,6 @@ components:
               name:
                 type: string
                 example: Engineer
-    User:
-      type: object
-      required:
-      - id
-      - email
-      - fullName
-      properties:
-        id:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-          example: 58d55e3ffdc2eb20547edd0a
-        email:
-          type: string
-          format: email
-          example: example@example.com
-        fullName:
-          type: string
-          example: John Doe
-        preferredName:
-          type: string
-          example: John von Doe (Full name)
-  headers:
-    X-Next:
-      description: A link to the next page of responses
-      schema:
-        type: string
-        format: url
-        example: https://api.leapsome.com/v1/goals?cursor=58d55e3ffdc2eb20547edd0a&limit=100
   parameters:
     cursorParam:
       name: cursor
@@ -729,6 +722,13 @@ components:
         minimum: 1
         maximum: 1000
         default: 100
+  headers:
+    X-Next:
+      description: A link to the next page of responses
+      schema:
+        type: string
+        format: url
+        example: https://api.leapsome.com/v1/goals?cursor=58d55e3ffdc2eb20547edd0a&limit=100
   securitySchemes:
     bearerAuth:
       type: http
