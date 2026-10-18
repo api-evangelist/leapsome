@@ -65,7 +65,7 @@
     - connectors/applications/leapsome
     vendor_link: https://www.leapsome.com
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: leapsome-microsoft-teams-own
   label: Microsoft Teams (own)
