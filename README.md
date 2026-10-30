@@ -1,4 +1,4 @@
-# Leapsome (leapsome)
+# Leapsome
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,51 +64,198 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Leapsome is an AI-powered people enablement platform that combines HRIS, talent management, and HR automation into a single modular solution used by more than 2,000 organizations worldwide. The platform covers the full employee lifecycle including performance reviews, OKRs and goal management, engagement surveys, 1:1 meetings, instant feedback, learning pathways, and compensation management. Leapsome exposes a REST Content API for extracting reviews, goals, employee attributes, payroll, and time-tracking data, plus a SCIM 2.0 API for automated user provisioning and lifecycle management with enterprise identity providers.
+Leapsome is an AI-powered people enablement platform that combines HRIS, talent management, and HR automation into a single modular solution used by more than 2,000 organizations worldwide. The platform covers the full employee lifecycle including performance reviews, OKRs and goal management, engagement surveys, 1:1 meetings, instant feedback, learning pathways, and compensation management. Leapsome exposes a REST Content API for extracting reviews, goals, employee attributes, payroll, and time-tracking data, plus a SCIM 2.0 API for automated user provisioning and lifecycle management with enterprise identity providers. Both APIs authenticate via bearer tokens generated inside the platform settings and are documented through Swagger UI at api.leapsome.com.
 
-**APIs.json:** https://raw.githubusercontent.com/api-evangelist/leapsome/refs/heads/main/apis.yml
+**Areas:** People Enablement · Performance Management · OKRs · Goals · Engagement Surveys · HRIS · SCIM · Employee Development · 1:1 Meetings · Learning
 
-**Naftiko:** https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=leapsome-api-evangelist&utm_content=repo
+## Leapsome on APIs.io
 
-## Tags
+Everything profiled for Leapsome is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/leapsome/](https://apis.io/providers/leapsome/)** — or go straight to one of the APIs or properties below.
 
-People Enablement, Performance Management, OKRs, Goals, Engagement Surveys, HRIS, SCIM, Employee Development, 1:1 Meetings, Learning
+### APIs (14)
 
-## APIs
+- [Leapsome Absences API](https://apis.io/apis/leapsome/leapsome-absences-api/) — The absences API from Leapsome — 1 operation(s) for absences.
+- [Leapsome Auth API](https://apis.io/apis/leapsome/leapsome-auth-api/) — The auth API from Leapsome — 1 operation(s) for auth.
+- [Leapsome Documents API](https://apis.io/apis/leapsome/leapsome-documents-api/) — The documents API from Leapsome — 2 operation(s) for documents.
+- [Leapsome Feedback API](https://apis.io/apis/leapsome/leapsome-feedback-api/) — The feedback API from Leapsome — 4 operation(s) for feedback.
+- [Leapsome Goals API](https://apis.io/apis/leapsome/leapsome-goals-api/) — The goals API from Leapsome — 6 operation(s) for goals.
+- [Leapsome Groups API](https://apis.io/apis/leapsome/leapsome-groups-api/) — Operations on groups belonging to an organization
+- [Leapsome API](https://apis.io/apis/leapsome/leapsome-leapsome-api-api/) — The Leapsome API API from Leapsome — 1 operation(s) for leapsome api.
+- [Leapsome Payroll API](https://apis.io/apis/leapsome/leapsome-payroll-api/) — The payroll API from Leapsome — 2 operation(s) for payroll.
+- [Leapsome Reviews API](https://apis.io/apis/leapsome/leapsome-reviews-api/) — The reviews API from Leapsome — 4 operation(s) for reviews.
+- [Leapsome Schemas API](https://apis.io/apis/leapsome/leapsome-schemas-api/) — Operations on schemas
+- [Leapsome Users API](https://apis.io/apis/leapsome/leapsome-users-api/) — The users API from Leapsome — 4 operation(s) for users.
+- [Leapsome Work Locations API](https://apis.io/apis/leapsome/leapsome-worklocations-api/) — The workLocations API from Leapsome — 1 operation(s) for worklocations.
+- [Leapsome Access Roles API](https://apis.io/apis/leapsome/leapsome-access-roles-api/) — The Access Roles API from Leapsome — 1 operation(s) for access roles.
+- [Leapsome Time Tracking API](https://apis.io/apis/leapsome/leapsome-time-tracking-api/) — The Time Tracking API from Leapsome — 1 operation(s) for time tracking.
 
-| Name | Description | Docs |
-|---|---|---|
-| Leapsome Content API | Read access to reviews, goals, employee data, payroll, and time tracking | https://api.leapsome.com/v1/api-docs/ |
-| Leapsome SCIM API | SCIM 2.0 user provisioning and lifecycle management | https://api.leapsome.com/scim/v1/api-docs/ |
+### Published properties
 
-## Plans / Rate Limits / FinOps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Resource | File |
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/leapsome/](https://apis.io/graphqls/leapsome/leapsome-graphql/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [leapsome](https://apis.io/servers/leapsome/leapsome/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Leapsome Agentic Access](https://apis.io/agentic-access/leapsome/leapsome-agentic-access/)
+
+#### JSON Schema (11)
+
+The data models the API reads and writes.
+
+- [Absence](https://apis.io/schemas/leapsome/leapsome-absence/)
+- [Employee](https://apis.io/schemas/leapsome/leapsome-employee/)
+- [FeedbackItem](https://apis.io/schemas/leapsome/leapsome-feedbackitem/)
+- [Goal](https://apis.io/schemas/leapsome/leapsome-goal/)
+- [PayrollCycle](https://apis.io/schemas/leapsome/leapsome-payrollcycle/)
+- [SCIM Group](https://apis.io/schemas/leapsome/leapsome-scim-group/)
+- [SCIM GroupDefinition](https://apis.io/schemas/leapsome/leapsome-scim-groupdefinition/)
+- [SCIM User](https://apis.io/schemas/leapsome/leapsome-scim-user/)
+- [SCIM UserDefinition](https://apis.io/schemas/leapsome/leapsome-scim-userdefinition/)
+- [Timesheet](https://apis.io/schemas/leapsome/leapsome-timesheet/)
+- [WorkLocation](https://apis.io/schemas/leapsome/leapsome-worklocation/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Leapsome Context](https://apis.io/jsonld/leapsome/leapsome-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Leapsome API Vocabulary](https://apis.io/vocabularies/leapsome/leapsome-vocabulary/)
+
+#### Examples (1)
+
+Example requests and responses.
+
+- [Leapsome Api Examples](https://apis.io/examples/leapsome/leapsome-api-examples/)
+
+#### Collections (13)
+
+Postman and Open Collection request collections.
+
+- [Leapsome absences API](https://apis.io/collections/leapsome/open-leapsome-absences-api/)
+- [Leapsome absences accessRoles API](https://apis.io/collections/leapsome/open-leapsome-accessroles-api/)
+- [Leapsome absences auth API](https://apis.io/collections/leapsome/open-leapsome-auth-api/)
+- [Leapsome absences documents API](https://apis.io/collections/leapsome/open-leapsome-documents-api/)
+- [Leapsome absences feedback API](https://apis.io/collections/leapsome/open-leapsome-feedback-api/)
+- [Leapsome absences goals API](https://apis.io/collections/leapsome/open-leapsome-goals-api/)
+- [Leapsome absences Groups API](https://apis.io/collections/leapsome/open-leapsome-groups-api/)
+- [Leapsome absences Leapsome API API](https://apis.io/collections/leapsome/open-leapsome-leapsome-api-api/)
+- [Leapsome absences payroll API](https://apis.io/collections/leapsome/open-leapsome-payroll-api/)
+- [Leapsome absences Schemas API](https://apis.io/collections/leapsome/open-leapsome-schemas-api/)
+- [Leapsome absences timeTracking API](https://apis.io/collections/leapsome/open-leapsome-timetracking-api/)
+- [Leapsome absences users API](https://apis.io/collections/leapsome/open-leapsome-users-api/)
+- [Leapsome absences workLocations API](https://apis.io/collections/leapsome/open-leapsome-worklocations-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Leapsome — jsonschema rules](https://apis.io/rules/leapsome/leapsome-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Leapsome Authentication](https://apis.io/security/leapsome/leapsome-authentication/)
+- [Leapsome Domain Security](https://apis.io/security/leapsome/leapsome-domain-security/)
+- [Leapsome Trust Center](https://apis.io/security/leapsome/leapsome-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Leapsome Plans Pricing](https://apis.io/plans/leapsome/leapsome-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Leapsome Rate Limits](https://apis.io/rate-limits/leapsome/leapsome-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Leapsome Finops](https://apis.io/finops/leapsome/leapsome-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.leapsome.com/)
+- [Documentation](https://help.leapsome.com/)
+- [Pricing](https://www.leapsome.com/pricing)
+- [Blog](https://www.leapsome.com/blog)
+- [Status](https://status.leapsome.tech/)
+
+## API Evangelist rating
+
+**Kin Score 39.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
 |---|---|
-| Plans & Pricing | [plans/leapsome-plans-pricing.yml](plans/leapsome-plans-pricing.yml) |
-| Rate Limits | [rate-limits/leapsome-rate-limits.yml](rate-limits/leapsome-rate-limits.yml) |
-| FinOps | [finops/leapsome-finops.yml](finops/leapsome-finops.yml) |
+| Discoverability | 68.3 |
+| Contract quality | 63.0 |
+| Contract governance | 23.5 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 23.7 |
 
-## Timestamps
+**Agent readiness 45.5** — agent-ready (gated down from agent-native)
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
-
-## Common
-
-| Type | URL |
+| Agent-readiness dimension | Result |
 |---|---|
-| Website | https://www.leapsome.com/ |
-| Documentation | https://help.leapsome.com/ |
-| GitHub Org | https://github.com/Leapsome |
-| LinkedIn | https://www.linkedin.com/company/leapsome |
-| Blog | https://www.leapsome.com/blog |
-| Pricing | https://www.leapsome.com/pricing |
-| Status Page | https://status.leapsome.tech/ |
-| X | https://x.com/leapsome |
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | mostly |
 
-## Maintainers
+**Regulatory alignment 21.6** — Employment & Payroll
 
-| Name | Email |
-|---|---|
-| Kin Lane | kin@apievangelist.com |
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/leapsome/](https://apis.io/providers/leapsome/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Leapsome: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/leapsome/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
